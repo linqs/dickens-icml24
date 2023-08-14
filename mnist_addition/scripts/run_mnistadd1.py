@@ -14,7 +14,7 @@ SPLITS = ["0"]
 # TRAIN_SIZES = ["0040", "0060", "0080"]
 TRAIN_SIZES = ["0080"]
 # OVERLAPS = ["0.00", "0.50", "1.00"]
-OVERLAPS = ["0.00"]
+OVERLAPS = ["1.00"]
 
 STANDARD_EXPERIMENT_OPTIONS = {
     "inference.normalize": "false",
@@ -26,6 +26,8 @@ STANDARD_EXPERIMENT_OPTIONS = {
     "gradientdescent.runfulliterations": "false",
     "duallcqp.computeperiod": "10",
     "duallcqp.maxiterations": "10000",
+    "runtime.validation": "true",
+    "gradientdescent.savevalidationweights": "true",
 }
 
 STANDARD_DATASET_OPTIONS = {
@@ -53,7 +55,7 @@ FIRST_ORDER_WL_METHODS_OPTION_RANGES = {
     },
     "BinaryCrossEntropy": {
         "runtime.learn.method": ["BinaryCrossEntropy"],
-        "minimizer.initialsquaredpenalty": ["1.0"],
+        "minimizer.initialsquaredpenalty": ["10.0"],
         "minimizer.objectivedifferencetolerance": ["0.01"],
         "minimizer.proxruleweight": ["1.0e-1", "1.0e-2"],
         "minimizer.numinternaliterations": ["500"]
@@ -140,7 +142,7 @@ BEST_HYPERPARAMETERS = {
         "0040": {
             "0.00": {
                 "runtime.learn.method": "BinaryCrossEntropy",
-                "minimizer.initialsquaredpenalty": "1.0",
+                "minimizer.initialsquaredpenalty": "10.0",
                 "minimizer.objectivedifferencetolerance": "0.001",
                 "minimizer.proxruleweight": "1.0e-2",
                 "minimizer.numinternaliterations": "500",
@@ -151,7 +153,7 @@ BEST_HYPERPARAMETERS = {
             },
             "0.50": {
                 "runtime.learn.method": "BinaryCrossEntropy",
-                "minimizer.initialsquaredpenalty": "1.0",
+                "minimizer.initialsquaredpenalty": "10.0",
                 "minimizer.objectivedifferencetolerance": "0.001",
                 "minimizer.proxruleweight": "1.0e-2",
                 "minimizer.numinternaliterations": "500",
@@ -162,7 +164,7 @@ BEST_HYPERPARAMETERS = {
             },
             "1.00": {
                 "runtime.learn.method": "BinaryCrossEntropy",
-                "minimizer.initialsquaredpenalty": "1.0",
+                "minimizer.initialsquaredpenalty": "10.0",
                 "minimizer.objectivedifferencetolerance": "0.001",
                 "minimizer.proxruleweight": "1.0e-1",
                 "minimizer.numinternaliterations": "500",
@@ -175,7 +177,7 @@ BEST_HYPERPARAMETERS = {
         "0060": {
             "0.00": {
                 "runtime.learn.method": "BinaryCrossEntropy",
-                "minimizer.initialsquaredpenalty": "1.0",
+                "minimizer.initialsquaredpenalty": "10.0",
                 "minimizer.objectivedifferencetolerance": "0.001",
                 "minimizer.proxruleweight": "1.0e-2",
                 "minimizer.numinternaliterations": "500",
@@ -186,7 +188,7 @@ BEST_HYPERPARAMETERS = {
             },
             "0.50": {
                 "runtime.learn.method": "BinaryCrossEntropy",
-                "minimizer.initialsquaredpenalty": "1.0",
+                "minimizer.initialsquaredpenalty": "10.0",
                 "minimizer.objectivedifferencetolerance": "0.001",
                 "minimizer.proxruleweight": "1.0e-2",
                 "minimizer.numinternaliterations": "500",
@@ -197,7 +199,7 @@ BEST_HYPERPARAMETERS = {
             },
             "1.00": {
                 "runtime.learn.method": "BinaryCrossEntropy",
-                "minimizer.initialsquaredpenalty": "1.0",
+                "minimizer.initialsquaredpenalty": "10.0",
                 "minimizer.objectivedifferencetolerance": "0.001",
                 "minimizer.proxruleweight": "1.0e-1",
                 "minimizer.numinternaliterations": "500",
@@ -210,7 +212,7 @@ BEST_HYPERPARAMETERS = {
         "0080": {
             "0.00": {
                 "runtime.learn.method": "BinaryCrossEntropy",
-                "minimizer.initialsquaredpenalty": "0.1",
+                "minimizer.initialsquaredpenalty": "10.0",
                 "minimizer.objectivedifferencetolerance": "0.001",
                 "minimizer.proxruleweight": "1.0e-2",
                 "minimizer.numinternaliterations": "500",
@@ -221,7 +223,7 @@ BEST_HYPERPARAMETERS = {
             },
             "0.50": {
                 "runtime.learn.method": "BinaryCrossEntropy",
-                "minimizer.initialsquaredpenalty": "1.0",
+                "minimizer.initialsquaredpenalty": "10.0",
                 "minimizer.objectivedifferencetolerance": "0.001",
                 "minimizer.proxruleweight": "1.0e-2",
                 "minimizer.numinternaliterations": "500",
@@ -232,7 +234,7 @@ BEST_HYPERPARAMETERS = {
             },
             "1.00": {
                 "runtime.learn.method": "BinaryCrossEntropy",
-                "minimizer.initialsquaredpenalty": "1.0",
+                "minimizer.initialsquaredpenalty": "10.0",
                 "minimizer.objectivedifferencetolerance": "1.0e-5",
                 "minimizer.proxruleweight": "1.0e-2",
                 "minimizer.numinternaliterations": "500",
@@ -455,11 +457,11 @@ def run_first_order_wl_methods_hyperparamter_search():
                                 print("Skipping experiment: {}.".format(experiment_out_dir))
                                 continue
 
-                            dataset_json.update({"options":{**original_options,
-                                                            **STANDARD_EXPERIMENT_OPTIONS,
-                                                            **STANDARD_DATASET_OPTIONS["mnist-addition"],
-                                                            **options,
-                                                            "runtime.learn.output.model.path": "./mnist-addition_learned.psl"}})
+                            dataset_json.update({"options": {**original_options,
+                                                             **STANDARD_EXPERIMENT_OPTIONS,
+                                                             **STANDARD_DATASET_OPTIONS["mnist-addition"],
+                                                             **options,
+                                                             "runtime.learn.output.model.path": "./mnist-addition_learned.psl"}})
 
                             dataset_json["predicates"]["NeuralClassifier/2"]["options"]["learning-rate"] = options["gradientdescent.stepsize"]
                             dataset_json["predicates"]["NeuralClassifier/2"]["options"]["dropout"] = dropout
@@ -523,11 +525,11 @@ def run_first_order_wl_methods():
                         print("Skipping experiment: {}.".format(experiment_out_dir))
                         continue
 
-                    dataset_json.update({"options":{**original_options,
-                                                    **STANDARD_EXPERIMENT_OPTIONS,
-                                                    **STANDARD_DATASET_OPTIONS["mnist-addition"],
-                                                    **options,
-                                                    "runtime.learn.output.model.path": "./mnist-addition_learned.psl"}})
+                    dataset_json.update({"options": {**original_options,
+                                                     **STANDARD_EXPERIMENT_OPTIONS,
+                                                     **STANDARD_DATASET_OPTIONS["mnist-addition"],
+                                                     **options,
+                                                     "runtime.learn.output.model.path": "./mnist-addition_learned.psl"}})
 
                     dataset_json["predicates"]["NeuralClassifier/2"]["options"]["learning-rate"] = options["gradientdescent.stepsize"]
                     dataset_json["predicates"]["NeuralClassifier/2"]["options"]["dropout"] = dropout
