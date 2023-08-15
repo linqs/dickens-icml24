@@ -44,7 +44,7 @@ INFERENCE_OPTION_RANGES = {
 FIRST_ORDER_WL_METHODS = ["BinaryCrossEntropy"]
 
 FIRST_ORDER_WL_METHODS_STANDARD_OPTION_RANGES = {
-    "gradientdescent.stepsize": ["1.0e-3"],
+    "gradientdescent.stepsize": ["1.0e-2", "1.0e-3", "1.0e-4"],
     "gradientdescent.negativelogregularization": ["1.0e-3"],
     "gradientdescent.negativeentropyregularization": ["0.0"]
 }
@@ -56,9 +56,9 @@ FIRST_ORDER_WL_METHODS_OPTION_RANGES = {
     "BinaryCrossEntropy": {
         "runtime.learn.method": ["BinaryCrossEntropy"],
         "minimizer.initialsquaredpenalty": ["10.0"],
-        "minimizer.objectivedifferencetolerance": ["0.01"],
-        "minimizer.proxruleweight": ["1.0e-1", "1.0e-2"],
-        "minimizer.numinternaliterations": ["500"]
+        "minimizer.squaredpenaltyincreaserate": ["1.5", "2.0"],
+        "minimizer.objectivedifferencetolerance": ["0.001"],
+        "minimizer.proxruleweight": ["1.0e-1", "1.0e-2"]
     }
 }
 
@@ -146,7 +146,7 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.initialsquaredpenalty": "10.0",
                 "minimizer.objectivedifferencetolerance": "0.001",
                 "minimizer.proxruleweight": "1.0e-2",
-                "minimizer.numinternaliterations": "500",
+                "minimizer.squaredpenaltyincreaserate": "2.0",
                 "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-3",
                 "gradientdescent.negativelogregularization": "1.0e-3",
@@ -157,7 +157,7 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.initialsquaredpenalty": "10.0",
                 "minimizer.objectivedifferencetolerance": "0.001",
                 "minimizer.proxruleweight": "1.0e-2",
-                "minimizer.numinternaliterations": "500",
+                "minimizer.squaredpenaltyincreaserate": "2.0",
                 "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-3",
                 "gradientdescent.negativelogregularization": "1.0e-3",
@@ -168,7 +168,6 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.initialsquaredpenalty": "10.0",
                 "minimizer.objectivedifferencetolerance": "0.001",
                 "minimizer.proxruleweight": "1.0e-1",
-                "minimizer.numinternaliterations": "500",
                 "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-3",
                 "gradientdescent.negativelogregularization": "1.0e-3",
@@ -181,7 +180,7 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.initialsquaredpenalty": "10.0",
                 "minimizer.objectivedifferencetolerance": "0.001",
                 "minimizer.proxruleweight": "1.0e-2",
-                "minimizer.numinternaliterations": "500",
+                "minimizer.squaredpenaltyincreaserate": "2.0",
                 "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-3",
                 "gradientdescent.negativelogregularization": "1.0e-3",
@@ -192,7 +191,7 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.initialsquaredpenalty": "10.0",
                 "minimizer.objectivedifferencetolerance": "0.001",
                 "minimizer.proxruleweight": "1.0e-2",
-                "minimizer.numinternaliterations": "500",
+                "minimizer.squaredpenaltyincreaserate": "2.0",
                 "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-3",
                 "gradientdescent.negativelogregularization": "1.0e-3",
@@ -203,7 +202,6 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.initialsquaredpenalty": "10.0",
                 "minimizer.objectivedifferencetolerance": "0.001",
                 "minimizer.proxruleweight": "1.0e-1",
-                "minimizer.numinternaliterations": "500",
                 "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-3",
                 "gradientdescent.negativelogregularization": "1.0e-3",
@@ -216,7 +214,7 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.initialsquaredpenalty": "10.0",
                 "minimizer.objectivedifferencetolerance": "0.001",
                 "minimizer.proxruleweight": "1.0e-2",
-                "minimizer.numinternaliterations": "500",
+                "minimizer.squaredpenaltyincreaserate": "2.0",
                 "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-3",
                 "gradientdescent.negativelogregularization": "1.0e-3",
@@ -227,7 +225,7 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.initialsquaredpenalty": "10.0",
                 "minimizer.objectivedifferencetolerance": "0.001",
                 "minimizer.proxruleweight": "1.0e-2",
-                "minimizer.numinternaliterations": "500",
+                "minimizer.squaredpenaltyincreaserate": "2.0",
                 "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-3",
                 "gradientdescent.negativelogregularization": "1.0e-3",
@@ -238,7 +236,7 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.initialsquaredpenalty": "10.0",
                 "minimizer.objectivedifferencetolerance": "1.0e-5",
                 "minimizer.proxruleweight": "1.0e-2",
-                "minimizer.numinternaliterations": "500",
+                "minimizer.squaredpenaltyincreaserate": "2.0",
                 "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-3",
                 "gradientdescent.negativelogregularization": "1.0e-3",
@@ -583,8 +581,8 @@ def run_first_order_wl_methods():
 
 
 def main():
-    # run_first_order_wl_methods_hyperparamter_search()
-    run_first_order_wl_methods()
+    run_first_order_wl_methods_hyperparamter_search()
+    # run_first_order_wl_methods()
 
 
 if __name__ == '__main__':
