@@ -14,7 +14,7 @@ SPLITS = ["0"]
 # TRAIN_SIZES = ["0040", "0060", "0080"]
 TRAIN_SIZES = ["0080"]
 # OVERLAPS = ["0.00", "0.50", "1.00"]
-OVERLAPS = ["1.00"]
+OVERLAPS = ["0.00"]
 
 STANDARD_EXPERIMENT_OPTIONS = {
     "inference.normalize": "false",
@@ -22,17 +22,17 @@ STANDARD_EXPERIMENT_OPTIONS = {
     "gradientdescent.scalestepsize": "false",
     "weightlearning.inference": "DualBCDInference",
     "runtime.inference.method": "DualBCDInference",
-    "gradientdescent.numsteps": "10000",
-    "gradientdescent.runfulliterations": "false",
+    "gradientdescent.numsteps": "5000",
+    "gradientdescent.runfulliterations": "true",
     "duallcqp.computeperiod": "10",
-    "duallcqp.maxiterations": "10000",
+    "duallcqp.maxiterations": "1000",
     "runtime.validation": "true",
     "gradientdescent.savevalidationweights": "true",
 }
 
 STANDARD_DATASET_OPTIONS = {
     "mnist-addition": {
-        "duallcqp.primaldualthreshold": "0.001"
+        "duallcqp.primaldualthreshold": "0.01"
     }
 }
 
@@ -41,7 +41,7 @@ INFERENCE_OPTION_RANGES = {
 }
 
 # FIRST_ORDER_WL_METHODS = ["Energy", "BinaryCrossEntropy"]
-FIRST_ORDER_WL_METHODS = ["BinaryCrossEntropy"]
+FIRST_ORDER_WL_METHODS = ["Energy"]
 
 FIRST_ORDER_WL_METHODS_STANDARD_OPTION_RANGES = {
     "gradientdescent.stepsize": ["1.0e-2", "1.0e-3", "1.0e-4"],
@@ -64,7 +64,7 @@ FIRST_ORDER_WL_METHODS_OPTION_RANGES = {
 
 NEURAL_NETWORK_OPTIONS = {
     "dropout": ["0.0", "0.1"],
-    "loss_alpha": ["0.1", "0.5", "0.99"],
+    "loss_alpha": ["0.1", "0.5", "0.99", "1.0"],
 }
 
 BEST_HYPERPARAMETERS = {
@@ -118,8 +118,8 @@ BEST_HYPERPARAMETERS = {
         "0080": {
             "0.00": {
                 "runtime.learn.method": "Energy",
-                "duallcqp.regularizationparameter": "1.0e-3",
-                "gradientdescent.stepsize": "1.0e-3",
+                "duallcqp.regularizationparameter": "1.0e-2",
+                "gradientdescent.stepsize": "1.0e-4",
                 "gradientdescent.negativelogregularization": "1.0e-3",
                 "gradientdescent.negativeentropyregularization": "0.0"
             },
@@ -168,7 +168,7 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.initialsquaredpenalty": "10.0",
                 "minimizer.objectivedifferencetolerance": "0.001",
                 "minimizer.proxruleweight": "1.0e-1",
-                "duallcqp.regularizationparameter": "1.0e-3",
+                "duallcqp.regularizationparameter": "1.0e-2",
                 "gradientdescent.stepsize": "1.0e-3",
                 "gradientdescent.negativelogregularization": "1.0e-3",
                 "gradientdescent.negativeentropyregularization": "0.0"
@@ -212,10 +212,10 @@ BEST_HYPERPARAMETERS = {
             "0.00": {
                 "runtime.learn.method": "BinaryCrossEntropy",
                 "minimizer.initialsquaredpenalty": "10.0",
-                "minimizer.objectivedifferencetolerance": "0.001",
-                "minimizer.proxruleweight": "1.0e-2",
+                "minimizer.objectivedifferencetolerance": "1.0e-5",
+                "minimizer.proxruleweight": "1.0e-1",
                 "minimizer.squaredpenaltyincreaserate": "2.0",
-                "duallcqp.regularizationparameter": "1.0e-3",
+                "duallcqp.regularizationparameter": "1.0e-2",
                 "gradientdescent.stepsize": "1.0e-3",
                 "gradientdescent.negativelogregularization": "1.0e-3",
                 "gradientdescent.negativeentropyregularization": "0.0"
@@ -235,9 +235,9 @@ BEST_HYPERPARAMETERS = {
                 "runtime.learn.method": "BinaryCrossEntropy",
                 "minimizer.initialsquaredpenalty": "10.0",
                 "minimizer.objectivedifferencetolerance": "1.0e-5",
-                "minimizer.proxruleweight": "1.0e-2",
+                "minimizer.proxruleweight": "1.0e-1",
                 "minimizer.squaredpenaltyincreaserate": "2.0",
-                "duallcqp.regularizationparameter": "1.0e-3",
+                "duallcqp.regularizationparameter": "1.0e-2",
                 "gradientdescent.stepsize": "1.0e-3",
                 "gradientdescent.negativelogregularization": "1.0e-3",
                 "gradientdescent.negativeentropyregularization": "0.0"
@@ -330,8 +330,8 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
                 "loss_alpha": "0.5"
             },
             "1.00": {
-                "dropout": "0.1",
-                "loss_alpha": "0.5"
+                "dropout": "0.0",
+                "loss_alpha": "1.0"
             }
         }
     }
@@ -581,8 +581,8 @@ def run_first_order_wl_methods():
 
 
 def main():
-    run_first_order_wl_methods_hyperparamter_search()
-    # run_first_order_wl_methods()
+    # run_first_order_wl_methods_hyperparamter_search()
+    run_first_order_wl_methods()
 
 
 if __name__ == '__main__':
