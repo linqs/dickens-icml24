@@ -33,6 +33,8 @@
         "0 * ImageSumBlock(ImageId1, ImageId2) + 0 * DigitSumTensPlace('0', X, Y, Z) + Carry(ImageId1, ImageId2, Z) + ImageDigit(ImageId1, X) <= ImageDigit(ImageId2, Y) + 1.0 .",
         "0 * ImageSumBlock(ImageId1, ImageId2) + 0 * DigitSumTensPlace('0', X, Y, Z) + ImageDigit(ImageId2, Y) + Carry(ImageId1, ImageId2, Z) <= ImageDigit(ImageId1, X) + 1.0 .",
 
+        "0 * ImageSumBlock(ImageId1, ImageId2) + 0 * DigitSumOnesPlace(W, '0', '0', Z) + Carry(ImageId1, ImageId2, W) = SumPlace(ImageId1, ImageId2, '10', Z) .",
+
         "ImageSumBlock(ImageId1, ImageId2) & PlacedRepresentation(Z_10, Z_1, Z) & SumPlace(ImageId1, ImageId2, '1', Z_1) & SumPlace(ImageId1, ImageId2, '10', Z_10) -> ImageSum(ImageId1, ImageId2, Z) .",
         "ImageSumBlock(ImageId1, ImageId2) & PlacedRepresentation(Z_10, Z_1, Z) & ImageSum(ImageId1, ImageId2, Z) & SumPlace(ImageId1, ImageId2, '1', Z_1) -> SumPlace(ImageId1, ImageId2, '10', Z_10) .",
         "ImageSumBlock(ImageId1, ImageId2) & PlacedRepresentation(Z_10, Z_1, Z) & SumPlace(ImageId1, ImageId2, '10', Z_10) & ImageSum(ImageId1, ImageId2, Z) -> SumPlace(ImageId1, ImageId2, '1', Z_1) .",
@@ -52,7 +54,7 @@
                 "entity-argument-indexes": "0",
                 "class-size": 10,
                 "save-path": "../data/experiment::mnist-1/split::0/train-size::0040/overlap::0.00/saved-networks/nesy-trained/trained_model.pt",
-                "alpha": 1.0,
+                "loss_alpha": 0.5,
                 "learning-rate": "1.0e-3",
                 "dropout": 0.2
             },

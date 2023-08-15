@@ -63,7 +63,8 @@ FIRST_ORDER_WL_METHODS_OPTION_RANGES = {
 }
 
 NEURAL_NETWORK_OPTIONS = {
-    "dropout": ["0.0", "0.1"]
+    "dropout": ["0.0", "0.1"],
+    "loss_alpha": ["0.1", "0.5", "0.99"],
 }
 
 BEST_HYPERPARAMETERS = {
@@ -251,70 +252,88 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
     "Energy": {
         "0040": {
             "0.00": {
-                "dropout": "0.1"
+                "dropout": "0.1",
+                "loss_alpha": "0.5"
             },
             "0.50": {
-                "dropout": "0.0"
+                "dropout": "0.0",
+                "loss_alpha": "0.5"
             },
             "1.00": {
-                "dropout": "0.1"
+                "dropout": "0.1",
+                "loss_alpha": "0.5"
             }
         },
         "0060": {
             "0.00": {
-                "dropout": "0.0"
+                "dropout": "0.0",
+                "loss_alpha": "0.5"
             },
             "0.50": {
-                "dropout": "0.0"
+                "dropout": "0.0",
+                "loss_alpha": "0.5"
             },
             "1.00": {
-                "dropout": "0.1"
+                "dropout": "0.1",
+                "loss_alpha": "0.5"
             }
         },
         "0080": {
             "0.00": {
-                "dropout": "0.0"
+                "dropout": "0.0",
+                "loss_alpha": "0.5"
             },
             "0.50": {
-                "dropout": "0.1"
+                "dropout": "0.1",
+                "loss_alpha": "0.5"
             },
             "1.00": {
-                "dropout": "0.1"
+                "dropout": "0.1",
+                "loss_alpha": "0.5"
             }
         }
     },
     "BinaryCrossEntropy": {
         "0040": {
             "0.00": {
-                "dropout": "0.0"
+                "dropout": "0.0",
+                "loss_alpha": "0.5"
             },
             "0.50": {
-                "dropout": "0.1"
+                "dropout": "0.1",
+                "loss_alpha": "0.5"
             },
             "1.00": {
-                "dropout": "0.1"
+                "dropout": "0.1",
+                "loss_alpha": "0.5"
             }
         },
         "0060": {
             "0.00": {
-                "dropout": "0.0"
+                "dropout": "0.0",
+                "loss_alpha": "0.5"
             },
             "0.50": {
-                "dropout": "0.0"
+                "dropout": "0.0",
+                "loss_alpha": "0.5"
             },
             "1.00": {
-                "dropout": "0.1"
+                "dropout": "0.1",
+                "loss_alpha": "0.5"
             }
         },
         "0080": {
             "0.00": {
-                "dropout": "0.0"
+                "dropout": "0.0",
+                "loss_alpha": "0.5"
             },
             "0.50": {
-                "dropout": "0.1"
+                "dropout": "0.1",
+                "loss_alpha": "0.5"
             },
             "1.00": {
-                "dropout": "0.1"
+                "dropout": "0.1",
+                "loss_alpha": "0.5"
             }
         }
     }
@@ -446,47 +465,50 @@ def run_first_order_wl_methods_hyperparamter_search():
                                            **FIRST_ORDER_WL_METHODS_OPTION_RANGES[method]}
                     for options in enumerate_hyperparameters(method_options_dict):
                         for dropout in NEURAL_NETWORK_OPTIONS["dropout"]:
-                            experiment_out_dir = split_out_dir
-                            for key, value in sorted(options.items()):
-                                experiment_out_dir = os.path.join(experiment_out_dir, "{}::{}".format(key, value))
-                            experiment_out_dir = os.path.join(experiment_out_dir, "dropout::{}".format(dropout))
+                            for loss_alpha in NEURAL_NETWORK_OPTIONS["loss_alpha"]:
+                                experiment_out_dir = split_out_dir
+                                for key, value in sorted(options.items()):
+                                    experiment_out_dir = os.path.join(experiment_out_dir, "{}::{}".format(key, value))
+                                experiment_out_dir = os.path.join(experiment_out_dir, "dropout::{}".format(dropout))
+                                experiment_out_dir = os.path.join(experiment_out_dir, "loss_alpha::{}".format(loss_alpha))
 
-                            os.makedirs(experiment_out_dir, exist_ok=True)
+                                os.makedirs(experiment_out_dir, exist_ok=True)
 
-                            if os.path.exists(os.path.join(experiment_out_dir, "out.txt")):
-                                print("Skipping experiment: {}.".format(experiment_out_dir))
-                                continue
+                                if os.path.exists(os.path.join(experiment_out_dir, "out.txt")):
+                                    print("Skipping experiment: {}.".format(experiment_out_dir))
+                                    continue
 
-                            dataset_json.update({"options": {**original_options,
-                                                             **STANDARD_EXPERIMENT_OPTIONS,
-                                                             **STANDARD_DATASET_OPTIONS["mnist-addition"],
-                                                             **options,
-                                                             "runtime.learn.output.model.path": "./mnist-addition_learned.psl"}})
+                                dataset_json.update({"options": {**original_options,
+                                                                 **STANDARD_EXPERIMENT_OPTIONS,
+                                                                 **STANDARD_DATASET_OPTIONS["mnist-addition"],
+                                                                 **options,
+                                                                 "runtime.learn.output.model.path": "./mnist-addition_learned.psl"}})
 
-                            dataset_json["predicates"]["NeuralClassifier/2"]["options"]["learning-rate"] = options["gradientdescent.stepsize"]
-                            dataset_json["predicates"]["NeuralClassifier/2"]["options"]["dropout"] = dropout
+                                dataset_json["predicates"]["NeuralClassifier/2"]["options"]["learning-rate"] = options["gradientdescent.stepsize"]
+                                dataset_json["predicates"]["NeuralClassifier/2"]["options"]["dropout"] = dropout
+                                dataset_json["predicates"]["NeuralClassifier/2"]["options"]["loss_alpha"] = loss_alpha
 
-                            # Set the data path.
-                            set_data_path(dataset_json, split, train_size, overlap)
+                                # Set the data path.
+                                set_data_path(dataset_json, split, train_size, overlap)
 
-                            # Write the options the json file.
-                            with open(os.path.join(MNIST_CLI_DIR, "mnist-addition.json"), "w") as file:
-                                json.dump(dataset_json, file, indent=4)
+                                # Write the options the json file.
+                                with open(os.path.join(MNIST_CLI_DIR, "mnist-addition.json"), "w") as file:
+                                    json.dump(dataset_json, file, indent=4)
 
-                            # Run the experiment.
-                            print("Running experiment: {}.".format(experiment_out_dir))
-                            exit_code = os.system("cd {} && ./run.sh {} > out.txt 2> out.err".format(MNIST_CLI_DIR, experiment_out_dir))
+                                # Run the experiment.
+                                print("Running experiment: {}.".format(experiment_out_dir))
+                                exit_code = os.system("cd {} && ./run.sh {} > out.txt 2> out.err".format(MNIST_CLI_DIR, experiment_out_dir))
 
-                            if exit_code != 0:
-                                print("Experiment failed: {}.".format(experiment_out_dir))
-                                exit()
+                                if exit_code != 0:
+                                    print("Experiment failed: {}.".format(experiment_out_dir))
+                                    exit()
 
-                            # Save the output and json file.
-                            os.system("mv {} {}".format(os.path.join(MNIST_CLI_DIR, "out.txt"), experiment_out_dir))
-                            os.system("mv {} {}".format(os.path.join(MNIST_CLI_DIR, "out.err"), experiment_out_dir))
-                            os.system("cp {} {}".format(os.path.join(MNIST_CLI_DIR, "mnist-addition.json"), experiment_out_dir))
-                            os.system("cp {} {}".format(os.path.join(MNIST_CLI_DIR, "mnist-addition_learned.psl"), experiment_out_dir))
-                            os.system("cp -r {} {}".format(os.path.join(MNIST_CLI_DIR, "inferred-predicates"), experiment_out_dir))
+                                # Save the output and json file.
+                                os.system("mv {} {}".format(os.path.join(MNIST_CLI_DIR, "out.txt"), experiment_out_dir))
+                                os.system("mv {} {}".format(os.path.join(MNIST_CLI_DIR, "out.err"), experiment_out_dir))
+                                os.system("cp {} {}".format(os.path.join(MNIST_CLI_DIR, "mnist-addition.json"), experiment_out_dir))
+                                os.system("cp {} {}".format(os.path.join(MNIST_CLI_DIR, "mnist-addition_learned.psl"), experiment_out_dir))
+                                os.system("cp -r {} {}".format(os.path.join(MNIST_CLI_DIR, "inferred-predicates"), experiment_out_dir))
 
 
 def run_first_order_wl_methods():
@@ -509,6 +531,7 @@ def run_first_order_wl_methods():
             for overlap in OVERLAPS:
                 options = BEST_HYPERPARAMETERS[method][train_size][overlap]
                 dropout = BEST_NEURAL_NETWORK_HYPERPARAMETERS[method][train_size][overlap]["dropout"]
+                loss_alpha = BEST_NEURAL_NETWORK_HYPERPARAMETERS[method][train_size][overlap]["loss_alpha"]
 
                 for split in SPLITS:
                     split_out_dir = os.path.join(method_out_dir, "split::{}/train-size::{}/overlap::{}".format(split, train_size, overlap))
@@ -518,6 +541,7 @@ def run_first_order_wl_methods():
                     for key, value in sorted(options.items()):
                         experiment_out_dir = os.path.join(experiment_out_dir, "{}::{}".format(key, value))
                     experiment_out_dir = os.path.join(experiment_out_dir, "dropout::{}".format(dropout))
+                    experiment_out_dir = os.path.join(experiment_out_dir, "loss_alpha::{}".format(loss_alpha))
 
                     os.makedirs(experiment_out_dir, exist_ok=True)
 
@@ -533,6 +557,7 @@ def run_first_order_wl_methods():
 
                     dataset_json["predicates"]["NeuralClassifier/2"]["options"]["learning-rate"] = options["gradientdescent.stepsize"]
                     dataset_json["predicates"]["NeuralClassifier/2"]["options"]["dropout"] = dropout
+                    dataset_json["predicates"]["NeuralClassifier/2"]["options"]["loss_alpha"] = loss_alpha
 
                     # Set the data path.
                     set_data_path(dataset_json, split, train_size, overlap)
@@ -555,6 +580,7 @@ def run_first_order_wl_methods():
                     os.system("cp {} {}".format(os.path.join(MNIST_CLI_DIR, "mnist-addition.json"), experiment_out_dir))
                     os.system("cp {} {}".format(os.path.join(MNIST_CLI_DIR, "mnist-addition_learned.psl"), experiment_out_dir))
                     os.system("cp -r {} {}".format(os.path.join(MNIST_CLI_DIR, "inferred-predicates"), experiment_out_dir))
+
 
 def main():
     # run_first_order_wl_methods_hyperparamter_search()

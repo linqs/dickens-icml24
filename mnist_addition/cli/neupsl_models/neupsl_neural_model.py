@@ -70,10 +70,10 @@ class MNISTAdditionModel(pslpython.deeppsl.model.DeepModel):
     def internal_fit(self, data, gradients, options={}):
         self._prepare_data(data, options=options)
 
-        structured_gradients = torch.tensor(gradients.astype(np.float32), dtype=torch.float32, device=self._device)
+        structured_gradients = float(options["loss_alpha"]) * torch.tensor(gradients.astype(np.float32), dtype=torch.float32, device=self._device)
 
-        dino_loss = (self._dino_loss(self._teacher_predictions_1, self._student_predictions_1)
-                     + self._dino_loss(self._teacher_predictions_2, self._student_predictions_2)) / 2.0
+        dino_loss = (1 - float(options["loss_alpha"])) * (self._dino_loss(self._teacher_predictions_1, self._student_predictions_1)
+                                                          + self._dino_loss(self._teacher_predictions_2, self._student_predictions_2)) / 2.0
 
         self._optimizer.zero_grad()
 
