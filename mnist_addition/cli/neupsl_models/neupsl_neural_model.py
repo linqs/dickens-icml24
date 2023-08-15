@@ -31,12 +31,17 @@ class MNISTAdditionModel(pslpython.deeppsl.model.DeepModel):
         self._teacher_model = None
         self._teacher_predictions_1 = None
         self._teacher_predictions_2 = None
-        self._teacher_parameter_momentum = 0.99
+        self._teacher_parameter_momentum_minimum = 0.996
+        self._teacher_parameter_momentum_maximum = 1.0
+        self._teacher_parameter_momentum = self._teacher_parameter_momentum_maximum
+        self._teacher_parameter_momentum_period = 250
         self._teacher_center_momentum = 0.9
         self._teacher_center = None
 
         self._training_transforms = None
         self._optimizer = None
+
+        self._iteration = 0
 
         self._features = None
         self._digit_labels = None
@@ -56,6 +61,7 @@ class MNISTAdditionModel(pslpython.deeppsl.model.DeepModel):
         self._teacher_center = torch.zeros(int(options['class-size']), device=self._device) + 1.0 / int(options['class-size'])
 
         if self._application == 'learning':
+            self._iteration = 0
             self._optimizer = torch.optim.Adam(self._student_model.parameters(), lr=float(options['learning-rate']))
             self._training_transforms = torchvision.transforms.Compose([
                 torchvision.transforms.RandomRotation(degrees=(0, 45)),
@@ -85,6 +91,7 @@ class MNISTAdditionModel(pslpython.deeppsl.model.DeepModel):
         self._optimizer.step()
 
         # EMA updates for the teacher
+        self._update_teacher_momentum()
         with torch.no_grad():
             for param_student, param_teacher in zip(self._student_model.parameters(), self._teacher_model.parameters()):
                 param_teacher.data.mul_(self._teacher_parameter_momentum).add_((1 - self._teacher_parameter_momentum) * param_student.detach().data)
@@ -103,7 +110,15 @@ class MNISTAdditionModel(pslpython.deeppsl.model.DeepModel):
                    "struct gradient_norm_2": torch.norm(structured_gradients, 2).item(),
                    "struct gradient_norm_infty": torch.norm(structured_gradients, torch.inf).item()}
 
+        self._iteration += 1
+
         return results
+
+    def _update_teacher_momentum(self):
+        # Update teacher momentum using cosine annealing.
+        self._teacher_parameter_momentum = (self._teacher_parameter_momentum_minimum
+                                            + 0.5 * (self._teacher_parameter_momentum_maximum - self._teacher_parameter_momentum_minimum)
+                                            * (1 + np.cos(np.pi * self._iteration / self._teacher_parameter_momentum_period)))
 
     def _dino_loss(self, teacher_predictions, student_predictions):
         return -1.0 * (teacher_predictions * torch.log(student_predictions + 1e-7)).sum(dim=1).mean()
