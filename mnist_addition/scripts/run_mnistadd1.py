@@ -12,7 +12,7 @@ PERFORMANCE_RESULTS_DIR = os.path.join(RESULTS_BASE_DIR, "performance")
 # SPLITS = ["0", "1", "2", "3", "4"]
 SPLITS = ["0"]
 # TRAIN_SIZES = ["0040", "0060", "0080"]
-TRAIN_SIZES = ["6000"]
+TRAIN_SIZES = ["0080"]
 # OVERLAPS = ["0.00", "0.50", "1.00"]
 OVERLAPS = ["0.00"]
 
@@ -20,14 +20,14 @@ STANDARD_EXPERIMENT_OPTIONS = {
     "inference.normalize": "false",
     "runtime.log.level": "TRACE",
     "gradientdescent.scalestepsize": "false",
-    "weightlearning.inference": "ADMMInference",
-    "runtime.inference.method": "ADMMInference",
+    "weightlearning.inference": "DualBCDInference",
+    "runtime.inference.method": "DualBCDInference",
     "gradientdescent.numsteps": "5000",
     "gradientdescent.runfulliterations": "false",
     "duallcqp.computeperiod": "10",
     "duallcqp.maxiterations": "10000",
-    "runtime.validation": "false",
-    "gradientdescent.savevalidationweights": "false",
+    "runtime.validation": "true",
+    "gradientdescent.savevalidationweights": "true",
 }
 
 STANDARD_DATASET_OPTIONS = {
@@ -44,7 +44,7 @@ INFERENCE_OPTION_RANGES = {
 FIRST_ORDER_WL_METHODS = ["Energy"]
 
 FIRST_ORDER_WL_METHODS_STANDARD_OPTION_RANGES = {
-    "gradientdescent.stepsize": ["1.0e-2", "1.0e-3", "1.0e-4"],
+    "gradientdescent.stepsize": ["1.0e-14"],
     "gradientdescent.negativelogregularization": ["1.0e-3"],
     "gradientdescent.negativeentropyregularization": ["0.0"]
 }
@@ -64,8 +64,10 @@ FIRST_ORDER_WL_METHODS_OPTION_RANGES = {
 
 NEURAL_NETWORK_OPTIONS = {
     "dropout": ["0.0", "0.1"],
-    "weight_decay": ["1.0e-3", "1.0e-4"],
+    "weight_decay": ["1.0e-3", "1.0e-5", "1.0e-7"],
     "loss_alpha": ["0.1", "0.5", "0.99", "1.0"],
+    "neural_learning_rate": ["1.0e-3", "1.0e-4", "1.0e-5"],
+    "transforms": ["true", "false"],
 }
 
 BEST_HYPERPARAMETERS = {
@@ -120,7 +122,7 @@ BEST_HYPERPARAMETERS = {
             "0.00": {
                 "runtime.learn.method": "Energy",
                 "duallcqp.regularizationparameter": "1.0e-3",
-                "gradientdescent.stepsize": "1.0e-4",
+                "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
                 "gradientdescent.negativeentropyregularization": "0.0"
             },
@@ -277,19 +279,22 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
                 "dropout": "0.1",
                 "weight_decay": "1.0e-3",
                 "loss_alpha": "1.0",
-                "neural_learning_rate": "1.0e-3"
+                "neural_learning_rate": "1.0e-3",
+                "transforms": "true"
             },
             "0.50": {
                 "dropout": "0.0",
                 "weight_decay": "1.0e-3",
                 "loss_alpha": "1.0",
-                "neural_learning_rate": "1.0e-3"
+                "neural_learning_rate": "1.0e-3",
+                "transforms": "true"
             },
             "1.00": {
                 "dropout": "0.1",
                 "weight_decay": "1.0e-3",
                 "loss_alpha": "1.0",
-                "neural_learning_rate": "1.0e-3"
+                "neural_learning_rate": "1.0e-3",
+                "transforms": "true"
             }
         },
         "0060": {
@@ -297,39 +302,45 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
                 "dropout": "0.0",
                 "weight_decay": "1.0e-3",
                 "loss_alpha": "1.0",
-                "neural_learning_rate": "1.0e-3"
+                "neural_learning_rate": "1.0e-3",
+                "transforms": "true"
             },
             "0.50": {
                 "dropout": "0.0",
                 "weight_decay": "1.0e-3",
                 "loss_alpha": "1.0",
-                "neural_learning_rate": "1.0e-3"
+                "neural_learning_rate": "1.0e-3",
+                "transforms": "true"
             },
             "1.00": {
                 "dropout": "0.1",
                 "weight_decay": "1.0e-3",
                 "loss_alpha": "1.0",
-                "neural_learning_rate": "1.0e-3"
+                "neural_learning_rate": "1.0e-3",
+                "transforms": "true"
             }
         },
         "0080": {
             "0.00": {
                 "dropout": "0.0",
-                "weight_decay": "1.0e-3",
+                "weight_decay": "0.0",
                 "loss_alpha": "1.0",
-                "neural_learning_rate": "1.0e-3"
+                "neural_learning_rate": "1.0e-4",
+                "transforms": "false"
             },
             "0.50": {
                 "dropout": "0.1",
                 "weight_decay": "1.0e-3",
                 "loss_alpha": "1.0",
-                "neural_learning_rate": "1.0e-3"
+                "neural_learning_rate": "1.0e-3",
+                "transforms": "true"
             },
             "1.00": {
                 "dropout": "0.0",
                 "weight_decay": "0.0",
                 "loss_alpha": "1.0",
-                "neural_learning_rate": "1.0e-3"
+                "neural_learning_rate": "1.0e-3",
+                "transforms": "true"
             }
         },
         "6000": {
@@ -337,19 +348,22 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
                 "dropout": "0.0",
                 "weight_decay": "1.0e-3",
                 "loss_alpha": "1.0",
-                "neural_learning_rate": "1.0e-3"
+                "neural_learning_rate": "1.0e-3",
+                "transforms": "true"
             },
             "0.50": {
                 "dropout": "0.1",
                 "weight_decay": "1.0e-3",
                 "loss_alpha": "1.0",
-                "neural_learning_rate": "1.0e-3"
+                "neural_learning_rate": "1.0e-3",
+                "transforms": "true"
             },
             "1.00": {
                 "dropout": "0.0",
                 "weight_decay": "0.0",
                 "loss_alpha": "1.0",
-                "neural_learning_rate": "1.0e-3"
+                "neural_learning_rate": "1.0e-3",
+                "transforms": "true"
             }
         }
     },
@@ -359,19 +373,22 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
                 "dropout": "0.0",
                 "weight_decay": "1.0e-3",
                 "loss_alpha": "1.0",
-                "neural_learning_rate": "1.0e-3"
+                "neural_learning_rate": "1.0e-3",
+                "transforms": "true"
             },
             "0.50": {
                 "dropout": "0.1",
                 "weight_decay": "1.0e-3",
                 "loss_alpha": "1.0",
-                "neural_learning_rate": "1.0e-3"
+                "neural_learning_rate": "1.0e-3",
+                "transforms": "true"
             },
             "1.00": {
                 "dropout": "0.1",
                 "weight_decay": "1.0e-3",
                 "loss_alpha": "1.0",
-                "neural_learning_rate": "1.0e-3"
+                "neural_learning_rate": "1.0e-3",
+                "transforms": "true"
             }
         },
         "0060": {
@@ -379,19 +396,22 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
                 "dropout": "0.0",
                 "weight_decay": "1.0e-3",
                 "loss_alpha": "1.0",
-                "neural_learning_rate": "1.0e-3"
+                "neural_learning_rate": "1.0e-3",
+                "transforms": "true"
             },
             "0.50": {
                 "dropout": "0.0",
                 "weight_decay": "1.0e-3",
                 "loss_alpha": "1.0",
-                "neural_learning_rate": "1.0e-3"
+                "neural_learning_rate": "1.0e-3",
+                "transforms": "true"
             },
             "1.00": {
                 "dropout": "0.1",
                 "weight_decay": "1.0e-3",
                 "loss_alpha": "1.0",
-                "neural_learning_rate": "1.0e-3"
+                "neural_learning_rate": "1.0e-3",
+                "transforms": "true"
             }
         },
         "0080": {
@@ -399,19 +419,22 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
                 "dropout": "0.0",
                 "weight_decay": "0.0",
                 "loss_alpha": "1.0",
-                "neural_learning_rate": "1.0e-3"
+                "neural_learning_rate": "1.0e-3",
+                "transforms": "true"
             },
             "0.50": {
                 "dropout": "0.1",
                 "weight_decay": "1.0e-3",
                 "loss_alpha": "1.0",
-                "neural_learning_rate": "1.0e-3"
+                "neural_learning_rate": "1.0e-3",
+                "transforms": "true"
             },
             "1.00": {
                 "dropout": "0.0",
                 "weight_decay": "1.0e-3",
                 "loss_alpha": "1.0",
-                "neural_learning_rate": "1.0e-3"
+                "neural_learning_rate": "1.0e-3",
+                "transforms": "true"
             }
         }
     }
@@ -572,53 +595,56 @@ def run_first_order_wl_methods_hyperparamter_search():
                         for dropout in NEURAL_NETWORK_OPTIONS["dropout"]:
                             for weight_decay in NEURAL_NETWORK_OPTIONS["weight_decay"]:
                                 for loss_alpha in NEURAL_NETWORK_OPTIONS["loss_alpha"]:
-                                    for neural_learning_rate in NEURAL_NETWORK_OPTIONS["neural_learning_rate"]:
-                                        experiment_out_dir = split_out_dir
-                                        for key, value in sorted(options.items()):
-                                            experiment_out_dir = os.path.join(experiment_out_dir, "{}::{}".format(key, value))
-                                        experiment_out_dir = os.path.join(experiment_out_dir, "dropout::{}".format(dropout))
-                                        experiment_out_dir = os.path.join(experiment_out_dir, "weight_decay::{}".format(weight_decay))
-                                        experiment_out_dir = os.path.join(experiment_out_dir, "loss_alpha::{}".format(loss_alpha))
-                                        experiment_out_dir = os.path.join(experiment_out_dir, "neural_learning_rate::{}".format(neural_learning_rate))
+                                    for transforms in NEURAL_NETWORK_OPTIONS["transforms"]:
+                                        for neural_learning_rate in NEURAL_NETWORK_OPTIONS["neural_learning_rate"]:
+                                            experiment_out_dir = split_out_dir
+                                            for key, value in sorted(options.items()):
+                                                experiment_out_dir = os.path.join(experiment_out_dir, "{}::{}".format(key, value))
+                                            experiment_out_dir = os.path.join(experiment_out_dir, "dropout::{}".format(dropout))
+                                            experiment_out_dir = os.path.join(experiment_out_dir, "weight_decay::{}".format(weight_decay))
+                                            experiment_out_dir = os.path.join(experiment_out_dir, "loss_alpha::{}".format(loss_alpha))
+                                            experiment_out_dir = os.path.join(experiment_out_dir, "transforms::{}".format(transforms))
+                                            experiment_out_dir = os.path.join(experiment_out_dir, "neural_learning_rate::{}".format(neural_learning_rate))
 
-                                        os.makedirs(experiment_out_dir, exist_ok=True)
+                                            os.makedirs(experiment_out_dir, exist_ok=True)
 
-                                        if os.path.exists(os.path.join(experiment_out_dir, "out.txt")):
-                                            print("Skipping experiment: {}.".format(experiment_out_dir))
-                                            continue
+                                            if os.path.exists(os.path.join(experiment_out_dir, "out.txt")):
+                                                print("Skipping experiment: {}.".format(experiment_out_dir))
+                                                continue
 
-                                        dataset_json.update({"options": {**original_options,
-                                                                         **STANDARD_EXPERIMENT_OPTIONS,
-                                                                         **STANDARD_DATASET_OPTIONS["mnist-addition"],
-                                                                         **options,
-                                                                         "runtime.learn.output.model.path": "./mnist-addition_learned.psl"}})
+                                            dataset_json.update({"options": {**original_options,
+                                                                             **STANDARD_EXPERIMENT_OPTIONS,
+                                                                             **STANDARD_DATASET_OPTIONS["mnist-addition"],
+                                                                             **options,
+                                                                             "runtime.learn.output.model.path": "./mnist-addition_learned.psl"}})
 
-                                        dataset_json["predicates"]["NeuralClassifier/2"]["options"]["dropout"] = dropout
-                                        dataset_json["predicates"]["NeuralClassifier/2"]["options"]["weight_decay"] = weight_decay
-                                        dataset_json["predicates"]["NeuralClassifier/2"]["options"]["loss_alpha"] = loss_alpha
-                                        dataset_json["predicates"]["NeuralClassifier/2"]["options"]["neural_learning_rate"] = neural_learning_rate
+                                            dataset_json["predicates"]["NeuralClassifier/2"]["options"]["dropout"] = dropout
+                                            dataset_json["predicates"]["NeuralClassifier/2"]["options"]["weight_decay"] = weight_decay
+                                            dataset_json["predicates"]["NeuralClassifier/2"]["options"]["loss_alpha"] = loss_alpha
+                                            dataset_json["predicates"]["NeuralClassifier/2"]["options"]["transforms"] = transforms
+                                            dataset_json["predicates"]["NeuralClassifier/2"]["options"]["neural_learning_rate"] = neural_learning_rate
 
-                                        # Set the data path.
-                                        set_data_path(dataset_json, split, train_size, overlap)
+                                            # Set the data path.
+                                            set_data_path(dataset_json, split, train_size, overlap)
 
-                                        # Write the options the json file.
-                                        with open(os.path.join(MNIST_CLI_DIR, "mnist-addition.json"), "w") as file:
-                                            json.dump(dataset_json, file, indent=4)
+                                            # Write the options the json file.
+                                            with open(os.path.join(MNIST_CLI_DIR, "mnist-addition.json"), "w") as file:
+                                                json.dump(dataset_json, file, indent=4)
 
-                                        # Run the experiment.
-                                        print("Running experiment: {}.".format(experiment_out_dir))
-                                        exit_code = os.system("cd {} && ./run.sh {} > out.txt 2> out.err".format(MNIST_CLI_DIR, experiment_out_dir))
+                                            # Run the experiment.
+                                            print("Running experiment: {}.".format(experiment_out_dir))
+                                            exit_code = os.system("cd {} && ./run.sh {} > out.txt 2> out.err".format(MNIST_CLI_DIR, experiment_out_dir))
 
-                                        if exit_code != 0:
-                                            print("Experiment failed: {}.".format(experiment_out_dir))
-                                            exit()
+                                            if exit_code != 0:
+                                                print("Experiment failed: {}.".format(experiment_out_dir))
+                                                exit()
 
-                                        # Save the output and json file.
-                                        os.system("mv {} {}".format(os.path.join(MNIST_CLI_DIR, "out.txt"), experiment_out_dir))
-                                        os.system("mv {} {}".format(os.path.join(MNIST_CLI_DIR, "out.err"), experiment_out_dir))
-                                        os.system("cp {} {}".format(os.path.join(MNIST_CLI_DIR, "mnist-addition.json"), experiment_out_dir))
-                                        os.system("cp {} {}".format(os.path.join(MNIST_CLI_DIR, "mnist-addition_learned.psl"), experiment_out_dir))
-                                        os.system("cp -r {} {}".format(os.path.join(MNIST_CLI_DIR, "inferred-predicates"), experiment_out_dir))
+                                            # Save the output and json file.
+                                            os.system("mv {} {}".format(os.path.join(MNIST_CLI_DIR, "out.txt"), experiment_out_dir))
+                                            os.system("mv {} {}".format(os.path.join(MNIST_CLI_DIR, "out.err"), experiment_out_dir))
+                                            os.system("cp {} {}".format(os.path.join(MNIST_CLI_DIR, "mnist-addition.json"), experiment_out_dir))
+                                            os.system("cp {} {}".format(os.path.join(MNIST_CLI_DIR, "mnist-addition_learned.psl"), experiment_out_dir))
+                                            os.system("cp -r {} {}".format(os.path.join(MNIST_CLI_DIR, "inferred-predicates"), experiment_out_dir))
 
 
 def run_first_order_wl_methods():
@@ -643,6 +669,7 @@ def run_first_order_wl_methods():
                 dropout = BEST_NEURAL_NETWORK_HYPERPARAMETERS[method][train_size][overlap]["dropout"]
                 weight_decay = BEST_NEURAL_NETWORK_HYPERPARAMETERS[method][train_size][overlap]["weight_decay"]
                 loss_alpha = BEST_NEURAL_NETWORK_HYPERPARAMETERS[method][train_size][overlap]["loss_alpha"]
+                transforms = BEST_NEURAL_NETWORK_HYPERPARAMETERS[method][train_size][overlap]["transforms"]
                 neural_learning_rate = BEST_NEURAL_NETWORK_HYPERPARAMETERS[method][train_size][overlap]["neural_learning_rate"]
 
                 for split in SPLITS:
@@ -655,6 +682,7 @@ def run_first_order_wl_methods():
                     experiment_out_dir = os.path.join(experiment_out_dir, "dropout::{}".format(dropout))
                     experiment_out_dir = os.path.join(experiment_out_dir, "weight_decay::{}".format(weight_decay))
                     experiment_out_dir = os.path.join(experiment_out_dir, "loss_alpha::{}".format(loss_alpha))
+                    experiment_out_dir = os.path.join(experiment_out_dir, "transforms::{}".format(transforms))
                     experiment_out_dir = os.path.join(experiment_out_dir, "neural_learning_rate::{}".format(neural_learning_rate))
 
                     os.makedirs(experiment_out_dir, exist_ok=True)
@@ -672,6 +700,7 @@ def run_first_order_wl_methods():
                     dataset_json["predicates"]["NeuralClassifier/2"]["options"]["dropout"] = dropout
                     dataset_json["predicates"]["NeuralClassifier/2"]["options"]["weight_decay"] = weight_decay
                     dataset_json["predicates"]["NeuralClassifier/2"]["options"]["loss_alpha"] = loss_alpha
+                    dataset_json["predicates"]["NeuralClassifier/2"]["options"]["transforms"] = transforms
                     dataset_json["predicates"]["NeuralClassifier/2"]["options"]["neural_learning_rate"] = neural_learning_rate
 
                     # Set the data path.

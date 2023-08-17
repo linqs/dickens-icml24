@@ -62,12 +62,17 @@ class MNISTAdditionModel(pslpython.deeppsl.model.DeepModel):
 
         if self._application == 'learning':
             self._iteration = 0
-            self._optimizer = torch.optim.Adam(self._student_model.mlp.parameters(), lr=float(options['neural_learning_rate']), weight_decay=float(options['weight_decay']))
-            self._training_transforms = torchvision.transforms.Compose([
-                torchvision.transforms.RandomRotation(degrees=(0, 45)),
-                # torchvision.transforms.RandomPerspective(distortion_scale=0.25, p=1.0),
-                torchvision.transforms.ElasticTransform(alpha=50.0)
-            ])
+            self._optimizer = torch.optim.Adam(self._student_model.parameters(), lr=float(options['neural_learning_rate']), weight_decay=float(options['weight_decay']))
+            if options['transforms'] == 'true':
+                self._training_transforms = torchvision.transforms.Compose([
+                    torchvision.transforms.RandomRotation(degrees=45),
+                    # torchvision.transforms.RandomPerspective(distortion_scale=0.25, p=1.0),
+                    torchvision.transforms.ElasticTransform(alpha=100.0)
+                ])
+            else:
+                self._training_transforms = torchvision.transforms.Compose([
+                    torchvision.transforms.RandomRotation(degrees=0)
+                ])
         elif self._application == 'inference':
             self._student_model.load_state_dict(torch.load(options['save-path']))
 
@@ -87,12 +92,12 @@ class MNISTAdditionModel(pslpython.deeppsl.model.DeepModel):
         self._student_predictions_1.backward(structured_gradients, retain_graph=True)
 
         total_gradient_norm = 0.0
-        for p in self._student_model.parameters():
+        for p in self._student_model.mlp.parameters():
             param_norm = p.grad.data.norm(2)
             total_gradient_norm += param_norm.item() ** 2
         total_gradient_norm = total_gradient_norm ** (1. / 2)
 
-        torch.nn.utils.clip_grad_norm_(self._student_model.parameters(), 1.0)
+        torch.nn.utils.clip_grad_norm_(self._student_model.parameters(), 3.0)
 
         self._optimizer.step()
 
@@ -169,15 +174,15 @@ class MNISTAdditionModel(pslpython.deeppsl.model.DeepModel):
     def _create_model(self, options={}):
         resnet18_ = torchvision.models.resnet18()
         resnet18_.conv1 = torch.nn.Conv2d(1, resnet18_.inplanes, kernel_size=7, stride=2, padding=3, bias=False)
-        backbone = torchvision.models.resnet18(num_classes=256)
+        backbone = torchvision.models.resnet18(num_classes=128)
 
         backbone.load_state_dict(torch.load(
-            f"{THIS_DIR}/../../data/experiment::mnist-1/split::0/train-size::6000/overlap::0.00/saved-networks/simclr-pretrained-backbone.pt"
+            f"{THIS_DIR}/../../data/experiment::mnist-1/split::0/train-size::0600/overlap::0.00/saved-networks/simclr-pretrained-backbone.pt"
         ))
 
         return MNIST_Classifier(
             backbone,
-            MLP(256, int(options['class-size']), int(options['class-size']), 2, float(options["dropout"])),
+            MLP(128, 64, int(options['class-size']), 2, float(options["dropout"])),
             options["temperature"])
 
     def _prepare_data(self, data, options={}):

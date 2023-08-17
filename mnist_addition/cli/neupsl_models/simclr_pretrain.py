@@ -140,9 +140,9 @@ def simclr_pretrain(data_folder):
 
     resnet18_ = torchvision.models.resnet18()
     resnet18_.conv1 = torch.nn.Conv2d(1, resnet18_.inplanes, kernel_size=7, stride=2, padding=3, bias=False)
-    backbone = torchvision.models.resnet18(num_classes=256)
+    backbone = torchvision.models.resnet18(num_classes=128)
 
-    projection_head = MLP(256, 256, 256, 2)
+    projection_head = MLP(128, 128, 128, 2)
 
     model = torch.nn.Sequential(backbone, projection_head)
     optimizer = torch.optim.Adam(model.parameters(), lr=3.0e-4)
@@ -151,7 +151,7 @@ def simclr_pretrain(data_folder):
     simclr_pretrain = SimCLR(model.to(device), optimizer, scheduler,
                              batch_size=256, temperature=0.07, device=device)
 
-    simclr_pretrain.train(torch.utils.data.DataLoader(mnist_dataset, batch_size=1024, shuffle=True), epochs=100)
+    simclr_pretrain.train(torch.utils.data.DataLoader(mnist_dataset, batch_size=256, shuffle=True), epochs=1000)
 
     os.makedirs(f"{data_folder}/saved-networks", exist_ok=True)
 
@@ -169,7 +169,7 @@ def get_torch_device():
 
 
 def main():
-    simclr_pretrain(f"{THIS_DIR}/../../data/experiment::mnist-1/split::0/train-size::6000/overlap::0.00")
+    simclr_pretrain(f"{THIS_DIR}/../../data/experiment::mnist-1/split::0/train-size::0600/overlap::0.00")
 
 
 if __name__ == "__main__":
