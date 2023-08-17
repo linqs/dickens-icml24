@@ -20,13 +20,12 @@ STANDARD_EXPERIMENT_OPTIONS = {
     "inference.normalize": "false",
     "runtime.log.level": "TRACE",
     "gradientdescent.scalestepsize": "false",
-    "weightlearning.inference": "ADMMInference",
-    "runtime.inference.method": "ADMMInference",
-    # "gradientdescent.numsteps": "5000",
-    "gradientdescent.numsteps": "500",
+    "weightlearning.inference": "DualBCDInference",
+    "runtime.inference.method": "DualBCDInference",
+    "gradientdescent.numsteps": "5000",
     "gradientdescent.runfulliterations": "true",
     "duallcqp.computeperiod": "10",
-    "duallcqp.maxiterations": "100000",
+    "duallcqp.maxiterations": "10000",
     "runtime.validation": "false",
     "gradientdescent.savevalidationweights": "false",
 }
@@ -120,7 +119,7 @@ BEST_HYPERPARAMETERS = {
         "0080": {
             "0.00": {
                 "runtime.learn.method": "Energy",
-                "duallcqp.regularizationparameter": "1.0e-2",
+                "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-4",
                 "gradientdescent.negativelogregularization": "1.0e-3",
                 "gradientdescent.negativeentropyregularization": "0.0"

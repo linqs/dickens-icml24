@@ -64,9 +64,10 @@ class MNISTAdditionModel(pslpython.deeppsl.model.DeepModel):
             self._iteration = 0
             self._optimizer = torch.optim.Adam(self._student_model.parameters(), lr=float(options['neural_learning_rate']), weight_decay=float(options['weight_decay']))
             self._training_transforms = torchvision.transforms.Compose([
-                torchvision.transforms.RandomRotation(degrees=(0, 45)),
+                # torchvision.transforms.RandomRotation(degrees=(0, 45)),
+                torchvision.transforms.RandomRotation(degrees=(0, 0)),
                 # torchvision.transforms.RandomPerspective(distortion_scale=0.25, p=1.0),
-                torchvision.transforms.ElasticTransform(alpha=50.0)
+                # torchvision.transforms.ElasticTransform(alpha=50.0)
             ])
         elif self._application == 'inference':
             self._student_model.load_state_dict(torch.load(options['save-path']))
