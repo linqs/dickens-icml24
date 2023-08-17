@@ -8,12 +8,12 @@
         "gradientdescent.savevalidationweights": "false",
         "categoricalevaluator.defaultpredicate": "ImageSum",
         "gradientdescent.numsteps": "5000",
-        "gradientdescent.runfulliterations": "true",
+        "gradientdescent.runfulliterations": "false",
         "gradientdescent.stepsize": "1.0e-4",
-        "weightlearning.inference": "DualBCDInference",
-        "runtime.inference.method": "DualBCDInference",
+        "weightlearning.inference": "ADMMInference",
+        "runtime.inference.method": "ADMMInference",
         "duallcqp.computeperiod": "10",
-        "duallcqp.maxiterations": "100000",
+        "duallcqp.maxiterations": "10000",
         "duallcqp.primaldualthreshold": "0.1",
         "duallcqp.regularizationparameter": "1.0e-3",
         "gradientdescent.negativeentropyregularization": "0.0",
@@ -56,10 +56,10 @@
             "type": "DeepPredicate",
             "options": {
                 "model-path": "./neupsl_models/neupsl_neural_model.py::MNISTAdditionModel",
-                "entity-data-map-path": "../data/experiment::mnist-1/split::0/train-size::0080/overlap::0.00/entity-data-map.txt",
+                "entity-data-map-path": "../data/experiment::mnist-1/split::0/train-size::6000/overlap::0.00/entity-data-map.txt",
                 "entity-argument-indexes": "0",
                 "class-size": 10,
-                "save-path": "../data/experiment::mnist-1/split::0/train-size::0080/overlap::0.00/saved-networks/nesy-trained/trained_model.pt",
+                "save-path": "../data/experiment::mnist-1/split::0/train-size::6000/overlap::0.00/saved-networks/nesy-trained/trained_model.pt",
                 "loss_alpha": "1.0",
                 "learning-rate": "1.0e-3",
                 "dropout": "0.0",
@@ -68,26 +68,26 @@
             },
             "targets": {
                 "learn": [
-                    "../data/experiment::mnist-1/split::0/train-size::0080/overlap::0.00/image-target-train.txt"
+                    "../data/experiment::mnist-1/split::0/train-size::6000/overlap::0.00/image-target-train.txt"
                 ],
                 "validation": [
-                    "../data/experiment::mnist-1/split::0/train-size::0080/overlap::0.00/image-target-valid.txt"
+                    "../data/experiment::mnist-1/split::0/train-size::6000/overlap::0.00/image-target-valid.txt"
                 ],
                 "infer": [
-                    "../data/experiment::mnist-1/split::0/train-size::0080/overlap::0.00/image-target-test.txt"
+                    "../data/experiment::mnist-1/split::0/train-size::6000/overlap::0.00/image-target-test.txt"
                 ]
             }
         },
         "ImageDigit/2": {
             "targets": {
                 "learn": [
-                    "../data/experiment::mnist-1/split::0/train-size::0080/overlap::0.00/image-target-train.txt"
+                    "../data/experiment::mnist-1/split::0/train-size::6000/overlap::0.00/image-target-train.txt"
                 ],
                 "validation": [
-                    "../data/experiment::mnist-1/split::0/train-size::0080/overlap::0.00/image-target-valid.txt"
+                    "../data/experiment::mnist-1/split::0/train-size::6000/overlap::0.00/image-target-valid.txt"
                 ],
                 "infer": [
-                    "../data/experiment::mnist-1/split::0/train-size::0080/overlap::0.00/image-target-test.txt"
+                    "../data/experiment::mnist-1/split::0/train-size::6000/overlap::0.00/image-target-test.txt"
                 ]
             }
         },
@@ -103,24 +103,24 @@
             ],
             "targets": {
                 "learn": [
-                    "../data/experiment::mnist-1/split::0/train-size::0080/overlap::0.00/image-sum-target-train.txt"
+                    "../data/experiment::mnist-1/split::0/train-size::6000/overlap::0.00/image-sum-target-train.txt"
                 ],
                 "validation": [
-                    "../data/experiment::mnist-1/split::0/train-size::0080/overlap::0.00/image-sum-target-valid.txt"
+                    "../data/experiment::mnist-1/split::0/train-size::6000/overlap::0.00/image-sum-target-valid.txt"
                 ],
                 "infer": [
-                    "../data/experiment::mnist-1/split::0/train-size::0080/overlap::0.00/image-sum-target-test.txt"
+                    "../data/experiment::mnist-1/split::0/train-size::6000/overlap::0.00/image-sum-target-test.txt"
                 ]
             },
             "truth": {
                 "learn": [
-                    "../data/experiment::mnist-1/split::0/train-size::0080/overlap::0.00/image-sum-truth-train.txt"
+                    "../data/experiment::mnist-1/split::0/train-size::6000/overlap::0.00/image-sum-truth-train.txt"
                 ],
                 "validation": [
-                    "../data/experiment::mnist-1/split::0/train-size::0080/overlap::0.00/image-sum-truth-valid.txt"
+                    "../data/experiment::mnist-1/split::0/train-size::6000/overlap::0.00/image-sum-truth-valid.txt"
                 ],
                 "infer": [
-                    "../data/experiment::mnist-1/split::0/train-size::0080/overlap::0.00/image-sum-truth-test.txt"
+                    "../data/experiment::mnist-1/split::0/train-size::6000/overlap::0.00/image-sum-truth-test.txt"
                 ]
             }
         },
@@ -139,50 +139,50 @@
             },
             "targets": {
                 "learn": [
-                    "../data/experiment::mnist-1/split::0/train-size::0080/overlap::0.00/image-sum-place-target-train.txt"
+                    "../data/experiment::mnist-1/split::0/train-size::6000/overlap::0.00/image-sum-place-target-train.txt"
                 ],
                 "validation": [
-                    "../data/experiment::mnist-1/split::0/train-size::0080/overlap::0.00/image-sum-place-target-valid.txt"
+                    "../data/experiment::mnist-1/split::0/train-size::6000/overlap::0.00/image-sum-place-target-valid.txt"
                 ],
                 "infer": [
-                    "../data/experiment::mnist-1/split::0/train-size::0080/overlap::0.00/image-sum-place-target-test.txt"
+                    "../data/experiment::mnist-1/split::0/train-size::6000/overlap::0.00/image-sum-place-target-test.txt"
                 ]
             },
             "truth": {
                 "learn": [
-                    "../data/experiment::mnist-1/split::0/train-size::0080/overlap::0.00/image-sum-place-truth-train.txt"
+                    "../data/experiment::mnist-1/split::0/train-size::6000/overlap::0.00/image-sum-place-truth-train.txt"
                 ],
                 "validation": [
-                    "../data/experiment::mnist-1/split::0/train-size::0080/overlap::0.00/image-sum-place-truth-valid.txt"
+                    "../data/experiment::mnist-1/split::0/train-size::6000/overlap::0.00/image-sum-place-truth-valid.txt"
                 ],
                 "infer": [
-                    "../data/experiment::mnist-1/split::0/train-size::0080/overlap::0.00/image-sum-place-truth-test.txt"
+                    "../data/experiment::mnist-1/split::0/train-size::6000/overlap::0.00/image-sum-place-truth-test.txt"
                 ]
             }
         },
         "ImageSumBlock/2": {
             "observations": {
                 "learn": [
-                    "../data/experiment::mnist-1/split::0/train-size::0080/overlap::0.00/image-sum-block-train.txt"
+                    "../data/experiment::mnist-1/split::0/train-size::6000/overlap::0.00/image-sum-block-train.txt"
                 ],
                 "validation": [
-                    "../data/experiment::mnist-1/split::0/train-size::0080/overlap::0.00/image-sum-block-valid.txt"
+                    "../data/experiment::mnist-1/split::0/train-size::6000/overlap::0.00/image-sum-block-valid.txt"
                 ],
                 "infer": [
-                    "../data/experiment::mnist-1/split::0/train-size::0080/overlap::0.00/image-sum-block-test.txt"
+                    "../data/experiment::mnist-1/split::0/train-size::6000/overlap::0.00/image-sum-block-test.txt"
                 ]
             }
         },
         "Carry/3": {
             "targets": {
                 "learn": [
-                    "../data/experiment::mnist-1/split::0/train-size::0080/overlap::0.00/carry-target-train.txt"
+                    "../data/experiment::mnist-1/split::0/train-size::6000/overlap::0.00/carry-target-train.txt"
                 ],
                 "validation": [
-                    "../data/experiment::mnist-1/split::0/train-size::0080/overlap::0.00/carry-target-valid.txt"
+                    "../data/experiment::mnist-1/split::0/train-size::6000/overlap::0.00/carry-target-valid.txt"
                 ],
                 "infer": [
-                    "../data/experiment::mnist-1/split::0/train-size::0080/overlap::0.00/carry-target-test.txt"
+                    "../data/experiment::mnist-1/split::0/train-size::6000/overlap::0.00/carry-target-test.txt"
                 ]
             }
         },

@@ -25,8 +25,8 @@ DATASET_CONFIG = {
     DATASET_MNIST_1: {
         "name": DATASET_MNIST_1,
         "class-size": 10,
-        "train-sizes": [40, 60, 80],
-        "valid-size": 100,
+        "train-sizes": [40, 60, 80, 6000],
+        "valid-size": 1000,
         "test-size": 1000,
         "num-splits": 5,
         "num-digits": 1,

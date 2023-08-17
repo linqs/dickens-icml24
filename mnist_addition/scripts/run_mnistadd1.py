@@ -12,7 +12,7 @@ PERFORMANCE_RESULTS_DIR = os.path.join(RESULTS_BASE_DIR, "performance")
 # SPLITS = ["0", "1", "2", "3", "4"]
 SPLITS = ["0"]
 # TRAIN_SIZES = ["0040", "0060", "0080"]
-TRAIN_SIZES = ["0080"]
+TRAIN_SIZES = ["6000"]
 # OVERLAPS = ["0.00", "0.50", "1.00"]
 OVERLAPS = ["0.00"]
 
@@ -20,10 +20,10 @@ STANDARD_EXPERIMENT_OPTIONS = {
     "inference.normalize": "false",
     "runtime.log.level": "TRACE",
     "gradientdescent.scalestepsize": "false",
-    "weightlearning.inference": "DualBCDInference",
-    "runtime.inference.method": "DualBCDInference",
+    "weightlearning.inference": "ADMMInference",
+    "runtime.inference.method": "ADMMInference",
     "gradientdescent.numsteps": "5000",
-    "gradientdescent.runfulliterations": "true",
+    "gradientdescent.runfulliterations": "false",
     "duallcqp.computeperiod": "10",
     "duallcqp.maxiterations": "10000",
     "runtime.validation": "false",
@@ -117,6 +117,29 @@ BEST_HYPERPARAMETERS = {
             }
         },
         "0080": {
+            "0.00": {
+                "runtime.learn.method": "Energy",
+                "duallcqp.regularizationparameter": "1.0e-3",
+                "gradientdescent.stepsize": "1.0e-4",
+                "gradientdescent.negativelogregularization": "1.0e-3",
+                "gradientdescent.negativeentropyregularization": "0.0"
+            },
+            "0.50": {
+                "runtime.learn.method": "Energy",
+                "duallcqp.regularizationparameter": "1.0e-3",
+                "gradientdescent.stepsize": "1.0e-3",
+                "gradientdescent.negativelogregularization": "1.0e-3",
+                "gradientdescent.negativeentropyregularization": "0.0"
+            },
+            "1.00": {
+                "runtime.learn.method": "Energy",
+                "duallcqp.regularizationparameter": "1.0e-3",
+                "gradientdescent.stepsize": "1.0e-3",
+                "gradientdescent.negativelogregularization": "1.0e-3",
+                "gradientdescent.negativeentropyregularization": "0.0"
+            }
+        },
+        "6000": {
             "0.00": {
                 "runtime.learn.method": "Energy",
                 "duallcqp.regularizationparameter": "1.0e-3",
@@ -290,6 +313,26 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
             }
         },
         "0080": {
+            "0.00": {
+                "dropout": "0.0",
+                "weight_decay": "1.0e-3",
+                "loss_alpha": "1.0",
+                "neural_learning_rate": "1.0e-3"
+            },
+            "0.50": {
+                "dropout": "0.1",
+                "weight_decay": "1.0e-3",
+                "loss_alpha": "1.0",
+                "neural_learning_rate": "1.0e-3"
+            },
+            "1.00": {
+                "dropout": "0.0",
+                "weight_decay": "0.0",
+                "loss_alpha": "1.0",
+                "neural_learning_rate": "1.0e-3"
+            }
+        },
+        "6000": {
             "0.00": {
                 "dropout": "0.0",
                 "weight_decay": "1.0e-3",

@@ -22,7 +22,7 @@ def main():
     resnet18_.conv1 = torch.nn.Conv2d(1, resnet18_.inplanes, kernel_size=7, stride=2, padding=3, bias=False)
     backbone = torchvision.models.resnet18(num_classes=256)
 
-    data_folder = f"{THIS_DIR}/../../data/experiment::mnist-1/split::0/train-size::0080/overlap::0.00"
+    data_folder = f"{THIS_DIR}/../../data/experiment::mnist-1/split::0/train-size::6000/overlap::0.00"
 
     backbone.load_state_dict(torch.load(
         f"{data_folder}/saved-networks/simclr-pretrained-backbone.pt"

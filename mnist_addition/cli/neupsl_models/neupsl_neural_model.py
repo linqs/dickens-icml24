@@ -62,12 +62,11 @@ class MNISTAdditionModel(pslpython.deeppsl.model.DeepModel):
 
         if self._application == 'learning':
             self._iteration = 0
-            self._optimizer = torch.optim.Adam(self._student_model.parameters(), lr=float(options['neural_learning_rate']), weight_decay=float(options['weight_decay']))
+            self._optimizer = torch.optim.Adam(self._student_model.mlp.parameters(), lr=float(options['neural_learning_rate']), weight_decay=float(options['weight_decay']))
             self._training_transforms = torchvision.transforms.Compose([
-                # torchvision.transforms.RandomRotation(degrees=(0, 45)),
-                torchvision.transforms.RandomRotation(degrees=(0, 0)),
+                torchvision.transforms.RandomRotation(degrees=(0, 45)),
                 # torchvision.transforms.RandomPerspective(distortion_scale=0.25, p=1.0),
-                # torchvision.transforms.ElasticTransform(alpha=50.0)
+                torchvision.transforms.ElasticTransform(alpha=50.0)
             ])
         elif self._application == 'inference':
             self._student_model.load_state_dict(torch.load(options['save-path']))
@@ -173,7 +172,7 @@ class MNISTAdditionModel(pslpython.deeppsl.model.DeepModel):
         backbone = torchvision.models.resnet18(num_classes=256)
 
         backbone.load_state_dict(torch.load(
-            f"{THIS_DIR}/../../data/experiment::mnist-1/split::0/train-size::0080/overlap::0.00/saved-networks/simclr-pretrained-backbone.pt"
+            f"{THIS_DIR}/../../data/experiment::mnist-1/split::0/train-size::6000/overlap::0.00/saved-networks/simclr-pretrained-backbone.pt"
         ))
 
         return MNIST_Classifier(

@@ -151,7 +151,7 @@ def simclr_pretrain(data_folder):
     simclr_pretrain = SimCLR(model.to(device), optimizer, scheduler,
                              batch_size=256, temperature=0.07, device=device)
 
-    simclr_pretrain.train(torch.utils.data.DataLoader(mnist_dataset, batch_size=256, shuffle=True), epochs=1000)
+    simclr_pretrain.train(torch.utils.data.DataLoader(mnist_dataset, batch_size=1024, shuffle=True), epochs=100)
 
     os.makedirs(f"{data_folder}/saved-networks", exist_ok=True)
 
@@ -169,7 +169,7 @@ def get_torch_device():
 
 
 def main():
-    simclr_pretrain(f"{THIS_DIR}/../../data/experiment::mnist-1/split::0/train-size::0080/overlap::0.00")
+    simclr_pretrain(f"{THIS_DIR}/../../data/experiment::mnist-1/split::0/train-size::6000/overlap::0.00")
 
 
 if __name__ == "__main__":
