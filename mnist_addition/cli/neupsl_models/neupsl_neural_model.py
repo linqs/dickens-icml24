@@ -34,7 +34,7 @@ class MNISTAdditionModel(pslpython.deeppsl.model.DeepModel):
         self._teacher_parameter_momentum_minimum = 0.996
         self._teacher_parameter_momentum_maximum = 1.0
         self._teacher_parameter_momentum = self._teacher_parameter_momentum_maximum
-        self._teacher_parameter_momentum_period = 250
+        self._teacher_parameter_momentum_half_period = 5000
         self._teacher_center_momentum = 0.9
         self._teacher_center = None
 
@@ -56,13 +56,13 @@ class MNISTAdditionModel(pslpython.deeppsl.model.DeepModel):
         self._student_model = self._create_model(options=student_options).to(self._device)
 
         teacher_options = options.copy()
-        teacher_options['temperature'] = 0.01
+        teacher_options['temperature'] = 0.04
         self._teacher_model = self._create_model(options=teacher_options).to(self._device)
         self._teacher_center = torch.zeros(int(options['class-size']), device=self._device) + 1.0 / int(options['class-size'])
 
         if self._application == 'learning':
             self._iteration = 0
-            self._optimizer = torch.optim.Adam(self._student_model.parameters(), lr=float(options['learning-rate']))
+            self._optimizer = torch.optim.Adam(self._student_model.parameters(), lr=float(options['neural_learning_rate']), weight_decay=float(options['weight_decay']))
             self._training_transforms = torchvision.transforms.Compose([
                 torchvision.transforms.RandomRotation(degrees=(0, 45)),
                 # torchvision.transforms.RandomPerspective(distortion_scale=0.25, p=1.0),
@@ -86,7 +86,13 @@ class MNISTAdditionModel(pslpython.deeppsl.model.DeepModel):
         dino_loss.backward(retain_graph=True)
         self._student_predictions_1.backward(structured_gradients, retain_graph=True)
 
-        torch.nn.utils.clip_grad_norm_(self._student_model.parameters(), 3.0)
+        total_gradient_norm = 0.0
+        for p in self._student_model.parameters():
+            param_norm = p.grad.data.norm(2)
+            total_gradient_norm += param_norm.item() ** 2
+        total_gradient_norm = total_gradient_norm ** (1. / 2)
+
+        torch.nn.utils.clip_grad_norm_(self._student_model.parameters(), 1.0)
 
         self._optimizer.step()
 
@@ -107,6 +113,7 @@ class MNISTAdditionModel(pslpython.deeppsl.model.DeepModel):
         results = {"training_classification_loss": loss,
                    "dino_loss": dino_loss.item(),
                    "teacher_center": self._teacher_center.cpu().detach().numpy().tolist(),
+                   "gradient_norm_2": total_gradient_norm,
                    "struct gradient_norm_2": torch.norm(structured_gradients, 2).item(),
                    "struct gradient_norm_infty": torch.norm(structured_gradients, torch.inf).item()}
 
@@ -118,7 +125,7 @@ class MNISTAdditionModel(pslpython.deeppsl.model.DeepModel):
         # Update teacher momentum using cosine annealing.
         self._teacher_parameter_momentum = (self._teacher_parameter_momentum_minimum
                                             + 0.5 * (self._teacher_parameter_momentum_maximum - self._teacher_parameter_momentum_minimum)
-                                            * (1 + np.cos(np.pi * self._iteration / self._teacher_parameter_momentum_period)))
+                                            * (1 + np.cos(np.pi * self._iteration / self._teacher_parameter_momentum_half_period)))
 
     def _dino_loss(self, teacher_predictions, student_predictions):
         return -1.0 * (teacher_predictions * torch.log(student_predictions + 1e-7)).sum(dim=1).mean()
@@ -164,9 +171,9 @@ class MNISTAdditionModel(pslpython.deeppsl.model.DeepModel):
         resnet18_.conv1 = torch.nn.Conv2d(1, resnet18_.inplanes, kernel_size=7, stride=2, padding=3, bias=False)
         backbone = torchvision.models.resnet18(num_classes=256)
 
-        # backbone.load_state_dict(torch.load(
-        #     "/Users/charlesdickens/Documents/GitHub/experimentscripts/mnist_addition/data/experiment::mnist-2/split::0/train-size::0500/overlap::0.00/saved-networks/simclr-pretrained-backbone.pt"
-        # ))
+        backbone.load_state_dict(torch.load(
+            f"{THIS_DIR}/../../data/experiment::mnist-1/split::0/train-size::0080/overlap::0.00/saved-networks/simclr-pretrained-backbone.pt"
+        ))
 
         return MNIST_Classifier(
             backbone,

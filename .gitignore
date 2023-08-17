@@ -24,7 +24,7 @@ __pycache__
 
 # Experiment Output #
 #####################
-*-learned.psl
+*_learned.psl
 *.jar
 out*.txt
 out*.err

@@ -189,6 +189,22 @@ def write_specific_data(config, out_dir, features, labels):
 
 
 def create_sum_data_add1(config):
+    most_significant_place = []
+    possible_most_significant_digits = []
+    for i in range(0, config['max-sum'] + 1):
+        if i // 10 > 0:
+            most_significant_place.append([10, i])
+            possible_most_significant_digits.append([10, 0, i])
+        else:
+            most_significant_place.append([1, i])
+
+    for index_i in range(config['class-size']):
+        for index_j in range(config['class-size']):
+            if (index_i + index_j) // 10 > 0:
+                continue
+            else:
+                possible_most_significant_digits.append([1, index_i, index_i + index_j])
+
     digit_sum_ones_place_obs = []
     digit_sum_tens_place_obs = []
     for index_i in range(2):
@@ -202,11 +218,13 @@ def create_sum_data_add1(config):
         representation = "%02d" % i
         placed_representation_add1 += [[int(representation[0]), int(representation[1]), i]]
 
-    return digit_sum_ones_place_obs, digit_sum_tens_place_obs, placed_representation_add1
+    return most_significant_place, possible_most_significant_digits, digit_sum_ones_place_obs, digit_sum_tens_place_obs, placed_representation_add1
 
 
 def write_shared_data(config, out_dir):
-    digit_sum_ones_place_obs, digit_sum_tens_place_obs, placed_representation_add1 = create_sum_data_add1(config)
+    most_significant_place, possible_most_significant_digits, digit_sum_ones_place_obs, digit_sum_tens_place_obs, placed_representation_add1 = create_sum_data_add1(config)
+    util.write_psl_data_file(os.path.join(out_dir, 'most-significant-place-obs.txt'), most_significant_place)
+    util.write_psl_data_file(os.path.join(out_dir, 'possible-most-significant-digits-obs.txt'), possible_most_significant_digits)
     util.write_psl_data_file(os.path.join(out_dir, 'digit-sum-ones-place-obs.txt'), digit_sum_ones_place_obs)
     util.write_psl_data_file(os.path.join(out_dir, 'digit-sum-tens-place-obs.txt'), digit_sum_tens_place_obs)
     util.write_psl_data_file(os.path.join(out_dir, 'placed-representation.txt'), placed_representation_add1)
