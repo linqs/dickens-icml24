@@ -62,7 +62,11 @@ class MNISTAdditionModel(pslpython.deeppsl.model.DeepModel):
 
         if self._application == 'learning':
             self._iteration = 0
-            self._optimizer = torch.optim.Adam(self._student_model.parameters(), lr=float(options['neural_learning_rate']), weight_decay=float(options['weight_decay']))
+            if options['freeze_resnet'] == 'true':
+                self._optimizer = torch.optim.Adam(self._student_model.mlp.parameters(), lr=float(options['neural_learning_rate']), weight_decay=float(options['weight_decay']))
+            else:
+                self._optimizer = torch.optim.Adam(self._student_model.parameters(), lr=float(options['neural_learning_rate']), weight_decay=float(options['weight_decay']))
+
             if options['transforms'] == 'true':
                 self._training_transforms = torchvision.transforms.Compose([
                     torchvision.transforms.RandomRotation(degrees=45),
