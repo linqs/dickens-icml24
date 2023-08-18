@@ -198,8 +198,10 @@ def create_sum_data_add1(config):
         else:
             most_significant_place.append([1, i])
 
+    possible_digits = []
     for index_i in range(config['class-size']):
         for index_j in range(config['class-size']):
+            possible_digits.append([index_i, index_i + index_j])
             if (index_i + index_j) // 10 > 0:
                 continue
             else:
@@ -218,11 +220,12 @@ def create_sum_data_add1(config):
         representation = "%02d" % i
         placed_representation_add1 += [[int(representation[0]), int(representation[1]), i]]
 
-    return most_significant_place, possible_most_significant_digits, digit_sum_ones_place_obs, digit_sum_tens_place_obs, placed_representation_add1
+    return possible_digits, most_significant_place, possible_most_significant_digits, digit_sum_ones_place_obs, digit_sum_tens_place_obs, placed_representation_add1
 
 
 def write_shared_data(config, out_dir):
-    most_significant_place, possible_most_significant_digits, digit_sum_ones_place_obs, digit_sum_tens_place_obs, placed_representation_add1 = create_sum_data_add1(config)
+    possible_digits, most_significant_place, possible_most_significant_digits, digit_sum_ones_place_obs, digit_sum_tens_place_obs, placed_representation_add1 = create_sum_data_add1(config)
+    util.write_psl_data_file(os.path.join(out_dir, 'possible-digit-obs.txt'), possible_digits)
     util.write_psl_data_file(os.path.join(out_dir, 'most-significant-place-obs.txt'), most_significant_place)
     util.write_psl_data_file(os.path.join(out_dir, 'possible-most-significant-digits-obs.txt'), possible_most_significant_digits)
     util.write_psl_data_file(os.path.join(out_dir, 'digit-sum-ones-place-obs.txt'), digit_sum_ones_place_obs)

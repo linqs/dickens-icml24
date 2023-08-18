@@ -12,7 +12,7 @@ PERFORMANCE_RESULTS_DIR = os.path.join(RESULTS_BASE_DIR, "performance")
 # SPLITS = ["0", "1", "2", "3", "4"]
 SPLITS = ["0"]
 # TRAIN_SIZES = ["0040", "0060", "0080"]
-TRAIN_SIZES = ["0080"]
+TRAIN_SIZES = ["0600"]
 # OVERLAPS = ["0.00", "0.50", "1.00"]
 OVERLAPS = ["0.00"]
 
@@ -40,8 +40,7 @@ INFERENCE_OPTION_RANGES = {
     "duallcqp.regularizationparameter": ["1.0e-3"]
 }
 
-# FIRST_ORDER_WL_METHODS = ["Energy", "BinaryCrossEntropy"]
-FIRST_ORDER_WL_METHODS = ["BinaryCrossEntropy"]
+FIRST_ORDER_WL_METHODS = ["Energy", "BinaryCrossEntropy"]
 
 FIRST_ORDER_WL_METHODS_STANDARD_OPTION_RANGES = {
     "gradientdescent.stepsize": ["1.0e-14"],
@@ -143,7 +142,7 @@ BEST_HYPERPARAMETERS = {
                 "gradientdescent.negativeentropyregularization": "0.0"
             }
         },
-        "6000": {
+        "0600": {
             "0.00": {
                 "runtime.learn.method": "Energy",
                 "duallcqp.regularizationparameter": "1.0e-3",
@@ -279,6 +278,44 @@ BEST_HYPERPARAMETERS = {
                 "gradientdescent.negativelogregularization": "1.0e-3",
                 "gradientdescent.negativeentropyregularization": "0.0"
             }
+        },
+        "0600": {
+            "0.00": {
+                "runtime.learn.method": "BinaryCrossEntropy",
+                "minimizer.initialsquaredpenalty": "2.0",
+                "minimizer.objectivedifferencetolerance": "1.0e-3",
+                "minimizer.proxruleweight": "1.0",
+                "minimizer.proxvaluestepsize": "1.0e-3",
+                "minimizer.squaredpenaltyincreaserate": "2.0",
+                "duallcqp.regularizationparameter": "1.0e-3",
+                "gradientdescent.stepsize": "1.0e-3",
+                "gradientdescent.negativelogregularization": "1.0e-3",
+                "gradientdescent.negativeentropyregularization": "0.0"
+            },
+            "0.50": {
+                "runtime.learn.method": "BinaryCrossEntropy",
+                "minimizer.initialsquaredpenalty": "10.0",
+                "minimizer.objectivedifferencetolerance": "1.0e-3",
+                "minimizer.proxruleweight": "1.0e-2",
+                "minimizer.proxvaluestepsize": "1.0e-3",
+                "minimizer.squaredpenaltyincreaserate": "2.0",
+                "duallcqp.regularizationparameter": "1.0e-3",
+                "gradientdescent.stepsize": "1.0e-3",
+                "gradientdescent.negativelogregularization": "1.0e-3",
+                "gradientdescent.negativeentropyregularization": "0.0"
+            },
+            "1.00": {
+                "runtime.learn.method": "BinaryCrossEntropy",
+                "minimizer.initialsquaredpenalty": "10.0",
+                "minimizer.objectivedifferencetolerance": "1.0e-5",
+                "minimizer.proxruleweight": "1.0e-1",
+                "minimizer.proxvaluestepsize": "1.0e-3",
+                "minimizer.squaredpenaltyincreaserate": "2.0",
+                "duallcqp.regularizationparameter": "1.0e-2",
+                "gradientdescent.stepsize": "1.0e-3",
+                "gradientdescent.negativelogregularization": "1.0e-3",
+                "gradientdescent.negativeentropyregularization": "0.0"
+            }
         }
     }
 }
@@ -363,7 +400,7 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
                 "freeze_resnet": "true"
             }
         },
-        "6000": {
+        "0600": {
             "0.00": {
                 "dropout": "0.0",
                 "weight_decay": "1.0e-3",
@@ -444,6 +481,32 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
             }
         },
         "0080": {
+            "0.00": {
+                "dropout": "0.0",
+                "weight_decay": "0.0",
+                "loss_alpha": "1.0",
+                "neural_learning_rate": "1.0e-3",
+                "transforms": "true",
+                "freeze_resnet": "true"
+            },
+            "0.50": {
+                "dropout": "0.1",
+                "weight_decay": "1.0e-3",
+                "loss_alpha": "1.0",
+                "neural_learning_rate": "1.0e-3",
+                "transforms": "true",
+                "freeze_resnet": "true"
+            },
+            "1.00": {
+                "dropout": "0.0",
+                "weight_decay": "1.0e-3",
+                "loss_alpha": "1.0",
+                "neural_learning_rate": "1.0e-3",
+                "transforms": "true",
+                "freeze_resnet": "true"
+            }
+        },
+        "0600": {
             "0.00": {
                 "dropout": "0.0",
                 "weight_decay": "0.0",

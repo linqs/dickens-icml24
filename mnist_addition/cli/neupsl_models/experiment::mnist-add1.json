@@ -40,8 +40,8 @@
         "0 * ImageSumBlock(ImageId1, ImageId2) + 0 * PlacedRepresentation(Z_10, Z_1, Z) + SumPlace(ImageId1, ImageId2, '1', Z_1) + ImageSum(ImageId1, ImageId2, Z) <= SumPlace(ImageId1, ImageId2, '10', Z_10) + 1.0 .",
         "0 * ImageSumBlock(ImageId1, ImageId2) + 0 * PlacedRepresentation(Z_10, Z_1, Z) + SumPlace(ImageId1, ImageId2, '10', Z_10) + ImageSum(ImageId1, ImageId2, Z) <= SumPlace(ImageId1, ImageId2, '1', Z_1) + 1.0 .",
 
-        "1.0: 0 * ImageSumBlock(ImageId1, ImageId2) + 0 * MostSignificantPlace('1', Z) + NeuralClassifier(ImageId1, +X) >= ImageSum(ImageId1, ImageId2, Z) {X: PossibleMostSignificantDigit('1', X, Z)}",
-        "1.0: 0 * ImageSumBlock(ImageId1, ImageId2) + 0 * MostSignificantPlace('1', Z) + NeuralClassifier(ImageId2, +X) >= ImageSum(ImageId1, ImageId2, Z) {X: PossibleMostSignificantDigit('1', X, Z)}",
+        "1.0: 0 * ImageSumBlock(ImageId1, ImageId2) + NeuralClassifier(ImageId1, +X) <= 1 - ImageSum(ImageId1, ImageId2, Z) {X: !PossibleDigit(X, Z)}",
+        "1.0: 0 * ImageSumBlock(ImageId1, ImageId2) + NeuralClassifier(ImageId2, +X) <= 1 - ImageSum(ImageId1, ImageId2, Z) {X: !PossibleDigit(X, Z)}",
 
         "ImageSum(ImageId1, ImageId2, +Z) = 1 .",
         "SumPlace(ImageId1, ImageId2, P, +Z) = 1 .",
@@ -214,29 +214,16 @@
                 ]
             }
         },
-        "MostSignificantPlace/2": {
+        "PossibleDigit/2": {
             "observations": {
                 "learn": [
-                    "../data/experiment::mnist-1/most-significant-place-obs.txt"
+                    "../data/experiment::mnist-1/possible-digit-obs.txt"
                 ],
                 "validation": [
-                    "../data/experiment::mnist-1/most-significant-place-obs.txt"
+                    "../data/experiment::mnist-1/possible-digit-obs.txt"
                 ],
                 "infer": [
-                    "../data/experiment::mnist-1/most-significant-place-obs.txt"
-                ]
-            }
-        },
-        "PossibleMostSignificantDigit/3": {
-            "observations": {
-                "learn": [
-                    "../data/experiment::mnist-1/possible-most-significant-digits-obs.txt"
-                ],
-                "validation": [
-                    "../data/experiment::mnist-1/possible-most-significant-digits-obs.txt"
-                ],
-                "infer": [
-                    "../data/experiment::mnist-1/possible-most-significant-digits-obs.txt"
+                    "../data/experiment::mnist-1/possible-digit-obs.txt"
                 ]
             }
         }
