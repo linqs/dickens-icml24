@@ -69,9 +69,8 @@ class MNISTAdditionModel(pslpython.deeppsl.model.DeepModel):
 
             if options['transforms'] == 'true':
                 self._training_transforms = torchvision.transforms.Compose([
-                    torchvision.transforms.RandomRotation(degrees=45),
-                    # torchvision.transforms.RandomPerspective(distortion_scale=0.25, p=1.0),
-                    torchvision.transforms.ElasticTransform(alpha=100.0)
+                    torchvision.transforms.RandomRotation(degrees=30),
+                    torchvision.transforms.ElasticTransform(alpha=50.0)
                 ])
             else:
                 self._training_transforms = torchvision.transforms.Compose([
