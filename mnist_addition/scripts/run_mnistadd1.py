@@ -65,7 +65,7 @@ FIRST_ORDER_WL_METHODS_OPTION_RANGES = {
 NEURAL_NETWORK_OPTIONS = {
     "dropout": ["0.0", "0.1"],
     "weight_decay": ["1.0e-3", "1.0e-5", "1.0e-7"],
-    "loss_alpha": ["0.01", "0.1", "0.9", "1.0"],
+    "loss_alpha": ["1.0"],
     "neural_learning_rate": ["1.0e-3", "1.0e-4", "1.0e-5"],
     "transforms": ["true", "false"],
     "freeze_resnet": ["true", "false"]
