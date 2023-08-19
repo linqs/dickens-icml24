@@ -8,6 +8,8 @@
         "gradientdescent.savevalidationweights": true,
         "categoricalevaluator.defaultpredicate": "ImageSum",
         "gradientdescent.numsteps": "5000",
+        "gradientdescent.trainingcomputeperiod": 10,
+        "gradientdescent.validationcomputeperiod": 10,
         "gradientdescent.runfulliterations": "false",
         "gradientdescent.stepsize": "1.0e-3",
         "weightlearning.inference": "DualBCDInference",
