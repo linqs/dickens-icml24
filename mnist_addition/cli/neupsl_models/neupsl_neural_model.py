@@ -154,9 +154,9 @@ class MNISTAdditionModel(pslpython.deeppsl.model.DeepModel):
             self._teacher_predictions_1 = self._teacher_model(self._training_transforms(self._features)).detach()
             self._teacher_predictions_2 = self._teacher_model(self._training_transforms(self._features)).detach()
         else:
+            results['mode'] = 'inference'
             self._student_model.eval()
             self._student_predictions_1 = self._student_model(self._features)
-            results['mode'] = 'inference'
 
         return self._student_predictions_1.cpu().detach(), results
 

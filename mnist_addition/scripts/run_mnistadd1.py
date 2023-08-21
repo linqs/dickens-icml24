@@ -34,15 +34,15 @@ STANDARD_EXPERIMENT_OPTIONS = {
 
 STANDARD_DATASET_OPTIONS = {
     "mnist-addition": {
-        "duallcqp.primaldualthreshold": "0.01"
+        "duallcqp.primaldualthreshold": "0.001"
     }
 }
 
 INFERENCE_OPTION_RANGES = {
-    "duallcqp.regularizationparameter": ["1.0e-3"]
+    "duallcqp.regularizationparameter": ["1.0", "1.0e-1", "1.0e-3"]
 }
 
-FIRST_ORDER_WL_METHODS = ["Energy", "BinaryCrossEntropy"]
+FIRST_ORDER_WL_METHODS = ["BinaryCrossEntropy"]
 
 FIRST_ORDER_WL_METHODS_STANDARD_OPTION_RANGES = {
     "gradientdescent.stepsize": ["1.0e-14"],
@@ -60,17 +60,17 @@ FIRST_ORDER_WL_METHODS_OPTION_RANGES = {
         "minimizer.proxvaluestepsize": ["1.0e-3", "1.0e-4"],
         "minimizer.squaredpenaltyincreaserate": ["2.0"],
         "minimizer.objectivedifferencetolerance": ["1.0e-3"],
-        "minimizer.proxruleweight": ["1.0", "1.0e-1"]
+        "minimizer.proxruleweight": ["1.0", "1.0e-1", "1.0e-3"]
     }
 }
 
 NEURAL_NETWORK_OPTIONS = {
     "dropout": ["0.0", "0.1"],
-    "weight_decay": ["1.0e-3", "1.0e-5", "1.0e-7"],
+    "weight_decay": ["0.0", "1.0e-2", "1.0e-4"],
     "loss_alpha": ["1.0"],
-    "neural_learning_rate": ["1.0e-3", "1.0e-4", "1.0e-5"],
-    "transforms": ["true", "false"],
-    "freeze_resnet": ["true", "false"]
+    "neural_learning_rate": ["1.0e-3", "1.0e-4"],
+    "transforms": ["false"],
+    "freeze_resnet": ["true"]
 }
 
 BEST_HYPERPARAMETERS = {
@@ -177,7 +177,7 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.proxruleweight": "1.0",
                 "minimizer.proxvaluestepsize": "1.0e-3",
                 "minimizer.squaredpenaltyincreaserate": "2.0",
-                "duallcqp.regularizationparameter": "1.0e-1",
+                "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
                 "gradientdescent.negativeentropyregularization": "0.0"
@@ -287,10 +287,10 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.initialsquaredpenalty": "2.0",
                 "minimizer.objectivedifferencetolerance": "1.0e-3",
                 "minimizer.proxruleweight": "1.0",
-                "minimizer.proxvaluestepsize": "1.0e-3",
+                "minimizer.proxvaluestepsize": "1.0e-4",
                 "minimizer.squaredpenaltyincreaserate": "2.0",
-                "duallcqp.regularizationparameter": "1.0e-3",
-                "gradientdescent.stepsize": "1.0e-3",
+                "duallcqp.regularizationparameter": "1.0e-1",
+                "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
                 "gradientdescent.negativeentropyregularization": "0.0"
             },
@@ -513,9 +513,9 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
                 "dropout": "0.0",
                 "weight_decay": "0.0",
                 "loss_alpha": "1.0",
-                "neural_learning_rate": "1.0e-3",
-                "transforms": "true",
-                "freeze_resnet": "true"
+                "neural_learning_rate": "1.0e-4",
+                "transforms": "false",
+                "freeze_resnet": "false"
             },
             "0.50": {
                 "dropout": "0.1",
