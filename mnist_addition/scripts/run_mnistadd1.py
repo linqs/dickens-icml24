@@ -69,8 +69,8 @@ NEURAL_NETWORK_OPTIONS = {
     "weight_decay": ["0.0", "1.0e-2", "1.0e-4"],
     "loss_alpha": ["1.0"],
     "neural_learning_rate": ["1.0e-3", "1.0e-4"],
-    "transforms": ["false"],
-    "freeze_resnet": ["true"]
+    "transforms": ["false", "true"],
+    "freeze_resnet": ["false", "true"]
 }
 
 BEST_HYPERPARAMETERS = {
