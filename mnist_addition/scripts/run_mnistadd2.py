@@ -24,7 +24,7 @@ STANDARD_EXPERIMENT_OPTIONS = {
     "gradientdescent.validationcomputeperiod": "10",
     "weightlearning.inference": "DualBCDInference",
     "runtime.inference.method": "DualBCDInference",
-    "gradientdescent.numsteps": "2500",
+    "gradientdescent.numsteps": "5000",
     "gradientdescent.runfulliterations": "false",
     "duallcqp.computeperiod": "10",
     "duallcqp.maxiterations": "10000",
