@@ -4,13 +4,13 @@
 # Before a directory is generated, the existence of a config file for that directory will be checked,
 # if it exists generation is skipped.
 
-import importlib
 import os
 import sys
 
 import numpy
-import torch
 import torchvision
+
+from itertools import product
 
 THIS_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)))
 
@@ -19,7 +19,7 @@ import util
 
 DATASET_MNIST_1 = 'mnist-1'
 DATASET_MNIST_2 = 'mnist-2'
-DATASETS = [DATASET_MNIST_1]
+DATASETS = [DATASET_MNIST_2]
 
 DATASET_CONFIG = {
     DATASET_MNIST_1: {
@@ -36,7 +36,7 @@ DATASET_CONFIG = {
     DATASET_MNIST_2: {
         "name": DATASET_MNIST_2,
         "class-size": 10,
-        "train-sizes": [40, 60, 80, 500],
+        "train-sizes": [40, 60, 80, 600],
         "valid-size": 100,
         "test-size": 1000,
         "num-splits": 5,
@@ -122,19 +122,50 @@ def create_image_sum_data(config, sum_entities, sum_labels):
     sum_place_target = []
     sum_place_truth = []
     for entity_index in range(len(sum_entities)):
-        for place in [1, 10]:
+        if config['num-digits'] == 1:
+            places = [1, 10]
+        elif config['num-digits'] == 2:
+            places = [1, 10, 100]
+        else:
+            raise Exception("Invalid number of digits.")
+
+        for place in places:
             for z in range(config['class-size']):
                 if place == 1:
                     sum_place_target.append(list(sum_entities[entity_index]) + [place] + [z])
-                    sum_place_truth.append(list(sum_entities[entity_index]) + [place] + [z] + [1 if z == int(("%02d" % sum_labels[entity_index])[-1]) else 0])
+                    if config['num-digits'] == 1:
+                        sum_place_truth.append(list(sum_entities[entity_index]) + [place] + [z] + [1 if z == int(("%02d" % sum_labels[entity_index])[-1]) else 0])
+                    elif config['num-digits'] == 2:
+                        sum_place_truth.append(list(sum_entities[entity_index]) + [place] + [z] + [1 if z == int(("%03d" % sum_labels[entity_index])[-1]) else 0])
+                    else:
+                        raise Exception("Invalid number of digits.")
                 if place == 10:
                     sum_place_target.append(list(sum_entities[entity_index]) + [place] + [z])
-                    sum_place_truth.append(list(sum_entities[entity_index]) + [place] + [z] + [1 if z == int(("%02d" % sum_labels[entity_index])[-2]) else 0])
+                    if config['num-digits'] == 1:
+                        sum_place_truth.append(list(sum_entities[entity_index]) + [place] + [z] + [1 if z == int(("%02d" % sum_labels[entity_index])[-2]) else 0])
+                    elif config['num-digits'] == 2:
+                        sum_place_truth.append(list(sum_entities[entity_index]) + [place] + [z] + [1 if z == int(("%03d" % sum_labels[entity_index])[-2]) else 0])
+                    else:
+                        raise Exception("Invalid number of digits.")
+                if place == 100:
+                    sum_place_target.append(list(sum_entities[entity_index]) + [place] + [z])
+                    if config['num-digits'] == 1:
+                        raise Exception("Invalid place for number of digits.")
+                    elif config['num-digits'] == 2:
+                        sum_place_truth.append(list(sum_entities[entity_index]) + [place] + [z] + [1 if z == int(sum_labels[entity_index] >= 100) else 0])
+                    else:
+                        raise Exception("Invalid number of digits.")
 
     carry_target = []
     for entity_index in range(len(sum_entities)):
-        carry_target.append([sum_entities[entity_index][0], sum_entities[entity_index][1], 0])
-        carry_target.append([sum_entities[entity_index][0], sum_entities[entity_index][1], 1])
+        if config['num-digits'] == 1:
+            carry_target.append([sum_entities[entity_index][0], sum_entities[entity_index][1], 0])
+            carry_target.append([sum_entities[entity_index][0], sum_entities[entity_index][1], 1])
+        elif config['num-digits'] == 2:
+            carry_target.append([sum_entities[entity_index][1], sum_entities[entity_index][3], 0])
+            carry_target.append([sum_entities[entity_index][1], sum_entities[entity_index][3], 1])
+            carry_target.append([sum_entities[entity_index][0], sum_entities[entity_index][2], 0])
+            carry_target.append([sum_entities[entity_index][0], sum_entities[entity_index][2], 1])
     carry_target = numpy.unique(carry_target, axis=0).tolist()
 
     return image_sum_target, image_sum_truth, sum_place_target, sum_place_truth, carry_target
@@ -189,23 +220,10 @@ def write_specific_data(config, out_dir, features, labels):
 
 
 def create_sum_data_add1(config):
-    most_significant_place = []
-    possible_most_significant_digits = []
-    for i in range(0, config['max-sum'] + 1):
-        if i // 10 > 0:
-            most_significant_place.append([10, i])
-            possible_most_significant_digits.append([10, 0, i])
-        else:
-            most_significant_place.append([1, i])
-
     possible_digits = []
     for index_i in range(config['class-size']):
         for index_j in range(config['class-size']):
             possible_digits.append([index_i, index_i + index_j])
-            if (index_i + index_j) // 10 > 0:
-                continue
-            else:
-                possible_most_significant_digits.append([1, index_i, index_i + index_j])
 
     digit_sum_ones_place_obs = []
     digit_sum_tens_place_obs = []
@@ -215,22 +233,82 @@ def create_sum_data_add1(config):
                 digit_sum_ones_place_obs.append([index_i, index_j, index_k, (index_i + index_j + index_k) % 10])
                 digit_sum_tens_place_obs.append([index_i, index_j, index_k, (index_i + index_j + index_k) // 10])
 
-    placed_representation_add1 = []
+    placed_representation = []
     for i in range(0, config['max-sum'] + 1):
         representation = "%02d" % i
-        placed_representation_add1 += [[int(representation[0]), int(representation[1]), i]]
+        placed_representation += [[int(representation[0]), int(representation[1]), i]]
 
-    return possible_digits, most_significant_place, possible_most_significant_digits, digit_sum_ones_place_obs, digit_sum_tens_place_obs, placed_representation_add1
+    return possible_digits, digit_sum_ones_place_obs, digit_sum_tens_place_obs, placed_representation
+
+
+def create_sum_data_add2(config):
+    # Possible ones place digits.
+    digits_sums = product(range(10), repeat=4)
+    possible_ones_digits_dict = {}
+    for digits_sum in digits_sums:
+        if digits_sum[1] in possible_ones_digits_dict:
+            possible_ones_digits_dict[digits_sum[1]].add(
+                10 * digits_sum[0] + digits_sum[1] + 10 * digits_sum[2] + digits_sum[3])
+        else:
+            possible_ones_digits_dict[digits_sum[1]] = {
+                10 * digits_sum[0] + digits_sum[1] + 10 * digits_sum[2] + digits_sum[3]}
+
+    possible_ones_digits = []
+    for key in possible_ones_digits_dict:
+        for value in possible_ones_digits_dict[key]:
+            possible_ones_digits.append([key, value])
+
+    # Possible tens place digits.
+    digits_sums = product(range(10), repeat=4)
+    possible_tens_digits_dict = {}
+    for digits_sum in digits_sums:
+        if digits_sum[0] in possible_tens_digits_dict:
+            possible_tens_digits_dict[digits_sum[0]].add(
+                10 * digits_sum[0] + digits_sum[1] + 10 * digits_sum[2] + digits_sum[3])
+        else:
+            possible_tens_digits_dict[digits_sum[0]] = {
+                10 * digits_sum[0] + digits_sum[1] + 10 * digits_sum[2] + digits_sum[3]}
+
+    possible_tens_digits = []
+    for key in possible_tens_digits_dict:
+        for value in possible_tens_digits_dict[key]:
+            possible_tens_digits.append([key, value])
+
+    digit_sum_ones_place_obs = []
+    digit_sum_tens_place_obs = []
+    for index_i in range(2):
+        for index_j in range(config['class-size']):
+            for index_k in range(config['class-size']):
+                digit_sum_ones_place_obs.append([index_i, index_j, index_k, (index_i + index_j + index_k) % 10])
+                digit_sum_tens_place_obs.append([index_i, index_j, index_k, (index_i + index_j + index_k) // 10])
+
+    # Placed Representation.
+    placed_representation = []
+    for i in range(0, config['max-sum'] + 1):
+        representation = "%03d" % i
+        placed_representation += [[int(representation[0]), int(representation[1]), int(representation[2]), i]]
+
+    return possible_ones_digits, possible_tens_digits, digit_sum_ones_place_obs, digit_sum_tens_place_obs, placed_representation
 
 
 def write_shared_data(config, out_dir):
-    possible_digits, most_significant_place, possible_most_significant_digits, digit_sum_ones_place_obs, digit_sum_tens_place_obs, placed_representation_add1 = create_sum_data_add1(config)
-    util.write_psl_data_file(os.path.join(out_dir, 'possible-digit-obs.txt'), possible_digits)
-    util.write_psl_data_file(os.path.join(out_dir, 'most-significant-place-obs.txt'), most_significant_place)
-    util.write_psl_data_file(os.path.join(out_dir, 'possible-most-significant-digits-obs.txt'), possible_most_significant_digits)
-    util.write_psl_data_file(os.path.join(out_dir, 'digit-sum-ones-place-obs.txt'), digit_sum_ones_place_obs)
-    util.write_psl_data_file(os.path.join(out_dir, 'digit-sum-tens-place-obs.txt'), digit_sum_tens_place_obs)
-    util.write_psl_data_file(os.path.join(out_dir, 'placed-representation.txt'), placed_representation_add1)
+    if config['num-digits'] == 1:
+        possible_digits,digit_sum_ones_place_obs, digit_sum_tens_place_obs, placed_representation = create_sum_data_add1(config)
+        util.write_psl_data_file(os.path.join(out_dir, 'possible-digit-obs.txt'), possible_digits)
+        util.write_psl_data_file(os.path.join(out_dir, 'digit-sum-ones-place-obs.txt'), digit_sum_ones_place_obs)
+        util.write_psl_data_file(os.path.join(out_dir, 'digit-sum-tens-place-obs.txt'), digit_sum_tens_place_obs)
+        util.write_psl_data_file(os.path.join(out_dir, 'placed-representation.txt'), placed_representation)
+
+    elif config['num-digits'] == 2:
+        possible_ones_digits, possible_tens_digits, digit_sum_ones_place_obs, digit_sum_tens_place_obs, placed_representation = create_sum_data_add2(config)
+        util.write_psl_data_file(os.path.join(out_dir, 'possible-ones-digit-obs.txt'), possible_ones_digits)
+        util.write_psl_data_file(os.path.join(out_dir, 'possible-tens-digit-obs.txt'), possible_tens_digits)
+        util.write_psl_data_file(os.path.join(out_dir, 'digit-sum-ones-place-obs.txt'), digit_sum_ones_place_obs)
+        util.write_psl_data_file(os.path.join(out_dir, 'digit-sum-tens-place-obs.txt'), digit_sum_tens_place_obs)
+        util.write_psl_data_file(os.path.join(out_dir, 'placed-representation.txt'), placed_representation)
+
+    else:
+        raise Exception(f"Unsupported num-digits: {config['num-digits']}")
 
     util.write_json_file(os.path.join(out_dir, CONFIG_FILENAME), config)
 
