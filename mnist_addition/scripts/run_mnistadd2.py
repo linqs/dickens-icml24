@@ -34,12 +34,12 @@ STANDARD_EXPERIMENT_OPTIONS = {
 
 STANDARD_DATASET_OPTIONS = {
     "mnist-addition": {
-        "duallcqp.primaldualthreshold": "0.001"
+        "duallcqp.primaldualthreshold": "1.0e-3"
     }
 }
 
 INFERENCE_OPTION_RANGES = {
-    "duallcqp.regularizationparameter": ["1.0", "1.0e-1", "1.0e-3"]
+    "duallcqp.regularizationparameter": ["1.0e-3"]
 }
 
 FIRST_ORDER_WL_METHODS = ["BinaryCrossEntropy"]
@@ -65,8 +65,8 @@ FIRST_ORDER_WL_METHODS_OPTION_RANGES = {
 }
 
 NEURAL_NETWORK_OPTIONS = {
-    "dropout": ["0.0", "0.1"],
-    "weight_decay": ["0.0", "1.0e-2", "1.0e-4"],
+    "dropout": ["0.0"],
+    "weight_decay": ["0.0"],
     "loss_alpha": ["1.0"],
     "neural_learning_rate": ["1.0e-3", "1.0e-4"],
     "transforms": ["true"],
@@ -830,8 +830,8 @@ def run_first_order_wl_methods():
 
 
 def main():
-    # run_first_order_wl_methods_hyperparamter_search()
-    run_first_order_wl_methods()
+    run_first_order_wl_methods_hyperparamter_search()
+    # run_first_order_wl_methods()
 
 
 if __name__ == '__main__':
