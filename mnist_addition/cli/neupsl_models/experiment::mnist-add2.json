@@ -27,18 +27,18 @@
         "gradientdescent.scalestepsize": "false"
     },
     "rules": [
-        "1.0: 0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * DigitSumOnesPlace('0', X, Y, Z) + NeuralClassifier(ImageId2, X) + NeuralClassifier(ImageId4, Y) <= SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '1', Z) + 1.0 ^2",
-        "1.0: 0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * DigitSumOnesPlace('0', X, Y, Z) + SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '1', Z) + NeuralClassifier(ImageId2, X) <= NeuralClassifier(ImageId4, Y) + 1.0 ^2",
-        "1.0: 0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * DigitSumOnesPlace('0', X, Y, Z) + NeuralClassifier(ImageId4, Y) + SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '1', Z) <= NeuralClassifier(ImageId2, X) + 1.0 ^2",
+        "1.0: 0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * DigitSumOnesPlace('0', X, Y, Z) + NeuralClassifier(ImageId2, X) + NeuralClassifier(ImageId4, Y) <= SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '1', Z) + 1.0 ",
+        "1.0: 0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * DigitSumOnesPlace('0', X, Y, Z) + SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '1', Z) + NeuralClassifier(ImageId2, X) <= NeuralClassifier(ImageId4, Y) + 1.0 ",
+        "1.0: 0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * DigitSumOnesPlace('0', X, Y, Z) + NeuralClassifier(ImageId4, Y) + SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '1', Z) <= NeuralClassifier(ImageId2, X) + 1.0 ",
 
-        "1.0: 0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * DigitSumTensPlace('0', X, Y, Z) + NeuralClassifier(ImageId2, X) + NeuralClassifier(ImageId4, Y) <= Carry(ImageId2, ImageId4, Z) + 1.0 ^2",
+        "1.0: 0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * DigitSumTensPlace('0', X, Y, Z) + NeuralClassifier(ImageId2, X) + NeuralClassifier(ImageId4, Y) <= Carry(ImageId2, ImageId4, Z) + 1.0 ",
 
-        "1.0: 0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * DigitSumOnesPlace(W, X, Y, Z) + NeuralClassifier(ImageId1, X) + NeuralClassifier(ImageId3, Y) + Carry(ImageId2, ImageId4, W) <= SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '10', Z) + 2.0 ^2",
-        "1.0: 0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * DigitSumOnesPlace(W, X, Y, Z) + SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '10', Z) + NeuralClassifier(ImageId1, X) + NeuralClassifier(ImageId3, Y) <= Carry(ImageId2, ImageId4, W) + 2.0 ^2",
-        "1.0: 0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * DigitSumOnesPlace(W, X, Y, Z) + Carry(ImageId2, ImageId4, W) + SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '10', Z) + NeuralClassifier(ImageId1, X) <= NeuralClassifier(ImageId3, Y) + 2.0 ^2",
-        "1.0: 0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * DigitSumOnesPlace(W, X, Y, Z) + NeuralClassifier(ImageId3, Y) + Carry(ImageId2, ImageId4, W) + SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '10', Z) <= NeuralClassifier(ImageId1, X) + 2.0 ^2",
+        "1.0: 0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * DigitSumOnesPlace(W, X, Y, Z) + NeuralClassifier(ImageId1, X) + NeuralClassifier(ImageId3, Y) + Carry(ImageId2, ImageId4, W) <= SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '10', Z) + 2.0 ",
+        "1.0: 0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * DigitSumOnesPlace(W, X, Y, Z) + SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '10', Z) + NeuralClassifier(ImageId1, X) + NeuralClassifier(ImageId3, Y) <= Carry(ImageId2, ImageId4, W) + 2.0 ",
+        "1.0: 0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * DigitSumOnesPlace(W, X, Y, Z) + Carry(ImageId2, ImageId4, W) + SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '10', Z) + NeuralClassifier(ImageId1, X) <= NeuralClassifier(ImageId3, Y) + 2.0 ",
+        "1.0: 0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * DigitSumOnesPlace(W, X, Y, Z) + NeuralClassifier(ImageId3, Y) + Carry(ImageId2, ImageId4, W) + SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '10', Z) <= NeuralClassifier(ImageId1, X) + 2.0 ",
 
-        "1.0: 0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * DigitSumTensPlace(W, X, Y, Z) + NeuralClassifier(ImageId1, X) + NeuralClassifier(ImageId3, Y) + Carry(ImageId2, ImageId4, W) <= SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '100', Z) + 2.0 ^2",
+        "1.0: 0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * DigitSumTensPlace(W, X, Y, Z) + NeuralClassifier(ImageId1, X) + NeuralClassifier(ImageId3, Y) + Carry(ImageId2, ImageId4, W) <= SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '100', Z) + 2.0 ",
 
         "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * DigitSumOnesPlace(W, '0', '0', Z) + Carry(ImageId1, ImageId3, W) = SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '100', Z) .",
 
