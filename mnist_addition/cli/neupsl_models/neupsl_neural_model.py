@@ -180,7 +180,7 @@ class MNISTAdditionModel(pslpython.deeppsl.model.DeepModel):
         backbone = torchvision.models.resnet18(num_classes=128)
 
         backbone.load_state_dict(torch.load(
-            f"{THIS_DIR}/../../data/experiment::mnist-1/split::0/train-size::0600/overlap::0.00/saved-networks/simclr-pretrained-backbone.pt"
+            f"{THIS_DIR}/../../data/experiment::mnist-2/split::0/train-size::0600/overlap::0.00/saved-networks/simclr-pretrained-backbone.pt"
         ))
 
         return MNIST_Classifier(

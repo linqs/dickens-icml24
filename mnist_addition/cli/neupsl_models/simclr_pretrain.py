@@ -20,12 +20,11 @@ from mnist_addition.cli.neupsl_models.mlp import MLP
 
 
 class SimCLR(object):
-    def __init__(self, model, optimizer, scheduler, batch_size, temperature, device):
+    def __init__(self, model, optimizer, scheduler, temperature, device):
         self.device = device
         self.model = model.to(self.device)
         self.optimizer = optimizer
         self.scheduler = scheduler
-        self.batch_size = batch_size
         self.temperature = temperature
         self.criterion = torch.nn.CrossEntropyLoss().to(self.device)
 
@@ -148,8 +147,7 @@ def simclr_pretrain(data_folder):
     optimizer = torch.optim.Adam(model.parameters(), lr=3.0e-4)
     scheduler = torch.optim.lr_scheduler.StepLR(optimizer, 30, 0.9)
 
-    simclr_pretrain = SimCLR(model.to(device), optimizer, scheduler,
-                             batch_size=256, temperature=0.07, device=device)
+    simclr_pretrain = SimCLR(model.to(device), optimizer, scheduler, temperature=0.07, device=device)
 
     simclr_pretrain.train(torch.utils.data.DataLoader(mnist_dataset, batch_size=1024, shuffle=True), epochs=1000)
 
