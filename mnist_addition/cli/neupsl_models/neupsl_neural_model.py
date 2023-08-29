@@ -40,6 +40,7 @@ class MNISTAdditionModel(pslpython.deeppsl.model.DeepModel):
 
         self._training_transforms = None
         self._optimizer = None
+        self._scheduler = None
 
         self._iteration = 0
 
@@ -52,7 +53,7 @@ class MNISTAdditionModel(pslpython.deeppsl.model.DeepModel):
         self._application = application
 
         student_options = options.copy()
-        student_options['temperature'] = 0.1
+        student_options['temperature'] = 1.0
         self._student_model = self._create_model(options=student_options).to(self._device)
 
         teacher_options = options.copy()
@@ -66,6 +67,8 @@ class MNISTAdditionModel(pslpython.deeppsl.model.DeepModel):
                 self._optimizer = torch.optim.Adam(self._student_model.mlp.parameters(), lr=float(options['neural_learning_rate']), weight_decay=float(options['weight_decay']))
             else:
                 self._optimizer = torch.optim.Adam(self._student_model.parameters(), lr=float(options['neural_learning_rate']), weight_decay=float(options['weight_decay']))
+
+            self._scheduler = torch.optim.lr_scheduler.StepLR(self._optimizer, step_size=int(options['learning_rate_decay_step']), gamma=float(options['learning_rate_decay']))
 
             if options['transforms'] == 'true':
                 self._training_transforms = torchvision.transforms.Compose([
@@ -159,6 +162,12 @@ class MNISTAdditionModel(pslpython.deeppsl.model.DeepModel):
             self._student_predictions_1 = self._student_model(self._features)
 
         return self._student_predictions_1.cpu().detach(), results
+
+    def internal_epoch_end(self, options={}):
+        if self._application == 'learning':
+            self._scheduler.step()
+
+        return {}
 
     def internal_eval(self, data, options={}):
         self._prepare_data(data, options=options)
