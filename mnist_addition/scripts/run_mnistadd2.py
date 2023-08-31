@@ -25,11 +25,10 @@ STANDARD_EXPERIMENT_OPTIONS = {
     "gradientdescent.stopcomputeperiod": "10",
     "weightlearning.inference": "DualBCDInference",
     "runtime.inference.method": "DualBCDInference",
-    "gradientdescent.numsteps": "1000",
+    "gradientdescent.numsteps": "500",
     "gradientdescent.runfulliterations": "false",
-    "connectedcomponents.batchsize": "16",
     "duallcqp.computeperiod": "10",
-    "duallcqp.maxiterations": "10000",
+    "duallcqp.maxiterations": "25000",
     "runtime.validation": "true",
     "gradientdescent.savevalidationweights": "true",
 }
@@ -49,7 +48,8 @@ FIRST_ORDER_WL_METHODS = ["BinaryCrossEntropy"]
 FIRST_ORDER_WL_METHODS_STANDARD_OPTION_RANGES = {
     "gradientdescent.stepsize": ["1.0e-14"],
     "gradientdescent.negativelogregularization": ["1.0e-3"],
-    "gradientdescent.negativeentropyregularization": ["0.0"]
+    "gradientdescent.negativeentropyregularization": ["0.0"],
+    "connectedcomponents.batchsize": ["16", "32"]
 }
 
 FIRST_ORDER_WL_METHODS_OPTION_RANGES = {
@@ -58,11 +58,11 @@ FIRST_ORDER_WL_METHODS_OPTION_RANGES = {
     },
     "BinaryCrossEntropy": {
         "runtime.learn.method": ["BinaryCrossEntropy"],
-        "minimizer.initialsquaredpenalty": ["2.0"],
+        "minimizer.initialsquaredpenalty": ["2.0", "10.0"],
         "minimizer.proxvaluestepsize": ["1.0e-3", "1.0e-4"],
         "minimizer.squaredpenaltyincreaserate": ["2.0"],
         "minimizer.objectivedifferencetolerance": ["1.0e-3"],
-        "minimizer.proxruleweight": ["1.0", "1.0e-1", "1.0e-3"]
+        "minimizer.proxruleweight": ["1.0", "1.0e-1", "1.0e-2"]
     }
 }
 
@@ -70,10 +70,10 @@ NEURAL_NETWORK_OPTIONS = {
     "dropout": ["0.0"],
     "weight_decay": ["0.0"],
     "loss_alpha": ["1.0"],
-    "neural_learning_rate": ["1.0e-3", "1.0e-4"],
+    "neural_learning_rate": ["1.0e-3", "1.0e-4", "1.0e-5"],
     "learning_rate_decay_step": ["30"],
     "learning_rate_decay": ["1.0"],
-    "transforms": ["true"],
+    "transforms": ["false"],
     "freeze_resnet": ["false"]
 }
 
@@ -82,93 +82,105 @@ BEST_HYPERPARAMETERS = {
         "0040": {
             "0.00": {
                 "runtime.learn.method": "Energy",
-                "duallcqp.regularizationparameter": "1.0e-1",
+                "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
-                "gradientdescent.negativeentropyregularization": "0.0"
+                "gradientdescent.negativeentropyregularization": "0.0",
+                "connectedcomponents.batchsize": "16",
             },
             "0.50": {
                 "runtime.learn.method": "Energy",
-                "duallcqp.regularizationparameter": "1.0e-1",
+                "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
-                "gradientdescent.negativeentropyregularization": "0.0"
+                "gradientdescent.negativeentropyregularization": "0.0",
+                "connectedcomponents.batchsize": "16",
             },
             "1.00": {
                 "runtime.learn.method": "Energy",
-                "duallcqp.regularizationparameter": "1.0e-1",
+                "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
-                "gradientdescent.negativeentropyregularization": "0.0"
+                "gradientdescent.negativeentropyregularization": "0.0",
+                "connectedcomponents.batchsize": "16",
             }
         },
         "0060": {
             "0.00": {
                 "runtime.learn.method": "Energy",
-                "duallcqp.regularizationparameter": "1.0e-1",
+                "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
-                "gradientdescent.negativeentropyregularization": "0.0"
+                "gradientdescent.negativeentropyregularization": "0.0",
+                "connectedcomponents.batchsize": "16",
             },
             "0.50": {
                 "runtime.learn.method": "Energy",
-                "duallcqp.regularizationparameter": "1.0e-1",
+                "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
-                "gradientdescent.negativeentropyregularization": "0.0"
+                "gradientdescent.negativeentropyregularization": "0.0",
+                "connectedcomponents.batchsize": "16",
             },
             "1.00": {
                 "runtime.learn.method": "Energy",
-                "duallcqp.regularizationparameter": "1.0e-1",
+                "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
-                "gradientdescent.negativeentropyregularization": "0.0"
+                "gradientdescent.negativeentropyregularization": "0.0",
+                "connectedcomponents.batchsize": "16",
             }
         },
         "0080": {
             "0.00": {
                 "runtime.learn.method": "Energy",
-                "duallcqp.regularizationparameter": "1.0e-1",
+                "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
-                "gradientdescent.negativeentropyregularization": "0.0"
+                "gradientdescent.negativeentropyregularization": "0.0",
+                "connectedcomponents.batchsize": "16",
             },
             "0.50": {
                 "runtime.learn.method": "Energy",
-                "duallcqp.regularizationparameter": "1.0e-1",
+                "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
-                "gradientdescent.negativeentropyregularization": "0.0"
+                "gradientdescent.negativeentropyregularization": "0.0",
+                "connectedcomponents.batchsize": "16",
             },
             "1.00": {
                 "runtime.learn.method": "Energy",
-                "duallcqp.regularizationparameter": "1.0e-1",
+                "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
-                "gradientdescent.negativeentropyregularization": "0.0"
+                "gradientdescent.negativeentropyregularization": "0.0",
+                "connectedcomponents.batchsize": "16",
             }
         },
         "0600": {
             "0.00": {
                 "runtime.learn.method": "Energy",
-                "duallcqp.regularizationparameter": "1.0e-1",
+                "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
-                "gradientdescent.negativeentropyregularization": "0.0"
+                "gradientdescent.negativeentropyregularization": "0.0",
+                "connectedcomponents.batchsize": "16",
             },
             "0.50": {
                 "runtime.learn.method": "Energy",
-                "duallcqp.regularizationparameter": "1.0e-1",
+                "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
-                "gradientdescent.negativeentropyregularization": "0.0"
+                "gradientdescent.negativeentropyregularization": "0.0",
+                "connectedcomponents.batchsize": "16",
             },
             "1.00": {
                 "runtime.learn.method": "Energy",
-                "duallcqp.regularizationparameter": "1.0e-1",
+                "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
-                "gradientdescent.negativeentropyregularization": "0.0"
+                "gradientdescent.negativeentropyregularization": "0.0",
+                "connectedcomponents.batchsize": "16",
             }
         }
     },
@@ -181,10 +193,11 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.proxruleweight": "1.0",
                 "minimizer.proxvaluestepsize": "1.0e-3",
                 "minimizer.squaredpenaltyincreaserate": "2.0",
-                "duallcqp.regularizationparameter": "1.0e-1",
+                "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
-                "gradientdescent.negativeentropyregularization": "0.0"
+                "gradientdescent.negativeentropyregularization": "0.0",
+                "connectedcomponents.batchsize": "16",
             },
             "0.50": {
                 "runtime.learn.method": "BinaryCrossEntropy",
@@ -193,10 +206,11 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.proxruleweight": "1.0e-2",
                 "minimizer.proxvaluestepsize": "1.0e-3",
                 "minimizer.squaredpenaltyincreaserate": "2.0",
-                "duallcqp.regularizationparameter": "1.0e-1",
+                "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
-                "gradientdescent.negativeentropyregularization": "0.0"
+                "gradientdescent.negativeentropyregularization": "0.0",
+                "connectedcomponents.batchsize": "16",
             },
             "1.00": {
                 "runtime.learn.method": "BinaryCrossEntropy",
@@ -204,10 +218,11 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.objectivedifferencetolerance": "0.001",
                 "minimizer.proxruleweight": "1.0e-1",
                 "minimizer.proxvaluestepsize": "1.0e-3",
-                "duallcqp.regularizationparameter": "1.0e-2",
+                "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
-                "gradientdescent.negativeentropyregularization": "0.0"
+                "gradientdescent.negativeentropyregularization": "0.0",
+                "connectedcomponents.batchsize": "16",
             }
         },
         "0060": {
@@ -218,10 +233,11 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.proxruleweight": "1.0e-2",
                 "minimizer.proxvaluestepsize": "1.0e-3",
                 "minimizer.squaredpenaltyincreaserate": "2.0",
-                "duallcqp.regularizationparameter": "1.0e-1",
+                "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
-                "gradientdescent.negativeentropyregularization": "0.0"
+                "gradientdescent.negativeentropyregularization": "0.0",
+                "connectedcomponents.batchsize": "16",
             },
             "0.50": {
                 "runtime.learn.method": "BinaryCrossEntropy",
@@ -230,10 +246,11 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.proxruleweight": "1.0e-2",
                 "minimizer.proxvaluestepsize": "1.0e-3",
                 "minimizer.squaredpenaltyincreaserate": "2.0",
-                "duallcqp.regularizationparameter": "1.0e-1",
+                "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
-                "gradientdescent.negativeentropyregularization": "0.0"
+                "gradientdescent.negativeentropyregularization": "0.0",
+                "connectedcomponents.batchsize": "16",
             },
             "1.00": {
                 "runtime.learn.method": "BinaryCrossEntropy",
@@ -241,10 +258,11 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.objectivedifferencetolerance": "1.0e-3",
                 "minimizer.proxruleweight": "1.0e-1",
                 "minimizer.proxvaluestepsize": "1.0e-3",
-                "duallcqp.regularizationparameter": "1.0e-1",
+                "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
-                "gradientdescent.negativeentropyregularization": "0.0"
+                "gradientdescent.negativeentropyregularization": "0.0",
+                "connectedcomponents.batchsize": "16",
             }
         },
         "0080": {
@@ -255,10 +273,11 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.proxruleweight": "1.0",
                 "minimizer.proxvaluestepsize": "1.0e-3",
                 "minimizer.squaredpenaltyincreaserate": "2.0",
-                "duallcqp.regularizationparameter": "1.0e-1",
+                "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
-                "gradientdescent.negativeentropyregularization": "0.0"
+                "gradientdescent.negativeentropyregularization": "0.0",
+                "connectedcomponents.batchsize": "16",
             },
             "0.50": {
                 "runtime.learn.method": "BinaryCrossEntropy",
@@ -267,10 +286,11 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.proxruleweight": "1.0e-2",
                 "minimizer.proxvaluestepsize": "1.0e-3",
                 "minimizer.squaredpenaltyincreaserate": "2.0",
-                "duallcqp.regularizationparameter": "1.0e-1",
+                "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
-                "gradientdescent.negativeentropyregularization": "0.0"
+                "gradientdescent.negativeentropyregularization": "0.0",
+                "connectedcomponents.batchsize": "16",
             },
             "1.00": {
                 "runtime.learn.method": "BinaryCrossEntropy",
@@ -279,10 +299,11 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.proxruleweight": "1.0e-1",
                 "minimizer.proxvaluestepsize": "1.0e-3",
                 "minimizer.squaredpenaltyincreaserate": "2.0",
-                "duallcqp.regularizationparameter": "1.0e-1",
+                "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
-                "gradientdescent.negativeentropyregularization": "0.0"
+                "gradientdescent.negativeentropyregularization": "0.0",
+                "connectedcomponents.batchsize": "16",
             }
         },
         "0600": {
@@ -290,13 +311,14 @@ BEST_HYPERPARAMETERS = {
                 "runtime.learn.method": "BinaryCrossEntropy",
                 "minimizer.initialsquaredpenalty": "2.0",
                 "minimizer.objectivedifferencetolerance": "1.0e-3",
-                "minimizer.proxruleweight": "1.0e-1",
+                "minimizer.proxruleweight": "1.0",
                 "minimizer.proxvaluestepsize": "1.0e-4",
                 "minimizer.squaredpenaltyincreaserate": "2.0",
                 "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
-                "gradientdescent.negativeentropyregularization": "0.0"
+                "gradientdescent.negativeentropyregularization": "0.0",
+                "connectedcomponents.batchsize": "16",
             },
             "0.50": {
                 "runtime.learn.method": "BinaryCrossEntropy",
@@ -305,10 +327,11 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.proxruleweight": "1.0e-2",
                 "minimizer.proxvaluestepsize": "1.0e-3",
                 "minimizer.squaredpenaltyincreaserate": "2.0",
-                "duallcqp.regularizationparameter": "1.0e-1",
+                "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
-                "gradientdescent.negativeentropyregularization": "0.0"
+                "gradientdescent.negativeentropyregularization": "0.0",
+                "connectedcomponents.batchsize": "16",
             },
             "1.00": {
                 "runtime.learn.method": "BinaryCrossEntropy",
@@ -317,10 +340,11 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.proxruleweight": "1.0e-1",
                 "minimizer.proxvaluestepsize": "1.0e-3",
                 "minimizer.squaredpenaltyincreaserate": "2.0",
-                "duallcqp.regularizationparameter": "1.0e-2",
+                "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
-                "gradientdescent.negativeentropyregularization": "0.0"
+                "gradientdescent.negativeentropyregularization": "0.0",
+                "connectedcomponents.batchsize": "16",
             }
         }
     }
@@ -331,233 +355,103 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
         "0040": {
             "0.00": {
                 "dropout": "0.0",
-                "weight_decay": "0.0",
+                "weight_decay": "1.0e-4",
                 "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "transforms": "true",
+                "transforms": "false",
                 "freeze_resnet": "false"
             },
             "0.50": {
                 "dropout": "0.0",
-                "weight_decay": "0.0",
+                "weight_decay": "1.0e-4",
                 "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "transforms": "true",
+                "transforms": "false",
                 "freeze_resnet": "false"
             },
             "1.00": {
                 "dropout": "0.0",
-                "weight_decay": "0.0",
+                "weight_decay": "1.0e-4",
                 "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "transforms": "true",
+                "transforms": "false",
                 "freeze_resnet": "false"
             }
         },
         "0060": {
             "0.00": {
                 "dropout": "0.0",
-                "weight_decay": "0.0",
+                "weight_decay": "1.0e-4",
                 "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "transforms": "true",
+                "transforms": "false",
                 "freeze_resnet": "false"
             },
             "0.50": {
                 "dropout": "0.0",
-                "weight_decay": "0.0",
+                "weight_decay": "1.0e-4",
                 "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "transforms": "true",
+                "transforms": "false",
                 "freeze_resnet": "false"
             },
             "1.00": {
                 "dropout": "0.0",
-                "weight_decay": "0.0",
+                "weight_decay": "1.0e-4",
                 "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "transforms": "true",
+                "transforms": "false",
                 "freeze_resnet": "false"
             }
         },
         "0080": {
             "0.00": {
                 "dropout": "0.0",
-                "weight_decay": "0.0",
+                "weight_decay": "1.0e-4",
                 "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "transforms": "true",
+                "transforms": "false",
                 "freeze_resnet": "false"
             },
             "0.50": {
                 "dropout": "0.0",
-                "weight_decay": "0.0",
+                "weight_decay": "1.0e-4",
                 "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "transforms": "true",
+                "transforms": "false",
                 "freeze_resnet": "false"
             },
             "1.00": {
                 "dropout": "0.0",
-                "weight_decay": "0.0",
+                "weight_decay": "1.0e-4",
                 "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "transforms": "true",
+                "transforms": "false",
                 "freeze_resnet": "false"
             }
         },
         "0600": {
             "0.00": {
                 "dropout": "0.0",
-                "weight_decay": "0.0",
-                "loss_alpha": "1.0",
-                "neural_learning_rate": "1.0e-3",
-                "learning_rate_decay_step": "30",
-                "learning_rate_decay": "1.0",
-                "transforms": "true",
-                "freeze_resnet": "false"
-            },
-            "0.50": {
-                "dropout": "0.0",
-                "weight_decay": "0.0",
-                "loss_alpha": "1.0",
-                "neural_learning_rate": "1.0e-3",
-                "learning_rate_decay_step": "30",
-                "learning_rate_decay": "1.0",
-                "transforms": "true",
-                "freeze_resnet": "false"
-            },
-            "1.00": {
-                "dropout": "0.0",
-                "weight_decay": "0.0",
-                "loss_alpha": "1.0",
-                "neural_learning_rate": "1.0e-3",
-                "learning_rate_decay_step": "30",
-                "learning_rate_decay": "1.0",
-                "transforms": "true",
-                "freeze_resnet": "false"
-            }
-        }
-    },
-    "BinaryCrossEntropy": {
-        "0040": {
-            "0.00": {
-                "dropout": "0.0",
-                "weight_decay": "0.0",
-                "loss_alpha": "1.0",
-                "neural_learning_rate": "1.0e-3",
-                "learning_rate_decay_step": "30",
-                "learning_rate_decay": "1.0",
-                "transforms": "true",
-                "freeze_resnet": "false"
-            },
-            "0.50": {
-                "dropout": "0.0",
-                "weight_decay": "0.0",
-                "loss_alpha": "1.0",
-                "neural_learning_rate": "1.0e-3",
-                "learning_rate_decay_step": "30",
-                "learning_rate_decay": "1.0",
-                "transforms": "true",
-                "freeze_resnet": "false"
-            },
-            "1.00": {
-                "dropout": "0.0",
-                "weight_decay": "0.0",
-                "loss_alpha": "1.0",
-                "neural_learning_rate": "1.0e-3",
-                "learning_rate_decay_step": "30",
-                "learning_rate_decay": "1.0",
-                "transforms": "true",
-                "freeze_resnet": "false"
-            }
-        },
-        "0060": {
-            "0.00": {
-                "dropout": "0.0",
-                "weight_decay": "0.0",
-                "loss_alpha": "1.0",
-                "neural_learning_rate": "1.0e-3",
-                "learning_rate_decay_step": "30",
-                "learning_rate_decay": "1.0",
-                "transforms": "true",
-                "freeze_resnet": "false"
-            },
-            "0.50": {
-                "dropout": "0.0",
-                "weight_decay": "0.0",
-                "loss_alpha": "1.0",
-                "neural_learning_rate": "1.0e-3",
-                "learning_rate_decay_step": "30",
-                "learning_rate_decay": "1.0",
-                "transforms": "true",
-                "freeze_resnet": "false"
-            },
-            "1.00": {
-                "dropout": "0.0",
-                "weight_decay": "0.0",
-                "loss_alpha": "1.0",
-                "neural_learning_rate": "1.0e-3",
-                "learning_rate_decay_step": "30",
-                "learning_rate_decay": "1.0",
-                "transforms": "true",
-                "freeze_resnet": "false"
-            }
-        },
-        "0080": {
-            "0.00": {
-                "dropout": "0.0",
-                "weight_decay": "0.0",
-                "loss_alpha": "1.0",
-                "neural_learning_rate": "1.0e-3",
-                "learning_rate_decay_step": "30",
-                "learning_rate_decay": "1.0",
-                "transforms": "true",
-                "freeze_resnet": "false"
-            },
-            "0.50": {
-                "dropout": "0.0",
-                "weight_decay": "0.0",
-                "loss_alpha": "1.0",
-                "neural_learning_rate": "1.0e-3",
-                "learning_rate_decay_step": "30",
-                "learning_rate_decay": "1.0",
-                "transforms": "true",
-                "freeze_resnet": "false"
-            },
-            "1.00": {
-                "dropout": "0.0",
-                "weight_decay": "0.0",
-                "loss_alpha": "1.0",
-                "neural_learning_rate": "1.0e-3",
-                "learning_rate_decay_step": "30",
-                "learning_rate_decay": "1.0",
-                "transforms": "true",
-                "freeze_resnet": "false"
-            }
-        },
-        "0600": {
-            "0.00": {
-                "dropout": "0.0",
-                "weight_decay": "0.0",
+                "weight_decay": "1.0e-4",
                 "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-4",
                 "learning_rate_decay_step": "30",
@@ -567,22 +461,152 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
             },
             "0.50": {
                 "dropout": "0.0",
-                "weight_decay": "0.0",
+                "weight_decay": "1.0e-4",
                 "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "transforms": "true",
+                "transforms": "false",
                 "freeze_resnet": "false"
             },
             "1.00": {
                 "dropout": "0.0",
-                "weight_decay": "0.0",
+                "weight_decay": "1.0e-4",
                 "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "transforms": "true",
+                "transforms": "false",
+                "freeze_resnet": "false"
+            }
+        }
+    },
+    "BinaryCrossEntropy": {
+        "0040": {
+            "0.00": {
+                "dropout": "0.0",
+                "weight_decay": "1.0e-4",
+                "loss_alpha": "1.0",
+                "neural_learning_rate": "1.0e-3",
+                "learning_rate_decay_step": "30",
+                "learning_rate_decay": "1.0",
+                "transforms": "false",
+                "freeze_resnet": "false"
+            },
+            "0.50": {
+                "dropout": "0.0",
+                "weight_decay": "1.0e-4",
+                "loss_alpha": "1.0",
+                "neural_learning_rate": "1.0e-3",
+                "learning_rate_decay_step": "30",
+                "learning_rate_decay": "1.0",
+                "transforms": "false",
+                "freeze_resnet": "false"
+            },
+            "1.00": {
+                "dropout": "0.0",
+                "weight_decay": "1.0e-4",
+                "loss_alpha": "1.0",
+                "neural_learning_rate": "1.0e-3",
+                "learning_rate_decay_step": "30",
+                "learning_rate_decay": "1.0",
+                "transforms": "false",
+                "freeze_resnet": "false"
+            }
+        },
+        "0060": {
+            "0.00": {
+                "dropout": "0.0",
+                "weight_decay": "1.0e-4",
+                "loss_alpha": "1.0",
+                "neural_learning_rate": "1.0e-3",
+                "learning_rate_decay_step": "30",
+                "learning_rate_decay": "1.0",
+                "transforms": "false",
+                "freeze_resnet": "false"
+            },
+            "0.50": {
+                "dropout": "0.0",
+                "weight_decay": "1.0e-4",
+                "loss_alpha": "1.0",
+                "neural_learning_rate": "1.0e-3",
+                "learning_rate_decay_step": "30",
+                "learning_rate_decay": "1.0",
+                "transforms": "false",
+                "freeze_resnet": "false"
+            },
+            "1.00": {
+                "dropout": "0.0",
+                "weight_decay": "1.0e-4",
+                "loss_alpha": "1.0",
+                "neural_learning_rate": "1.0e-3",
+                "learning_rate_decay_step": "30",
+                "learning_rate_decay": "1.0",
+                "transforms": "false",
+                "freeze_resnet": "false"
+            }
+        },
+        "0080": {
+            "0.00": {
+                "dropout": "0.0",
+                "weight_decay": "1.0e-4",
+                "loss_alpha": "1.0",
+                "neural_learning_rate": "1.0e-3",
+                "learning_rate_decay_step": "30",
+                "learning_rate_decay": "1.0",
+                "transforms": "false",
+                "freeze_resnet": "false"
+            },
+            "0.50": {
+                "dropout": "0.0",
+                "weight_decay": "1.0e-4",
+                "loss_alpha": "1.0",
+                "neural_learning_rate": "1.0e-3",
+                "learning_rate_decay_step": "30",
+                "learning_rate_decay": "1.0",
+                "transforms": "false",
+                "freeze_resnet": "false"
+            },
+            "1.00": {
+                "dropout": "0.0",
+                "weight_decay": "1.0e-4",
+                "loss_alpha": "1.0",
+                "neural_learning_rate": "1.0e-3",
+                "learning_rate_decay_step": "30",
+                "learning_rate_decay": "1.0",
+                "transforms": "false",
+                "freeze_resnet": "false"
+            }
+        },
+        "0600": {
+            "0.00": {
+                "dropout": "0.0",
+                "weight_decay": "1.0e-4",
+                "loss_alpha": "1.0",
+                "neural_learning_rate": "1.0e-5",
+                "learning_rate_decay_step": "30",
+                "learning_rate_decay": "1.0",
+                "transforms": "false",
+                "freeze_resnet": "false"
+            },
+            "0.50": {
+                "dropout": "0.0",
+                "weight_decay": "1.0e-4",
+                "loss_alpha": "1.0",
+                "neural_learning_rate": "1.0e-3",
+                "learning_rate_decay_step": "30",
+                "learning_rate_decay": "1.0",
+                "transforms": "false",
+                "freeze_resnet": "false"
+            },
+            "1.00": {
+                "dropout": "0.0",
+                "weight_decay": "1.0e-4",
+                "loss_alpha": "1.0",
+                "neural_learning_rate": "1.0e-3",
+                "learning_rate_decay_step": "30",
+                "learning_rate_decay": "1.0",
+                "transforms": "false",
                 "freeze_resnet": "false"
             }
         }
@@ -894,8 +918,8 @@ def run_first_order_wl_methods():
 
 
 def main():
-    # run_first_order_wl_methods_hyperparamter_search()
-    run_first_order_wl_methods()
+    run_first_order_wl_methods_hyperparamter_search()
+    # run_first_order_wl_methods()
 
 
 if __name__ == '__main__':

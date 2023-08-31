@@ -195,7 +195,8 @@ class MNISTAdditionModel(pslpython.deeppsl.model.DeepModel):
         return MNIST_Classifier(
             backbone,
             MLP(128, 64, int(options['class-size']), 2, float(options["dropout"])),
-            options["temperature"])
+            options["temperature"],
+            device=self._device)
 
     def _prepare_data(self, data, options={}):
         self._features = torch.tensor(np.asarray(data[:, :-1], dtype=np.float32), dtype=torch.float32, device=self._device)

@@ -44,7 +44,7 @@ INFERENCE_OPTION_RANGES = {
     "duallcqp.regularizationparameter": ["1.0", "1.0e-1", "1.0e-3"]
 }
 
-FIRST_ORDER_WL_METHODS = ["BinaryCrossEntropy"]
+FIRST_ORDER_WL_METHODS = ["Energy"]
 
 FIRST_ORDER_WL_METHODS_STANDARD_OPTION_RANGES = {
     "gradientdescent.stepsize": ["1.0e-14"],
@@ -73,7 +73,7 @@ NEURAL_NETWORK_OPTIONS = {
     "neural_learning_rate": ["1.0e-3", "1.0e-4"],
     "learning_rate_decay_step": ["30"],
     "learning_rate_decay": ["1.0"],
-    "transforms": ["true"],
+    "transforms": ["false"],
     "freeze_resnet": ["false"]
 }
 
@@ -331,64 +331,64 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
         "0040": {
             "0.00": {
                 "dropout": "0.0",
-                "weight_decay": "1.0e-3",
+                "weight_decay": "1.0e-2",
                 "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "transforms": "true",
+                "transforms": "false",
                 "freeze_resnet": "false"
             },
             "0.50": {
                 "dropout": "0.0",
-                "weight_decay": "1.0e-3",
+                "weight_decay": "1.0e-2",
                 "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "transforms": "true",
+                "transforms": "false",
                 "freeze_resnet": "false"
             },
             "1.00": {
                 "dropout": "0.0",
-                "weight_decay": "1.0e-3",
+                "weight_decay": "1.0e-2",
                 "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "transforms": "true",
+                "transforms": "false",
                 "freeze_resnet": "false"
             }
         },
         "0060": {
             "0.00": {
                 "dropout": "0.0",
-                "weight_decay": "1.0e-3",
+                "weight_decay": "1.0e-2",
                 "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "transforms": "true",
+                "transforms": "false",
                 "freeze_resnet": "false"
             },
             "0.50": {
                 "dropout": "0.0",
-                "weight_decay": "1.0e-3",
+                "weight_decay": "1.0e-2",
                 "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "transforms": "true",
+                "transforms": "false",
                 "freeze_resnet": "false"
             },
             "1.00": {
                 "dropout": "0.0",
-                "weight_decay": "1.0e-3",
+                "weight_decay": "1.0e-2",
                 "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "transforms": "true",
+                "transforms": "false",
                 "freeze_resnet": "false"
             }
         },
@@ -400,17 +400,17 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "transforms": "true",
+                "transforms": "false",
                 "freeze_resnet": "false"
             },
             "0.50": {
                 "dropout": "0.0",
-                "weight_decay": "1.0e-3",
+                "weight_decay": "1.0e-2",
                 "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "transforms": "true",
+                "transforms": "false",
                 "freeze_resnet": "false"
             },
             "1.00": {
@@ -420,29 +420,29 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "transforms": "true",
+                "transforms": "false",
                 "freeze_resnet": "false"
             }
         },
         "0600": {
             "0.00": {
                 "dropout": "0.0",
-                "weight_decay": "1.0e-3",
+                "weight_decay": "1.0e-2",
                 "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "transforms": "true",
+                "transforms": "false",
                 "freeze_resnet": "false"
             },
             "0.50": {
                 "dropout": "0.0",
-                "weight_decay": "1.0e-3",
+                "weight_decay": "1.0e-2",
                 "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "transforms": "true",
+                "transforms": "false",
                 "freeze_resnet": "false"
             },
             "1.00": {
@@ -452,7 +452,7 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "transforms": "true",
+                "transforms": "false",
                 "freeze_resnet": "false"
             }
         }
@@ -461,64 +461,64 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
         "0040": {
             "0.00": {
                 "dropout": "0.0",
-                "weight_decay": "1.0e-3",
+                "weight_decay": "1.0e-2",
                 "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "transforms": "true",
+                "transforms": "false",
                 "freeze_resnet": "false"
             },
             "0.50": {
                 "dropout": "0.0",
-                "weight_decay": "1.0e-3",
+                "weight_decay": "1.0e-2",
                 "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "transforms": "true",
+                "transforms": "false",
                 "freeze_resnet": "false"
             },
             "1.00": {
                 "dropout": "0.0",
-                "weight_decay": "1.0e-3",
+                "weight_decay": "1.0e-2",
                 "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "transforms": "true",
+                "transforms": "false",
                 "freeze_resnet": "false"
             }
         },
         "0060": {
             "0.00": {
                 "dropout": "0.0",
-                "weight_decay": "1.0e-3",
+                "weight_decay": "1.0e-2",
                 "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "transforms": "true",
+                "transforms": "false",
                 "freeze_resnet": "false"
             },
             "0.50": {
                 "dropout": "0.0",
-                "weight_decay": "1.0e-3",
+                "weight_decay": "1.0e-2",
                 "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "transforms": "true",
+                "transforms": "false",
                 "freeze_resnet": "false"
             },
             "1.00": {
                 "dropout": "0.0",
-                "weight_decay": "1.0e-3",
+                "weight_decay": "1.0e-2",
                 "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "transforms": "true",
+                "transforms": "false",
                 "freeze_resnet": "false"
             }
         },
@@ -530,27 +530,27 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "transforms": "true",
+                "transforms": "false",
                 "freeze_resnet": "false"
             },
             "0.50": {
                 "dropout": "0.0",
-                "weight_decay": "1.0e-3",
+                "weight_decay": "1.0e-2",
                 "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "transforms": "true",
+                "transforms": "false",
                 "freeze_resnet": "false"
             },
             "1.00": {
                 "dropout": "0.0",
-                "weight_decay": "1.0e-3",
+                "weight_decay": "1.0e-2",
                 "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "transforms": "true",
+                "transforms": "false",
                 "freeze_resnet": "false"
             }
         },
@@ -562,27 +562,27 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "transforms": "true",
+                "transforms": "false",
                 "freeze_resnet": "false"
             },
             "0.50": {
                 "dropout": "0.0",
-                "weight_decay": "1.0e-3",
+                "weight_decay": "1.0e-2",
                 "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "transforms": "true",
+                "transforms": "false",
                 "freeze_resnet": "false"
             },
             "1.00": {
                 "dropout": "0.0",
-                "weight_decay": "1.0e-3",
+                "weight_decay": "1.0e-2",
                 "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "transforms": "true",
+                "transforms": "false",
                 "freeze_resnet": "false"
             }
         }
