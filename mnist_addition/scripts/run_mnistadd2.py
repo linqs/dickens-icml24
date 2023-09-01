@@ -28,7 +28,7 @@ STANDARD_EXPERIMENT_OPTIONS = {
     "gradientdescent.numsteps": "500",
     "gradientdescent.runfulliterations": "false",
     "duallcqp.computeperiod": "10",
-    "duallcqp.maxiterations": "25000",
+    "duallcqp.maxiterations": "50000",
     "runtime.validation": "true",
     "gradientdescent.savevalidationweights": "true",
 }
@@ -40,10 +40,10 @@ STANDARD_DATASET_OPTIONS = {
 }
 
 INFERENCE_OPTION_RANGES = {
-    "duallcqp.regularizationparameter": ["1.0e-3"]
+    "duallcqp.regularizationparameter": ["1.0e-3", "1.0e-4"]
 }
 
-FIRST_ORDER_WL_METHODS = ["BinaryCrossEntropy"]
+FIRST_ORDER_WL_METHODS = ["BinaryCrossEntropy", "Energy"]
 
 FIRST_ORDER_WL_METHODS_STANDARD_OPTION_RANGES = {
     "gradientdescent.stepsize": ["1.0e-14"],
@@ -59,6 +59,7 @@ FIRST_ORDER_WL_METHODS_OPTION_RANGES = {
     "BinaryCrossEntropy": {
         "runtime.learn.method": ["BinaryCrossEntropy"],
         "minimizer.initialsquaredpenalty": ["2.0", "10.0"],
+        "minimizer.energylosscoefficient": ["0.1", "1.0", "10.0"],
         "minimizer.proxvaluestepsize": ["1.0e-3", "1.0e-4"],
         "minimizer.squaredpenaltyincreaserate": ["2.0"],
         "minimizer.objectivedifferencetolerance": ["1.0e-3"],
@@ -68,12 +69,12 @@ FIRST_ORDER_WL_METHODS_OPTION_RANGES = {
 
 NEURAL_NETWORK_OPTIONS = {
     "dropout": ["0.0"],
-    "weight_decay": ["0.0"],
+    "weight_decay": ["1.0e-4", "1.0e-5"],
     "loss_alpha": ["1.0"],
-    "neural_learning_rate": ["1.0e-3", "1.0e-4", "1.0e-5"],
+    "neural_learning_rate": ["1.0e-3", "1.0e-4"],
     "learning_rate_decay_step": ["30"],
     "learning_rate_decay": ["1.0"],
-    "transforms": ["false"],
+    "transforms": ["false", "true"],
     "freeze_resnet": ["false"]
 }
 
@@ -311,8 +312,8 @@ BEST_HYPERPARAMETERS = {
                 "runtime.learn.method": "BinaryCrossEntropy",
                 "minimizer.initialsquaredpenalty": "2.0",
                 "minimizer.objectivedifferencetolerance": "1.0e-3",
-                "minimizer.proxruleweight": "1.0",
-                "minimizer.proxvaluestepsize": "1.0e-4",
+                "minimizer.proxruleweight": "1.0e-2",
+                "minimizer.proxvaluestepsize": "1.0e-3",
                 "minimizer.squaredpenaltyincreaserate": "2.0",
                 "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
@@ -583,7 +584,7 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
                 "dropout": "0.0",
                 "weight_decay": "1.0e-4",
                 "loss_alpha": "1.0",
-                "neural_learning_rate": "1.0e-5",
+                "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
                 "transforms": "false",
