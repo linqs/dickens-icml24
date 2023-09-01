@@ -28,7 +28,7 @@ STANDARD_EXPERIMENT_OPTIONS = {
     "gradientdescent.numsteps": "500",
     "gradientdescent.runfulliterations": "false",
     "duallcqp.computeperiod": "10",
-    "duallcqp.maxiterations": "50000",
+    "duallcqp.maxiterations": "10000",
     "runtime.validation": "true",
     "gradientdescent.savevalidationweights": "true",
 }
@@ -40,7 +40,7 @@ STANDARD_DATASET_OPTIONS = {
 }
 
 INFERENCE_OPTION_RANGES = {
-    "duallcqp.regularizationparameter": ["1.0e-3", "1.0e-4"]
+    "duallcqp.regularizationparameter": ["1.0e-3"]
 }
 
 FIRST_ORDER_WL_METHODS = ["BinaryCrossEntropy", "Energy"]
@@ -49,7 +49,7 @@ FIRST_ORDER_WL_METHODS_STANDARD_OPTION_RANGES = {
     "gradientdescent.stepsize": ["1.0e-14"],
     "gradientdescent.negativelogregularization": ["1.0e-3"],
     "gradientdescent.negativeentropyregularization": ["0.0"],
-    "connectedcomponents.batchsize": ["16", "32"]
+    "connectedcomponents.batchsize": ["16"]
 }
 
 FIRST_ORDER_WL_METHODS_OPTION_RANGES = {
@@ -60,18 +60,18 @@ FIRST_ORDER_WL_METHODS_OPTION_RANGES = {
         "runtime.learn.method": ["BinaryCrossEntropy"],
         "minimizer.initialsquaredpenalty": ["2.0", "10.0"],
         "minimizer.energylosscoefficient": ["0.1", "1.0", "10.0"],
-        "minimizer.proxvaluestepsize": ["1.0e-3", "1.0e-4"],
+        "minimizer.proxvaluestepsize": ["1.0e-2", "1.0e-3", "1.0e-4"],
         "minimizer.squaredpenaltyincreaserate": ["2.0"],
         "minimizer.objectivedifferencetolerance": ["1.0e-3"],
-        "minimizer.proxruleweight": ["1.0", "1.0e-1", "1.0e-2"]
+        "minimizer.proxruleweight": ["1.0e-2", "1.0e-3"]
     }
 }
 
 NEURAL_NETWORK_OPTIONS = {
     "dropout": ["0.0"],
-    "weight_decay": ["1.0e-4", "1.0e-5"],
+    "weight_decay": ["1.0e-4"],
     "loss_alpha": ["1.0"],
-    "neural_learning_rate": ["1.0e-3", "1.0e-4"],
+    "neural_learning_rate": ["1.0e-2", "1.0e-3", "1.0e-4"],
     "learning_rate_decay_step": ["30"],
     "learning_rate_decay": ["1.0"],
     "transforms": ["false", "true"],
@@ -194,6 +194,7 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.proxruleweight": "1.0",
                 "minimizer.proxvaluestepsize": "1.0e-3",
                 "minimizer.squaredpenaltyincreaserate": "2.0",
+                "minimizer.energylosscoefficient": "0.1",
                 "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
@@ -207,6 +208,7 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.proxruleweight": "1.0e-2",
                 "minimizer.proxvaluestepsize": "1.0e-3",
                 "minimizer.squaredpenaltyincreaserate": "2.0",
+                "minimizer.energylosscoefficient": "0.1",
                 "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
@@ -234,6 +236,7 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.proxruleweight": "1.0e-2",
                 "minimizer.proxvaluestepsize": "1.0e-3",
                 "minimizer.squaredpenaltyincreaserate": "2.0",
+                "minimizer.energylosscoefficient": "0.1",
                 "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
@@ -247,6 +250,7 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.proxruleweight": "1.0e-2",
                 "minimizer.proxvaluestepsize": "1.0e-3",
                 "minimizer.squaredpenaltyincreaserate": "2.0",
+                "minimizer.energylosscoefficient": "0.1",
                 "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
@@ -274,6 +278,7 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.proxruleweight": "1.0",
                 "minimizer.proxvaluestepsize": "1.0e-3",
                 "minimizer.squaredpenaltyincreaserate": "2.0",
+                "minimizer.energylosscoefficient": "0.1",
                 "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
@@ -287,6 +292,7 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.proxruleweight": "1.0e-2",
                 "minimizer.proxvaluestepsize": "1.0e-3",
                 "minimizer.squaredpenaltyincreaserate": "2.0",
+                "minimizer.energylosscoefficient": "0.1",
                 "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
@@ -300,6 +306,7 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.proxruleweight": "1.0e-1",
                 "minimizer.proxvaluestepsize": "1.0e-3",
                 "minimizer.squaredpenaltyincreaserate": "2.0",
+                "minimizer.energylosscoefficient": "0.1",
                 "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
@@ -315,6 +322,7 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.proxruleweight": "1.0e-2",
                 "minimizer.proxvaluestepsize": "1.0e-3",
                 "minimizer.squaredpenaltyincreaserate": "2.0",
+                "minimizer.energylosscoefficient": "0.1",
                 "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
@@ -328,6 +336,7 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.proxruleweight": "1.0e-2",
                 "minimizer.proxvaluestepsize": "1.0e-3",
                 "minimizer.squaredpenaltyincreaserate": "2.0",
+                "minimizer.energylosscoefficient": "0.1",
                 "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
@@ -341,6 +350,7 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.proxruleweight": "1.0e-1",
                 "minimizer.proxvaluestepsize": "1.0e-3",
                 "minimizer.squaredpenaltyincreaserate": "2.0",
+                "minimizer.energylosscoefficient": "0.1",
                 "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
