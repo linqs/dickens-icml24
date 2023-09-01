@@ -20,9 +20,11 @@ STANDARD_EXPERIMENT_OPTIONS = {
     "inference.normalize": "false",
     "runtime.log.level": "TRACE",
     "gradientdescent.scalestepsize": "false",
-    "gradientdescent.trainingcomputeperiod": "10",
-    "gradientdescent.validationcomputeperiod": "10",
-    "gradientdescent.stopcomputeperiod": "10",
+    "gradientdescent.trainingcomputeperiod": "5",
+    "gradientdescent.validationcomputeperiod": "5",
+    "gradientdescent.validationbreak": "true",
+    "gradientdescent.validationpatience": "25",
+    "gradientdescent.stopcomputeperiod": "5",
     "weightlearning.inference": "DualBCDInference",
     "runtime.inference.method": "DualBCDInference",
     "gradientdescent.numsteps": "500",
@@ -49,7 +51,7 @@ FIRST_ORDER_WL_METHODS_STANDARD_OPTION_RANGES = {
     "gradientdescent.stepsize": ["1.0e-14"],
     "gradientdescent.negativelogregularization": ["1.0e-3"],
     "gradientdescent.negativeentropyregularization": ["0.0"],
-    "connectedcomponents.batchsize": ["16"]
+    "connectedcomponents.batchsize": ["32"]
 }
 
 FIRST_ORDER_WL_METHODS_OPTION_RANGES = {
