@@ -73,7 +73,7 @@ NEURAL_NETWORK_OPTIONS = {
     "dropout": ["0.0"],
     "weight_decay": ["1.0e-4"],
     "loss_alpha": ["1.0"],
-    "neural_learning_rate": ["1.0e-2", "1.0e-3", "1.0e-4"],
+    "neural_learning_rate": ["1.0e-3", "1.0e-4", "1.0e-5"],
     "learning_rate_decay_step": ["30"],
     "learning_rate_decay": ["1.0"],
     "transforms": ["false", "true"],
