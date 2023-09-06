@@ -118,7 +118,7 @@ def enumerate_hyperparameters(hyperparameters_dict: dict, current_hyperparameter
 
 
 def run_first_order_wl_methods(dataset: str):
-    base_out_dir = os.path.join(PERFORMANCE_RESULTS_DIR, dataset, "first_order_wl_methods")
+    base_out_dir = os.path.join(PERFORMANCE_RESULTS_DIR, dataset)
     os.makedirs(base_out_dir, exist_ok=True)
 
     # Load the json file with the dataset options.

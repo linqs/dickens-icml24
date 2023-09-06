@@ -23,7 +23,7 @@ DATASET_NAME_OUTPUT_KEYS = {
 }
 
 
-def parse_experiment_output(dataset_name: str, output_file_path: str) -> pd.Series:
+def parse_experiment_output(dataset_name: str, experiment: str, output_file_path: str) -> pd.Series:
     experiment_output = pd.Series({"learning_objective": [], "inference_time": [], }, dtype=object)
 
     with open(output_file_path, "r") as output_file:
@@ -48,17 +48,18 @@ def parse_experiment_output(dataset_name: str, output_file_path: str) -> pd.Seri
 
     experiment_output["wl_num_steps"] = len(experiment_output["learning_objective"])
 
-    experiment_output["inference_time"] = experiment_output["inference_time"][:-1]
+    if experiment in ["wl_inference_timing", "performance"]:
+        experiment_output["inference_time"] = experiment_output["inference_time"][:-1]
+
     experiment_output["total_inference_time"] = sum(experiment_output["inference_time"])
 
     return experiment_output
 
 
-def parse_results_recursive(dataset_name: str, current_directory: str, model_results: list, parameters: dict):
+def parse_results_recursive(dataset_name: str, experiment: str, current_directory: str, results: list, parameters: dict):
     # Base Cases
     if os.path.exists(os.path.join(current_directory, "out.txt")):
-        results = pd.concat([pd.Series(parameters), parse_experiment_output(dataset_name, os.path.join(current_directory, "out.txt"))])
-        model_results.append(results)
+        results.append(pd.concat([pd.Series(parameters), parse_experiment_output(dataset_name, experiment, os.path.join(current_directory, "out.txt"))]))
 
     # Recursive Cases
     for parameter_setting_dir in os.listdir(current_directory):
@@ -68,18 +69,18 @@ def parse_results_recursive(dataset_name: str, current_directory: str, model_res
         parameter, value = parameter_setting_dir.split("::")
         next_parameters = parameters.copy()
         next_parameters[parameter] = value
-        parse_results_recursive(dataset_name, os.path.join(current_directory, parameter_setting_dir), model_results, next_parameters)
+        parse_results_recursive(dataset_name, experiment, os.path.join(current_directory, parameter_setting_dir), results, next_parameters)
 
 
-def parse_results(dataset_name: str, model_dir: str) -> pd.DataFrame:
-    model_results = []
-    parse_results_recursive(dataset_name, model_dir, model_results, {})
+def parse_results(dataset_name: str, experiment: str, results_dir: str) -> pd.DataFrame:
+    results = []
+    parse_results_recursive(dataset_name, experiment, results_dir, results, {})
 
-    if len(model_results) == 0:
-        print("No results found for model in directory: {}".format(model_dir))
+    if len(results) == 0:
+        print("No results found for model in directory: {}".format(results_dir))
         return pd.DataFrame()
 
-    return pd.DataFrame(model_results)
+    return pd.DataFrame(results)
 
 
 def save_model_results(model_results: pd.DataFrame, model_dir: str):
@@ -95,12 +96,27 @@ def main():
         experiment_dir = os.path.join(RESULTS_BASE_DIR, experiment)
         for dataset_name in os.listdir(experiment_dir):
             dataset_dir = os.path.join(experiment_dir, dataset_name)
-            for model_type_name in os.listdir(os.path.join(dataset_dir)):
-                model_type_dir = os.path.join(dataset_dir, model_type_name)
-                for model_name in os.listdir(model_type_dir):
-                    model_dir = os.path.join(model_type_dir, model_name)
-                    model_results = parse_results(dataset_name, model_dir)
-                    save_model_results(model_results, model_dir)
+
+            if experiment in ["dual_bcd_regularization", "inference"]:
+                for reasoner_name in os.listdir(dataset_dir):
+                    reasoner_dir = os.path.join(dataset_dir, reasoner_name)
+                    model_results = parse_results(dataset_name, experiment, reasoner_dir)
+                    save_model_results(model_results, reasoner_dir)
+
+            if experiment == "wl_inference_timing":
+                for reasoner_name in os.listdir(os.path.join(dataset_dir)):
+                    reasoner_dir = os.path.join(dataset_dir, reasoner_name)
+                    for learning_loss in os.listdir(reasoner_dir):
+                        learning_loss_dir = os.path.join(reasoner_dir, learning_loss)
+                        print(learning_loss_dir)
+                        model_results = parse_results(dataset_name, experiment, learning_loss_dir)
+                        save_model_results(model_results, learning_loss_dir)
+
+            if experiment == "performance":
+                for learning_loss in os.listdir(dataset_dir):
+                    learning_loss_dir = os.path.join(dataset_dir, learning_loss)
+                    model_results = parse_results(dataset_name, experiment, learning_loss_dir)
+                    save_model_results(model_results, learning_loss_dir)
 
 
 if __name__ == '__main__':

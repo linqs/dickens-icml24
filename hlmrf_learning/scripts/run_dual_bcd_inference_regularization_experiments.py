@@ -58,7 +58,7 @@ def enumerate_hyperparameters(hyperparameters_dict: dict, current_hyperparameter
 
 
 def run_inference_params(dataset: str):
-    base_out_dir = os.path.join(EXPERIMENT_RESULTS_DIR, "DualBCDInference/DualBCDInference", dataset)
+    base_out_dir = os.path.join(EXPERIMENT_RESULTS_DIR, "DualBCDInference", dataset)
     os.makedirs(base_out_dir, exist_ok=True)
 
     # Load the json file with the dataset options.
