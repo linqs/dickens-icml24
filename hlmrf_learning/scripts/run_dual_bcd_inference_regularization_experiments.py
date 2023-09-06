@@ -135,7 +135,7 @@ def run_inference_params(dataset: str):
             # Reset the json file.
             dataset_json.update({"options": original_options})
             with open(dataset_json_path, "w") as file:
-                json.dump(dataset_json, file)
+                json.dump(dataset_json, file, indent=4)
 
             print("Finished experiment: Dataset:{}".format(dataset))
 
