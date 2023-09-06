@@ -68,8 +68,12 @@ def main():
                         if len(results[experiment][dataset][experiment_group][method]['rows']) == 0:
                             results[experiment][dataset][experiment_group][method]['header'] = [row.split("::")[0] for
                                                                                                 row in parts]
+
                             results[experiment][dataset][experiment_group][method]['header'].append(
-                                'Categorical Accuracy')
+                                'Validation_Categorical_Accuracy')
+
+                            results[experiment][dataset][experiment_group][method]['header'].append(
+                                'Test_Categorical_Accuracy')
 
                         results[experiment][dataset][experiment_group][method]['rows'].append(
                             [row.split("::")[1] for row in parts])
