@@ -33,6 +33,7 @@ STANDARD_EXPERIMENT_OPTIONS = {
     "duallcqp.maxiterations": "10000",
     "runtime.validation": "true",
     "gradientdescent.savevalidationweights": "true",
+    "gradientdescent.batchgenerator": "ConnectedComponentBatchGenerator"
 }
 
 STANDARD_DATASET_OPTIONS = {
