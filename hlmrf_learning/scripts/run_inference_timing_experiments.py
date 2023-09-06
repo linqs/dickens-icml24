@@ -25,32 +25,20 @@ STANDARD_EXPERIMENT_OPTIONS = {
 STANDARD_DATASET_OPTIONS = {
     "epinions": {
         "duallcqp.regularizationparameter": "1.0e-3",
-        "duallcqp.primaldualthreshold": "0.1",
-        "admmreasoner.epsilonabs": "1.0e-5",
-        "admmreasoner.epsilonrel": "1.0e-3",
         "admmreasoner.stepsize": "1.0e-1"
     },
     "citeseer": {
         "eval.closetruth": "true",
-        "duallcqp.regularizationparameter": "1.0",
-        "duallcqp.primaldualthreshold": "0.1",
-        "admmreasoner.epsilonabs": "1.0e-5",
-        "admmreasoner.epsilonrel": "1.0e-3",
+        "duallcqp.regularizationparameter": "1.0e-1",
         "admmreasoner.stepsize": "1.0"
     },
     "cora": {
         "eval.closetruth": "true",
-        "duallcqp.regularizationparameter": "1.0",
-        "duallcqp.primaldualthreshold": "0.1",
-        "admmreasoner.epsilonabs": "1.0e-5",
-        "admmreasoner.epsilonrel": "1.0e-3",
+        "duallcqp.regularizationparameter": "1.0e-1",
         "admmreasoner.stepsize": "1.0"
     },
     "yelp": {
         "duallcqp.regularizationparameter": "1.0e-1",
-        "duallcqp.primaldualthreshold": "0.1",
-        "admmreasoner.epsilonabs": "1.0e-5",
-        "admmreasoner.epsilonrel": "1.0e-3",
         "admmreasoner.stepsize": "1.0"
     }
 }

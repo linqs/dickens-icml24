@@ -8,6 +8,7 @@ import sys
 THIS_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)))
 RESULTS_BASE_DIR = os.path.join(THIS_DIR, "../results")
 PSL_EXAMPLES_DIR = os.path.join(THIS_DIR, "../psl-examples")
+PSL_EXTENDED_EXAMPLES_DIR = os.path.join(THIS_DIR, "../psl-extended-examples")
 EXPERIMENT_RESULTS_DIR = os.path.join(RESULTS_BASE_DIR, "wl_inference_timing")
 
 STANDARD_EXPERIMENT_OPTIONS = {
@@ -29,37 +30,21 @@ STANDARD_EXPERIMENT_OPTIONS = {
 STANDARD_DATASET_OPTIONS = {
     "epinions": {
         "duallcqp.regularizationparameter": "1.0e-3",
-        "duallcqp.primaldualthreshold": "0.1",
-        "admmreasoner.epsilonabs": "1.0e-5",
-        "admmreasoner.epsilonrel": "1.0e-3",
         "admmreasoner.stepsize": "1.0e-1",
-        "gradientdescent.stepsize": "0.1"
     },
     "citeseer": {
         "eval.closetruth": "true",
         "duallcqp.regularizationparameter": "1.0e-1",
-        "duallcqp.primaldualthreshold": "0.1",
-        "admmreasoner.epsilonabs": "1.0e-5",
-        "admmreasoner.epsilonrel": "1.0e-3",
         "admmreasoner.stepsize": "10.0",
-        "gradientdescent.stepsize": "1.0"
     },
     "cora": {
         "eval.closetruth": "true",
         "duallcqp.regularizationparameter": "1.0e-1",
-        "duallcqp.primaldualthreshold": "0.1",
-        "admmreasoner.epsilonabs": "1.0e-5",
-        "admmreasoner.epsilonrel": "1.0e-3",
         "admmreasoner.stepsize": "10.0",
-        "gradientdescent.stepsize": "1.0"
     },
     "yelp": {
         "duallcqp.regularizationparameter": "1.0e-1",
-        "duallcqp.primaldualthreshold": "0.1",
-        "admmreasoner.epsilonabs": "1.0e-5",
-        "admmreasoner.epsilonrel": "1.0e-3",
         "admmreasoner.stepsize": "1.0",
-        "gradientdescent.stepsize": "1.0"
     },
 }
 
@@ -68,6 +53,7 @@ FIRST_ORDER_WL_INFERENCE_METHODS = ["DualBCDInference", "ADMMInference"]
 
 FIRST_ORDER_WL_METHODS_STANDARD_OPTION_RANGES = {
     "gradientdescent.negativelogregularization": ["1.0e-3"],
+    "gradientdescent.stepsize": ["1.0e-3", "1.0e-2"],
     "gradientdescent.negativeentropyregularization": ["0.0"]
 }
 
@@ -84,10 +70,10 @@ FIRST_ORDER_WL_INFERENCE_METHOD_OPTION_RANGES = {
 
 FIRST_ORDER_WL_METHODS_OPTION_RANGES = {
     "StructuredPerceptron": {
-        "runtime.learn.method": ["StructuredPerceptron"]
+        "runtime.learn.method": ["StructuredPerceptron"],
     },
     "Energy": {
-        "runtime.learn.method": ["Energy"]
+        "runtime.learn.method": ["Energy"],
     },
     "BinaryCrossEntropy": {
         "runtime.learn.method": ["BinaryCrossEntropy"],
@@ -135,10 +121,20 @@ def run_first_order_wl_methods(dataset: str):
     dataset_cli_path = os.path.join(PSL_EXAMPLES_DIR, "{}/cli".format(dataset))
     dataset_json_path = os.path.join(dataset_cli_path, "{}.json".format(dataset))
 
-    dataset_json = None
+    dataset_original_json = None
     with open(dataset_json_path, "r") as file:
-        dataset_json = json.load(file)
-    original_options = dataset_json["options"]
+        dataset_original_json = json.load(file)
+
+    original_options = dataset_original_json["options"]
+
+    # If the dataset is epinions, citeseer, or cora, then we need to load the extended json file.
+    if dataset in ["epinions", "citeseer", "cora"]:
+        dataset_extended_json_path = os.path.join(PSL_EXTENDED_EXAMPLES_DIR, "{}/cli/{}.json".format(dataset, dataset))
+
+        with open(dataset_extended_json_path, "r") as file:
+            dataset_json = json.load(file)
+    else:
+        dataset_json = dataset_original_json
 
     standard_experiment_option_ranges = {**FIRST_ORDER_WL_METHODS_STANDARD_OPTION_RANGES}
 
@@ -208,9 +204,9 @@ def run_first_order_wl_methods(dataset: str):
                     os.system("cp {} {}".format(os.path.join(dataset_cli_path, "{}_learned.psl".format(dataset)), experiment_out_dir))
 
                     # Reset the json file.
-                    dataset_json.update({"options": original_options})
+                    dataset_original_json.update({"options": original_options})
                     with open(dataset_json_path, "w") as file:
-                        json.dump(dataset_json, file, indent=4)
+                        json.dump(dataset_original_json, file, indent=4)
 
                     print("Finished experiment: Dataset:{}, Weight Learning Method: {}.".format(dataset, method))
 

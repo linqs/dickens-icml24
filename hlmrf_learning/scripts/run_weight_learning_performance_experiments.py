@@ -8,6 +8,7 @@ import signal
 THIS_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)))
 RESULTS_BASE_DIR = os.path.join(THIS_DIR, "../results")
 PSL_EXAMPLES_DIR = os.path.join(THIS_DIR, "../psl-examples")
+PSL_EXTENDED_EXAMPLES_DIR = os.path.join(THIS_DIR, "../psl-extended-examples")
 PERFORMANCE_RESULTS_DIR = os.path.join(RESULTS_BASE_DIR, "performance")
 
 STANDARD_EXPERIMENT_OPTIONS = {
@@ -43,22 +44,22 @@ STANDARD_DATASET_OPTIONS = {
 
 DATASET_OPTION_RANGES = {
     "epinions": {
-        "gradientdescent.stepsize": ["1.0", "0.1"],
+        "gradientdescent.stepsize": ["1.0e-3", "1.0e-2"],
         "duallcqp.regularizationparameter": ["1.0e-3"],
         "minimizer.objectivedifferencetolerance": ["0.1"]
     },
     "citeseer": {
-        "gradientdescent.stepsize": ["1.0", "0.1"],
+        "gradientdescent.stepsize": ["1.0e-3", "1.0e-2"],
         "duallcqp.regularizationparameter": ["1.0e-3"],
         "minimizer.objectivedifferencetolerance": ["1.0"],
     },
     "cora": {
-        "gradientdescent.stepsize": ["1.0", "0.1"],
+        "gradientdescent.stepsize": ["1.0e-3", "1.0e-2"],
         "duallcqp.regularizationparameter": ["1.0e-3"],
         "minimizer.objectivedifferencetolerance": ["1.0"]
     },
     "yelp": {
-        "gradientdescent.stepsize": ["1.0", "0.1"],
+        "gradientdescent.stepsize": ["1.0e-3", "1.0e-2"],
         "duallcqp.regularizationparameter": ["1.0e-3"],
         "minimizer.objectivedifferencetolerance": ["1.0"]
     }
@@ -124,10 +125,20 @@ def run_first_order_wl_methods(dataset: str):
     dataset_cli_path = os.path.join(PSL_EXAMPLES_DIR, "{}/cli".format(dataset))
     dataset_json_path = os.path.join(dataset_cli_path, "{}.json".format(dataset))
 
-    dataset_json = None
+    dataset_original_json = None
     with open(dataset_json_path, "r") as file:
-        dataset_json = json.load(file)
-    original_options = dataset_json["options"]
+        dataset_original_json = json.load(file)
+
+    original_options = dataset_original_json["options"]
+
+    # If the dataset is epinions, citeseer, or cora, then we need to load the extended json file.
+    if dataset in ["epinions", "citeseer", "cora"]:
+        dataset_extended_json_path = os.path.join(PSL_EXTENDED_EXAMPLES_DIR, "{}/cli/{}.json".format(dataset, dataset))
+
+        with open(dataset_extended_json_path, "r") as file:
+            dataset_json = json.load(file)
+    else:
+        dataset_json = dataset_original_json
 
     standard_experiment_option_ranges = {**INFERENCE_OPTION_RANGES,
                                          **FIRST_ORDER_WL_METHODS_STANDARD_OPTION_RANGES,
@@ -196,9 +207,9 @@ def run_first_order_wl_methods(dataset: str):
                     exit()
 
                 # Reset the json file.
-                dataset_json.update({"options": original_options})
+                dataset_original_json.update({"options": original_options})
                 with open(dataset_json_path, "w") as file:
-                    json.dump(dataset_json, file)
+                    json.dump(dataset_original_json, file)
 
                 print("Finished experiment: Dataset:{}, Weight Learning Method: {}.".format(dataset, method))
 
