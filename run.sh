@@ -4,7 +4,7 @@
 
 export PYTORCH_ENABLE_MPS_FALLBACK=1
 
-PSL_DATASETS='citeseer'
+PSL_DATASETS='epinions citeseer cora yelp'
 
 function main() {
     trap exit SIGINT
