@@ -37,7 +37,11 @@ def parse_log(log_path):
     results = []
     with open(log_path, 'r') as file:
         for line in file:
-            if 'Evaluation results' in line:
+            if 'Final MAP State Validation Evaluation Metric:' in line:
+                match = re.search(r': ([\d\.]+)', line)
+                results.append(float(match.group(1)))
+
+            if 'Evaluation results: Evaluator: CategoricalEvaluator, Predicate: IMAGESUM' in line:
                 match = re.search(r': ([\d\.]+)', line)
                 results.append(float(match.group(1)))
 
