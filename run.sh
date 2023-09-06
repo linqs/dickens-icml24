@@ -21,10 +21,16 @@ function main() {
 #        python3 ./hlmrf_learning/scripts/run_inference_timing_experiments.py ${dataset}
 #    done
 
+#    ./hlmrf_learning/scripts/setup_psl_examples.sh
+#    for dataset in $PSL_DATASETS; do
+#        echo "Running psl learning timing experiments on dataset: ${dataset}."
+#        python3 ./hlmrf_learning/scripts/run_weight_learning_inference_timing_experiments.py ${dataset}
+#    done
+
     ./hlmrf_learning/scripts/setup_psl_examples.sh
     for dataset in $PSL_DATASETS; do
-        echo "Running psl learning timing experiments on dataset: ${dataset}."
-        python3 ./hlmrf_learning/scripts/run_weight_learning_inference_timing_experiments.py ${dataset}
+        echo "Running psl learning performance experiments on dataset: ${dataset}."
+        python3 ./hlmrf_learning/scripts/run_weight_learning_performance_experiments.py ${dataset}
     done
 
 #    pushd . >/dev/null

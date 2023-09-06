@@ -12,6 +12,7 @@ EXPERIMENT_RESULTS_DIR = os.path.join(RESULTS_BASE_DIR, "wl_inference_timing")
 
 STANDARD_EXPERIMENT_OPTIONS = {
     "runtime.log.level": "TRACE",
+    "inference.normalize": "false",
     "admmreasoner.primaldualbreak": "false",
     "duallcqp.primaldualbreak": "false",
     "duallcqp.computeperiod": "1",
@@ -19,6 +20,7 @@ STANDARD_EXPERIMENT_OPTIONS = {
     "reasoner.variablemovementbreak": "true",
     "reasoner.variablemovementnorm": "Infinity",
     "reasoner.variablemovementtolerance": "1.0e-3",
+    "gradientdescent.scalestepsize": "false",
     "gradientdescent.numsteps": "500",
     "gradientdescent.runfulliterations": "true",
     "gradientdescent.batchgenerator": "FullBatchGenerator"
