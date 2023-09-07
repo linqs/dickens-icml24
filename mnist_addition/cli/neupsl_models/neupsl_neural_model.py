@@ -42,7 +42,6 @@ class MNISTAdditionModel(pslpython.deeppsl.model.DeepModel):
         self._application = application
 
         options = options.copy()
-        options['temperature'] = 1.0
         self._model = self._create_model(options=options).to(self._device)
 
         if self._application == 'learning':
@@ -143,13 +142,12 @@ class MNISTAdditionModel(pslpython.deeppsl.model.DeepModel):
         backbone = torchvision.models.resnet18(num_classes=128)
 
         backbone.load_state_dict(torch.load(
-            f"{THIS_DIR}/../../data/experiment::mnist-2/split::0/train-size::0600/overlap::0.00/saved-networks/simclr-pretrained-backbone.pt"
+            f"{THIS_DIR}/../../data/experiment::{options['experiment']}/split::{options['split']}/train-size::{options['train_size']}/overlap::0.00/saved-networks/simclr-pretrained-backbone.pt"
         ))
 
         return MNIST_Classifier(
             backbone,
             MLP(128, 64, int(options['class-size']), 2, float(options["dropout"])),
-            options["temperature"],
             device=self._device)
 
     def _prepare_data(self, data, options={}):
