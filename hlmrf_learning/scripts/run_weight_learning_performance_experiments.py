@@ -14,8 +14,8 @@ PERFORMANCE_RESULTS_DIR = os.path.join(RESULTS_BASE_DIR, "performance")
 STANDARD_EXPERIMENT_OPTIONS = {
     "runtime.log.level": "TRACE",
     "inference.normalize": "false",
-    "weightlearning.inference": "DualBCDInference",
-    "runtime.inference.method": "DualBCDInference",
+    "weightlearning.inference": "DistributedDualBCDInference",
+    "runtime.inference.method": "DistributedDualBCDInference",
     "gradientdescent.numsteps": "2500",
     "gradientdescent.scalestepsize": "false",
     "gradientdescent.batchgenerator": "FullBatchGenerator",
@@ -27,18 +27,18 @@ STANDARD_EXPERIMENT_OPTIONS = {
 
 STANDARD_DATASET_OPTIONS = {
     "epinions": {
-        "duallcqp.primaldualthreshold": "0.1"
+        "duallcqp.primaldualthreshold": "1.0e-2"
     },
     "citeseer": {
         "eval.closetruth": "true",
-        "duallcqp.primaldualthreshold": "0.1"
+        "duallcqp.primaldualthreshold": "1.0e-2"
     },
     "cora": {
         "eval.closetruth": "true",
-        "duallcqp.primaldualthreshold": "0.1"
+        "duallcqp.primaldualthreshold": "1.0e-2"
     },
     "yelp": {
-        "duallcqp.primaldualthreshold": "1.0"
+        "duallcqp.primaldualthreshold": "1.0e-2"
     },
 }
 
