@@ -4,8 +4,9 @@ Code for pre-training a model using SimCLR on MNIST.
 Adapted from: <https://github.com/sthalles/SimCLR>
 """
 
-import pandas as pd
+import numpy as np
 import os
+import pandas as pd
 import sys
 import torch
 import torchvision
@@ -20,7 +21,7 @@ from mnist_addition.cli.neupsl_models.mlp import MLP
 
 
 class SimCLR(object):
-    def __init__(self, model, optimizer, scheduler, temperature, device):
+    def __init__(self, model, optimizer, scheduler, temperature, size, device):
         self.device = device
         self.model = model.to(self.device)
         self.optimizer = optimizer
@@ -28,30 +29,32 @@ class SimCLR(object):
         self.temperature = temperature
         self.criterion = torch.nn.CrossEntropyLoss().to(self.device)
 
-    def info_nce_loss(self, features):
-        labels = torch.cat([torch.arange(features.shape[0] / 2, device=self.device) for _ in range(2)], dim=0)
+        labels = torch.cat([torch.arange(size, device=self.device) for _ in range(2)], dim=0)
         labels = (labels.unsqueeze(0) == labels.unsqueeze(1)).float()
+        mask = torch.eye(labels.shape[0], dtype=torch.bool, device=self.device)
+        labels = labels[~mask].view(labels.shape[0], -1)
 
+        self.mask = mask
+        self.labels = labels.bool()
+        self.contrastive_output_labels = torch.zeros((2 * size),
+                                                     dtype=torch.long, device=self.device)
+
+    def info_nce_loss(self, features):
         features = torch.nn.functional.normalize(features, dim=1)
 
         similarity_matrix = torch.matmul(features, features.T)
-
-        # discard the main diagonal from both: labels and similarities matrix
-        mask = torch.eye(labels.shape[0], dtype=torch.bool, device=self.device)
-        labels = labels[~mask].view(labels.shape[0], -1)
-        similarity_matrix = similarity_matrix[~mask].view(similarity_matrix.shape[0], -1)
+        similarity_matrix = similarity_matrix[~self.mask].view(similarity_matrix.shape[0], -1)
 
         # select and combine multiple positives
-        positives = similarity_matrix[labels.bool()].view(labels.shape[0], -1)
+        positives = similarity_matrix[self.labels].view(self.labels.shape[0], -1)
 
         # select only the negatives
-        negatives = similarity_matrix[~labels.bool()].view(similarity_matrix.shape[0], -1)
+        negatives = similarity_matrix[~self.labels].view(similarity_matrix.shape[0], -1)
 
         logits = torch.cat([positives, negatives], dim=1)
-        labels = torch.zeros(logits.shape[0], dtype=torch.long, device=self.device)
 
         logits = logits / self.temperature
-        return logits, labels
+        return logits
 
     def train(self, train_loader, epochs):
         for epoch_counter in range(epochs):
@@ -62,8 +65,8 @@ class SimCLR(object):
                     images = images.to(self.device)
 
                     features = self.model(images)
-                    logits, labels = self.info_nce_loss(features)
-                    loss = self.criterion(logits, labels)
+                    logits = self.info_nce_loss(features)
+                    loss = self.criterion(logits, self.contrastive_output_labels)
 
                     self.optimizer.zero_grad()
 
@@ -135,13 +138,14 @@ def simclr_pretrain(data_folder):
     optimizer = torch.optim.Adam(model.parameters(), lr=3.0e-4)
     scheduler = torch.optim.lr_scheduler.StepLR(optimizer, 30, 0.9)
 
-    simclr_pretrain = SimCLR(model.to(device), optimizer, scheduler, temperature=0.07, device=device)
+    simclr_pretrain = SimCLR(model.to(device), optimizer, scheduler,
+                             temperature=0.07, size=min(1024, training_features.shape[0]), device=device)
 
     simclr_pretrain.train(
         torch.utils.data.DataLoader(mnist_dataset,
-                                    batch_size=1024, shuffle=True,
-                                    num_workers=2, pin_memory=True),
-        epochs=500)
+                                    batch_size=min(1024, training_features.shape[0]), shuffle=True,
+                                    num_workers=0, pin_memory=True, drop_last=True),
+        epochs=250)
 
     os.makedirs(f"{data_folder}/saved-networks", exist_ok=True)
 
