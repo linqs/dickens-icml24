@@ -24,22 +24,14 @@ STANDARD_EXPERIMENT_OPTIONS = {
 
 STANDARD_DATASET_OPTIONS = {
     "epinions": {
-        "duallcqp.regularizationparameter": "1.0e-3",
-        "admmreasoner.stepsize": "1.0e-1"
     },
     "citeseer": {
         "eval.closetruth": "true",
-        "duallcqp.regularizationparameter": "1.0e-1",
-        "admmreasoner.stepsize": "1.0"
     },
     "cora": {
         "eval.closetruth": "true",
-        "duallcqp.regularizationparameter": "1.0e-1",
-        "admmreasoner.stepsize": "1.0"
     },
     "yelp": {
-        "duallcqp.regularizationparameter": "1.0e-1",
-        "admmreasoner.stepsize": "1.0"
     }
 }
 
@@ -48,6 +40,7 @@ INFERENCE_METHODS = ["DualBCDInference", "ADMMInference"]
 INFERENCE_METHOD_OPTION_RANGES = {
     "DualBCDInference": {
         "runtime.inference.method": ["DualBCDInference"],
+        "duallcqp.regularizationparameter": ["10.0", "1.0"],
     },
     "ADMMInference": {
         "runtime.inference.method": ["ADMMInference"],
