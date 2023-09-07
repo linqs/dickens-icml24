@@ -35,11 +35,15 @@ STANDARD_DATASET_OPTIONS = {
     }
 }
 
-INFERENCE_METHODS = ["DualBCDInference", "ADMMInference"]
+INFERENCE_METHODS = ["DualBCDInference", "DistributedDualBCDInference", "ADMMInference"]
 
 INFERENCE_METHOD_OPTION_RANGES = {
     "DualBCDInference": {
         "runtime.inference.method": ["DualBCDInference"],
+        "duallcqp.regularizationparameter": ["10.0", "1.0"],
+    },
+    "DistributedDualBCDInference": {
+        "runtime.inference.method": ["DistributedDualBCDInference"],
         "duallcqp.regularizationparameter": ["10.0", "1.0"],
     },
     "ADMMInference": {

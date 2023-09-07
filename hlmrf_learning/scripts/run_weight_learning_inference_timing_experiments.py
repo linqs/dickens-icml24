@@ -49,7 +49,7 @@ STANDARD_DATASET_OPTIONS = {
 }
 
 FIRST_ORDER_WL_METHODS = ["SquaredError", "StructuredPerceptron"]
-FIRST_ORDER_WL_INFERENCE_METHODS = ["DualBCDInference", "ADMMInference"]
+FIRST_ORDER_WL_INFERENCE_METHODS = ["DualBCDInference", "DistributedDualBCDInference", "ADMMInference"]
 
 FIRST_ORDER_WL_METHODS_STANDARD_OPTION_RANGES = {
     "gradientdescent.negativelogregularization": ["1.0e-3"],
@@ -61,6 +61,10 @@ FIRST_ORDER_WL_INFERENCE_METHOD_OPTION_RANGES = {
     "DualBCDInference": {
         "weightlearning.inference": ["DualBCDInference"],
         "runtime.inference.method": ["DualBCDInference"],
+    },
+    "DistributedDualBCDInference": {
+        "weightlearning.inference": ["DistributedDualBCDInference"],
+        "runtime.inference.method": ["DistributedDualBCDInference"],
     },
     "ADMMInference": {
         "weightlearning.inference": ["ADMMInference"],
