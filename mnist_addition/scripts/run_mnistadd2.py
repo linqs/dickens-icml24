@@ -10,8 +10,8 @@ RESULTS_BASE_DIR = os.path.join(THIS_DIR, "../results")
 PERFORMANCE_RESULTS_DIR = os.path.join(RESULTS_BASE_DIR, "performance")
 
 SPLITS = ["0", "1", "2", "3", "4"]
-HYPERPARAMETER_SEARCH_TRAIN_SIZES = ["0600"]
-TRAIN_SIZES = ["0600", "1200", "6000"]
+HYPERPARAMETER_SEARCH_TRAIN_SIZES = ["00600"]
+TRAIN_SIZES = ["00600", "06000", "50000"]
 OVERLAPS = ["0.00"]
 
 STANDARD_EXPERIMENT_OPTIONS = {
@@ -81,7 +81,27 @@ NEURAL_NETWORK_OPTIONS = {
 
 BEST_HYPERPARAMETERS = {
     "Energy": {
-        "0600": {
+        "00600": {
+            "0.00": {
+                "runtime.learn.method": "Energy",
+                "duallcqp.regularizationparameter": "1.0e-3",
+                "gradientdescent.stepsize": "1.0e-14",
+                "gradientdescent.negativelogregularization": "1.0e-3",
+                "gradientdescent.negativeentropyregularization": "0.0",
+                "connectedcomponents.batchsize": "32",
+            }
+        },
+        "06000": {
+            "0.00": {
+                "runtime.learn.method": "Energy",
+                "duallcqp.regularizationparameter": "1.0e-3",
+                "gradientdescent.stepsize": "1.0e-14",
+                "gradientdescent.negativelogregularization": "1.0e-3",
+                "gradientdescent.negativeentropyregularization": "0.0",
+                "connectedcomponents.batchsize": "32",
+            }
+        },
+        "50000": {
             "0.00": {
                 "runtime.learn.method": "Energy",
                 "duallcqp.regularizationparameter": "1.0e-3",
@@ -93,7 +113,39 @@ BEST_HYPERPARAMETERS = {
         }
     },
     "BinaryCrossEntropy": {
-        "0600": {
+        "00600": {
+            "0.00": {
+                "runtime.learn.method": "BinaryCrossEntropy",
+                "minimizer.initialsquaredpenalty": "2.0",
+                "minimizer.objectivedifferencetolerance": "1.0e-3",
+                "minimizer.proxruleweight": "1.0e-2",
+                "minimizer.proxvaluestepsize": "1.0e-2",
+                "minimizer.squaredpenaltyincreaserate": "2.0",
+                "minimizer.energylosscoefficient": "10.0",
+                "duallcqp.regularizationparameter": "1.0e-3",
+                "gradientdescent.stepsize": "1.0e-14",
+                "gradientdescent.negativelogregularization": "1.0e-3",
+                "gradientdescent.negativeentropyregularization": "0.0",
+                "connectedcomponents.batchsize": "32",
+            }
+        },
+        "06000": {
+            "0.00": {
+                "runtime.learn.method": "BinaryCrossEntropy",
+                "minimizer.initialsquaredpenalty": "2.0",
+                "minimizer.objectivedifferencetolerance": "1.0e-3",
+                "minimizer.proxruleweight": "1.0e-2",
+                "minimizer.proxvaluestepsize": "1.0e-2",
+                "minimizer.squaredpenaltyincreaserate": "2.0",
+                "minimizer.energylosscoefficient": "10.0",
+                "duallcqp.regularizationparameter": "1.0e-3",
+                "gradientdescent.stepsize": "1.0e-14",
+                "gradientdescent.negativelogregularization": "1.0e-3",
+                "gradientdescent.negativeentropyregularization": "0.0",
+                "connectedcomponents.batchsize": "32",
+            }
+        },
+        "50000": {
             "0.00": {
                 "runtime.learn.method": "BinaryCrossEntropy",
                 "minimizer.initialsquaredpenalty": "2.0",
@@ -114,7 +166,7 @@ BEST_HYPERPARAMETERS = {
 
 BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
     "Energy": {
-        "0600": {
+        "00600": {
             "0.00": {
                 "dropout": "0.0",
                 "weight_decay": "1.0e-4",
@@ -125,10 +177,58 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
                 "transforms": "false",
                 "freeze_resnet": "false"
             }
-        }
+        },
+        "06000": {
+            "0.00": {
+                "dropout": "0.0",
+                "weight_decay": "1.0e-4",
+                "neural_learning_rate": "1.0e-4",
+                "learning_rate_decay_step": "30",
+                "learning_rate_decay": "1.0",
+                "temperature_decay_rate": "1.0e-3",
+                "transforms": "false",
+                "freeze_resnet": "false"
+            }
+        },
+        "50000": {
+            "0.00": {
+                "dropout": "0.0",
+                "weight_decay": "1.0e-4",
+                "neural_learning_rate": "1.0e-4",
+                "learning_rate_decay_step": "30",
+                "learning_rate_decay": "1.0",
+                "temperature_decay_rate": "1.0e-3",
+                "transforms": "false",
+                "freeze_resnet": "false"
+            }
+        },
     },
     "BinaryCrossEntropy": {
-        "0600": {
+        "00600": {
+            "0.00": {
+                "dropout": "0.0",
+                "weight_decay": "1.0e-4",
+                "neural_learning_rate": "1.0e-4",
+                "learning_rate_decay_step": "30",
+                "learning_rate_decay": "1.0",
+                "temperature_decay_rate": "1.0e-3",
+                "transforms": "false",
+                "freeze_resnet": "false"
+            }
+        },
+        "06000": {
+            "0.00": {
+                "dropout": "0.0",
+                "weight_decay": "1.0e-4",
+                "neural_learning_rate": "1.0e-4",
+                "learning_rate_decay_step": "30",
+                "learning_rate_decay": "1.0",
+                "temperature_decay_rate": "1.0e-3",
+                "transforms": "false",
+                "freeze_resnet": "false"
+            }
+        },
+        "50000": {
             "0.00": {
                 "dropout": "0.0",
                 "weight_decay": "1.0e-4",
