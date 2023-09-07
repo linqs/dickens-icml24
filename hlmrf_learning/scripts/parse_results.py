@@ -97,16 +97,21 @@ def main():
         for dataset_name in os.listdir(experiment_dir):
             dataset_dir = os.path.join(experiment_dir, dataset_name)
 
-            if experiment in ["dual_bcd_regularization", "inference"]:
+            if experiment == "dual_bcd_regularization":
                 model_results = parse_results(dataset_name, experiment, dataset_dir)
                 save_model_results(model_results, dataset_dir)
+
+            if experiment == "inference":
+                for reasoner_name in os.listdir(os.path.join(dataset_dir)):
+                    reasoner_dir = os.path.join(dataset_dir, reasoner_name)
+                    model_results = parse_results(dataset_name, experiment, reasoner_dir)
+                    save_model_results(model_results, dataset_dir)
 
             if experiment == "wl_inference_timing":
                 for reasoner_name in os.listdir(os.path.join(dataset_dir)):
                     reasoner_dir = os.path.join(dataset_dir, reasoner_name)
                     for learning_loss in os.listdir(reasoner_dir):
                         learning_loss_dir = os.path.join(reasoner_dir, learning_loss)
-                        print(learning_loss_dir)
                         model_results = parse_results(dataset_name, experiment, learning_loss_dir)
                         save_model_results(model_results, learning_loss_dir)
 
