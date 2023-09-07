@@ -169,7 +169,7 @@ def get_torch_device():
 def main():
     for experiment in ["mnist-1", "mnist-2"]:
         for split in [0, 1, 2, 3, 4]:
-            for train_size in ["0600", "1200", "6000"]:
+            for train_size in ["00600", "06000", "50000"]:
                 simclr_pretrain(f"{THIS_DIR}/../../data/experiment::{experiment}/split::{split}/train-size::{train_size}/overlap::0.00")
 
 
