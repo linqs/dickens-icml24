@@ -105,7 +105,7 @@ def main():
                 for reasoner_name in os.listdir(os.path.join(dataset_dir)):
                     reasoner_dir = os.path.join(dataset_dir, reasoner_name)
                     model_results = parse_results(dataset_name, experiment, reasoner_dir)
-                    save_model_results(model_results, dataset_dir)
+                    save_model_results(model_results, reasoner_name)
 
             if experiment == "wl_inference_timing":
                 for reasoner_name in os.listdir(os.path.join(dataset_dir)):
