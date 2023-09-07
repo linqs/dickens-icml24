@@ -29,7 +29,7 @@ STANDARD_EXPERIMENT_OPTIONS = {
 
 STANDARD_DATASET_OPTIONS = {
     "epinions": {
-        "duallcqp.regularizationparameter": "1.0e-3",
+        "duallcqp.regularizationparameter": "1.0e-1",
         "admmreasoner.stepsize": "1.0e-1",
     },
     "citeseer": {
