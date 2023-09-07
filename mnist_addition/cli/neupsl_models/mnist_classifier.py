@@ -1,13 +1,15 @@
 import torch
+import numpy as np
 
 
 class MNIST_Classifier(torch.nn.Module):
-    def __init__(self, backbone, mlp, temperature=1.0, device="cpu"):
+    def __init__(self, backbone, mlp, initial_temperature=1.0, device="cpu"):
         super(MNIST_Classifier, self).__init__()
 
         self.backbone = backbone
         self.mlp = mlp
-        self.temperature = temperature
+        self.initial_temperature = initial_temperature
+        self.temperature = initial_temperature
         self.center = 0.0
 
         self.device = device
@@ -50,3 +52,6 @@ class MNIST_Classifier(torch.nn.Module):
         # Set gradients w.r.t. y_hard gradients w.r.t. y
         y_hard = (y_hard - y).detach() + y
         return y_hard
+
+    def temperature_step(self, epoch, rate=1.0e-4):
+        self.temperature = max(0.5, self.initial_temperature * np.exp(-1.0 * rate * epoch))

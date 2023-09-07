@@ -31,6 +31,7 @@ class MNISTAdditionModel(pslpython.deeppsl.model.DeepModel):
         self._optimizer = None
         self._scheduler = None
 
+        self._epoch = 0
         self._iteration = 0
 
         self._features = None
@@ -45,6 +46,7 @@ class MNISTAdditionModel(pslpython.deeppsl.model.DeepModel):
         self._model = self._create_model(options=options).to(self._device)
 
         if self._application == 'learning':
+            self._epoch = 0
             self._iteration = 0
             if options['freeze_resnet'] == 'true':
                 self._optimizer = torch.optim.Adam(self._model.mlp.parameters(), lr=float(options['neural_learning_rate']), weight_decay=float(options['weight_decay']))
@@ -118,7 +120,9 @@ class MNISTAdditionModel(pslpython.deeppsl.model.DeepModel):
 
     def internal_epoch_end(self, options={}):
         if self._application == 'learning':
+            self._epoch += 1
             self._scheduler.step()
+            self._model.temperature_step(self._epoch, rate=float(options['temperature_decay_rate']))
 
         return {}
 

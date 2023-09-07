@@ -25,24 +25,24 @@ DATASET_CONFIG = {
     DATASET_MNIST_1: {
         "name": DATASET_MNIST_1,
         "class-size": 10,
-        "train-sizes": [40, 60, 80, 600],
+        "train-sizes": [600, 1200, 6000],
         "valid-size": 1000,
         "test-size": 1000,
         "num-splits": 5,
         "num-digits": 1,
         "max-sum": 18,
-        "overlaps": [0.0, 0.5, 1.0],
+        "overlaps": [0.0],
     },
     DATASET_MNIST_2: {
         "name": DATASET_MNIST_2,
         "class-size": 10,
-        "train-sizes": [40, 60, 80, 600, 6000],
-        "valid-size": 100,
+        "train-sizes": [600, 1200, 6000],
+        "valid-size": 1000,
         "test-size": 1000,
         "num-splits": 5,
         "num-digits": 2,
         "max-sum": 198,
-        "overlaps": [0.0, 0.5, 1.0],
+        "overlaps": [0.0],
     }
 }
 
