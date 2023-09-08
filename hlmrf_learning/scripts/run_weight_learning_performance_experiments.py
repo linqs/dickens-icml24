@@ -16,11 +16,15 @@ STANDARD_EXPERIMENT_OPTIONS = {
     "inference.normalize": "false",
     "weightlearning.inference": "DistributedDualBCDInference",
     "runtime.inference.method": "DistributedDualBCDInference",
-    "gradientdescent.numsteps": "2500",
+    "gradientdescent.numsteps": "500",
     "gradientdescent.scalestepsize": "false",
     "gradientdescent.batchgenerator": "FullBatchGenerator",
     "gradientdescent.movementbreak": "true",
     "gradientdescent.movementtolerance": "1.0e-3",
+    "gradientdescent.trainingcomputeperiod": "5",
+    "gradientdescent.trainingevaluationbreak": "true",
+    "gradientdescent.trainingevaluationpatience": "25",
+    "gradientdescent.stopcomputeperiod": "5",
     "duallcqp.computeperiod": "10",
     "duallcqp.maxiterations": "10000"
 }
