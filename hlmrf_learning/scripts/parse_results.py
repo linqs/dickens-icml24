@@ -19,6 +19,9 @@ DATASET_NAME_OUTPUT_KEYS = {
     },
     "yelp": {
         "test_eval": {"name": "MAE", "key": "Results -- MAE:"}
+    },
+    "drug-drug-interaction": {
+        "test_eval": {"name": "AUROC", "key": "Results -- AUROC:"}
     }
 }
 

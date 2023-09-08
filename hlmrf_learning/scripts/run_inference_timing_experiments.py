@@ -16,7 +16,7 @@ STANDARD_EXPERIMENT_OPTIONS = {
     "admmreasoner.primaldualbreak": "false",
     "duallcqp.primaldualbreak": "false",
     "duallcqp.computeperiod": "1",
-    "duallcqp.maxiterations": "10000",
+    "duallcqp.maxiterations": "25000",
     "reasoner.variablemovementbreak": "true",
     "reasoner.variablemovementnorm": "Infinity",
     "reasoner.variablemovementtolerance": "1.0e-3"
@@ -32,6 +32,8 @@ STANDARD_DATASET_OPTIONS = {
         "eval.closetruth": "true",
     },
     "yelp": {
+    },
+    "drug-drug-interaction": {
     }
 }
 

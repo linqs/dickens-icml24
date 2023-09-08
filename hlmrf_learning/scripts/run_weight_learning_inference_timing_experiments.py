@@ -17,7 +17,7 @@ STANDARD_EXPERIMENT_OPTIONS = {
     "admmreasoner.primaldualbreak": "false",
     "duallcqp.primaldualbreak": "false",
     "duallcqp.computeperiod": "1",
-    "duallcqp.maxiterations": "10000",
+    "duallcqp.maxiterations": "25000",
     "reasoner.variablemovementbreak": "true",
     "reasoner.variablemovementnorm": "Infinity",
     "reasoner.variablemovementtolerance": "1.0e-3",
@@ -43,6 +43,10 @@ STANDARD_DATASET_OPTIONS = {
         "admmreasoner.stepsize": "10.0",
     },
     "yelp": {
+        "duallcqp.regularizationparameter": "1.0e-1",
+        "admmreasoner.stepsize": "1.0",
+    },
+    "drug-drug-interaction": {
         "duallcqp.regularizationparameter": "1.0e-1",
         "admmreasoner.stepsize": "1.0",
     },

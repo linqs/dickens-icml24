@@ -15,7 +15,7 @@ STANDARD_EXPERIMENT_OPTIONS = {
     "runtime.learn": "false",
     "runtime.inference.method": "DualBCDInference",
     "duallcqp.computeperiod": "10",
-    "duallcqp.maxiterations": "10000"
+    "duallcqp.maxiterations": "25000"
 }
 
 STANDARD_DATASET_OPTIONS = {
@@ -31,6 +31,9 @@ STANDARD_DATASET_OPTIONS = {
         "duallcqp.primaldualthreshold": "0.1"
     },
     "yelp": {
+        "duallcqp.primaldualthreshold": "0.1"
+    },
+    "drug-drug-interaction": {
         "duallcqp.primaldualthreshold": "0.1"
     },
 }

@@ -4,7 +4,7 @@
 
 export PYTORCH_ENABLE_MPS_FALLBACK=1
 
-PSL_DATASETS='epinions citeseer cora yelp'
+PSL_DATASETS='epinions citeseer cora yelp drug-drug-interaction'
 
 function main() {
     trap exit SIGINT
