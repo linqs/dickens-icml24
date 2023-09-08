@@ -44,27 +44,35 @@ STANDARD_DATASET_OPTIONS = {
     "yelp": {
         "duallcqp.primaldualthreshold": "1.0e-2"
     },
+    "drug-drug-interaction": {
+        "duallcqp.primaldualthreshold": "1.0e-2"
+    }
 }
 
 DATASET_OPTION_RANGES = {
     "epinions": {
         "gradientdescent.stepsize": ["1.0e-3", "1.0e-2"],
-        "duallcqp.regularizationparameter": ["1.0e-3"],
+        "duallcqp.regularizationparameter": ["1.0e-2"],
         "minimizer.objectivedifferencetolerance": ["0.1"]
     },
     "citeseer": {
         "gradientdescent.stepsize": ["1.0e-3", "1.0e-2"],
-        "duallcqp.regularizationparameter": ["1.0e-3"],
+        "duallcqp.regularizationparameter": ["1.0e-2"],
         "minimizer.objectivedifferencetolerance": ["1.0"],
     },
     "cora": {
         "gradientdescent.stepsize": ["1.0e-3", "1.0e-2"],
-        "duallcqp.regularizationparameter": ["1.0e-3"],
+        "duallcqp.regularizationparameter": ["1.0e-2"],
         "minimizer.objectivedifferencetolerance": ["1.0"]
     },
     "yelp": {
         "gradientdescent.stepsize": ["1.0e-3", "1.0e-2"],
-        "duallcqp.regularizationparameter": ["1.0e-3"],
+        "duallcqp.regularizationparameter": ["1.0e-2"],
+        "minimizer.objectivedifferencetolerance": ["1.0"]
+    },
+    "drug-drug-interaction": {
+        "gradientdescent.stepsize": ["1.0e-3", "1.0e-2"],
+        "duallcqp.regularizationparameter": ["1.0e-2"],
         "minimizer.objectivedifferencetolerance": ["1.0"]
     }
 }
