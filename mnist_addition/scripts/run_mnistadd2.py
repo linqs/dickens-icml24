@@ -64,6 +64,7 @@ FIRST_ORDER_WL_METHODS_OPTION_RANGES = {
         "minimizer.proxvaluestepsize": ["1.0e-2", "1.0e-3"],
         "minimizer.squaredpenaltyincreaserate": ["2.0"],
         "minimizer.objectivedifferencetolerance": ["1.0e-3"],
+        "minimizer.finalparametermovementconvergencetolerance": ["1.0e-1"],
         "minimizer.proxruleweight": ["1.0e-2", "1.0e-3"]
     }
 }
@@ -118,6 +119,7 @@ BEST_HYPERPARAMETERS = {
                 "runtime.learn.method": "BinaryCrossEntropy",
                 "minimizer.initialsquaredpenalty": "2.0",
                 "minimizer.objectivedifferencetolerance": "1.0e-3",
+                "minimizer.finalparametermovementconvergencetolerance": "1.0e-1",
                 "minimizer.proxruleweight": "1.0e-2",
                 "minimizer.proxvaluestepsize": "1.0e-2",
                 "minimizer.squaredpenaltyincreaserate": "2.0",
@@ -134,6 +136,7 @@ BEST_HYPERPARAMETERS = {
                 "runtime.learn.method": "BinaryCrossEntropy",
                 "minimizer.initialsquaredpenalty": "2.0",
                 "minimizer.objectivedifferencetolerance": "1.0e-3",
+                "minimizer.finalparametermovementconvergencetolerance": "1.0e-1",
                 "minimizer.proxruleweight": "1.0e-2",
                 "minimizer.proxvaluestepsize": "1.0e-2",
                 "minimizer.squaredpenaltyincreaserate": "2.0",
@@ -150,6 +153,7 @@ BEST_HYPERPARAMETERS = {
                 "runtime.learn.method": "BinaryCrossEntropy",
                 "minimizer.initialsquaredpenalty": "2.0",
                 "minimizer.objectivedifferencetolerance": "1.0e-3",
+                "minimizer.finalparametermovementconvergencetolerance": "1.0e-1",
                 "minimizer.proxruleweight": "1.0e-2",
                 "minimizer.proxvaluestepsize": "1.0e-2",
                 "minimizer.squaredpenaltyincreaserate": "2.0",
