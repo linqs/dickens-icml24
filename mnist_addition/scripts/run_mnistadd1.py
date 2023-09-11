@@ -11,7 +11,7 @@ PERFORMANCE_RESULTS_DIR = os.path.join(RESULTS_BASE_DIR, "performance")
 
 SPLITS = ["0", "1", "2", "3", "4"]
 HYPERPARAMETER_SEARCH_TRAIN_SIZES = ["0600"]
-TRAIN_SIZES = ["0600", "1200", "6000"]
+TRAIN_SIZES = ["00600", "06000", "50000"]
 OVERLAPS = ["0.00"]
 
 STANDARD_EXPERIMENT_OPTIONS = {
@@ -64,6 +64,7 @@ FIRST_ORDER_WL_METHODS_OPTION_RANGES = {
         "minimizer.proxvaluestepsize": ["1.0e-2", "1.0e-3"],
         "minimizer.squaredpenaltyincreaserate": ["2.0"],
         "minimizer.objectivedifferencetolerance": ["1.0e-3"],
+        "minimizer.finalparametermovementconvergencetolerance": ["1.0e-1"],
         "minimizer.proxruleweight": ["1.0e-2", "1.0e-3"]
     }
 }
@@ -118,6 +119,7 @@ BEST_HYPERPARAMETERS = {
                 "runtime.learn.method": "BinaryCrossEntropy",
                 "minimizer.initialsquaredpenalty": "2.0",
                 "minimizer.objectivedifferencetolerance": "1.0e-3",
+                "minimizer.finalparametermovementconvergencetolerance": "1.0e-1",
                 "minimizer.proxruleweight": "1.0e-2",
                 "minimizer.proxvaluestepsize": "1.0e-2",
                 "minimizer.squaredpenaltyincreaserate": "2.0",
@@ -134,6 +136,7 @@ BEST_HYPERPARAMETERS = {
                 "runtime.learn.method": "BinaryCrossEntropy",
                 "minimizer.initialsquaredpenalty": "2.0",
                 "minimizer.objectivedifferencetolerance": "1.0e-3",
+                "minimizer.finalparametermovementconvergencetolerance": "1.0e-1",
                 "minimizer.proxruleweight": "1.0e-2",
                 "minimizer.proxvaluestepsize": "1.0e-2",
                 "minimizer.squaredpenaltyincreaserate": "2.0",
@@ -150,6 +153,7 @@ BEST_HYPERPARAMETERS = {
                 "runtime.learn.method": "BinaryCrossEntropy",
                 "minimizer.initialsquaredpenalty": "2.0",
                 "minimizer.objectivedifferencetolerance": "1.0e-3",
+                "minimizer.finalparametermovementconvergencetolerance": "1.0e-1",
                 "minimizer.proxruleweight": "1.0e-2",
                 "minimizer.proxvaluestepsize": "1.0e-2",
                 "minimizer.squaredpenaltyincreaserate": "2.0",
@@ -170,10 +174,10 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
             "0.00": {
                 "dropout": "0.0",
                 "weight_decay": "1.0e-4",
-                "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
+                "temperature_decay_rate": "1.0e-3",
                 "transforms": "false",
                 "freeze_resnet": "false"
             }
@@ -182,10 +186,10 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
             "0.00": {
                 "dropout": "0.0",
                 "weight_decay": "1.0e-4",
-                "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
+                "temperature_decay_rate": "1.0e-3",
                 "transforms": "false",
                 "freeze_resnet": "false"
             }
@@ -194,10 +198,10 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
             "0.00": {
                 "dropout": "0.0",
                 "weight_decay": "1.0e-4",
-                "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
+                "temperature_decay_rate": "1.0e-3",
                 "transforms": "false",
                 "freeze_resnet": "false"
             }
@@ -208,10 +212,10 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
             "0.00": {
                 "dropout": "0.0",
                 "weight_decay": "0.0",
-                "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
+                "temperature_decay_rate": "1.0e-3",
                 "transforms": "false",
                 "freeze_resnet": "false"
             }
@@ -220,10 +224,10 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
             "0.00": {
                 "dropout": "0.0",
                 "weight_decay": "0.0",
-                "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
+                "temperature_decay_rate": "1.0e-3",
                 "transforms": "false",
                 "freeze_resnet": "false"
             }
@@ -232,10 +236,10 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
             "0.00": {
                 "dropout": "0.0",
                 "weight_decay": "0.0",
-                "loss_alpha": "1.0",
                 "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
+                "temperature_decay_rate": "1.0e-3",
                 "transforms": "false",
                 "freeze_resnet": "false"
             }
@@ -427,6 +431,9 @@ def run_first_order_wl_methods_hyperparamter_search():
                                                                                          **options,
                                                                                          "runtime.learn.output.model.path": "./mnist-addition_learned.psl"}})
 
+                                                        dataset_json["predicates"]["NeuralClassifier/2"]["options"]["experiment"] = "mnist-1"
+                                                        dataset_json["predicates"]["NeuralClassifier/2"]["options"]["split"] = split
+                                                        dataset_json["predicates"]["NeuralClassifier/2"]["options"]["train_size"] = train_size
                                                         dataset_json["predicates"]["NeuralClassifier/2"]["options"]["dropout"] = dropout
                                                         dataset_json["predicates"]["NeuralClassifier/2"]["options"]["weight_decay"] = weight_decay
                                                         dataset_json["predicates"]["NeuralClassifier/2"]["options"]["freeze_resnet"] = freeze_resnet
@@ -480,7 +487,6 @@ def run_first_order_wl_methods():
                 options = BEST_HYPERPARAMETERS[method][train_size][overlap]
                 dropout = BEST_NEURAL_NETWORK_HYPERPARAMETERS[method][train_size][overlap]["dropout"]
                 weight_decay = BEST_NEURAL_NETWORK_HYPERPARAMETERS[method][train_size][overlap]["weight_decay"]
-                loss_alpha = BEST_NEURAL_NETWORK_HYPERPARAMETERS[method][train_size][overlap]["loss_alpha"]
                 freeze_resnet = BEST_NEURAL_NETWORK_HYPERPARAMETERS[method][train_size][overlap]["freeze_resnet"]
                 transforms = BEST_NEURAL_NETWORK_HYPERPARAMETERS[method][train_size][overlap]["transforms"]
                 neural_learning_rate = BEST_NEURAL_NETWORK_HYPERPARAMETERS[method][train_size][overlap]["neural_learning_rate"]
@@ -516,6 +522,9 @@ def run_first_order_wl_methods():
                                                      **options,
                                                      "runtime.learn.output.model.path": "./mnist-addition_learned.psl"}})
 
+                    dataset_json["predicates"]["NeuralClassifier/2"]["options"]["experiment"] = "mnist-1"
+                    dataset_json["predicates"]["NeuralClassifier/2"]["options"]["split"] = split
+                    dataset_json["predicates"]["NeuralClassifier/2"]["options"]["train_size"] = train_size
                     dataset_json["predicates"]["NeuralClassifier/2"]["options"]["dropout"] = dropout
                     dataset_json["predicates"]["NeuralClassifier/2"]["options"]["weight_decay"] = weight_decay
                     dataset_json["predicates"]["NeuralClassifier/2"]["options"]["freeze_resnet"] = freeze_resnet
