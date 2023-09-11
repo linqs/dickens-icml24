@@ -10,7 +10,7 @@ RESULTS_BASE_DIR = os.path.join(THIS_DIR, "../results")
 PERFORMANCE_RESULTS_DIR = os.path.join(RESULTS_BASE_DIR, "performance")
 
 SPLITS = ["0", "1", "2", "3", "4"]
-HYPERPARAMETER_SEARCH_TRAIN_SIZES = ["0600"]
+HYPERPARAMETER_SEARCH_TRAIN_SIZES = ["00600"]
 TRAIN_SIZES = ["00600", "06000", "50000"]
 OVERLAPS = ["0.00"]
 
@@ -60,7 +60,7 @@ FIRST_ORDER_WL_METHODS_OPTION_RANGES = {
     "BinaryCrossEntropy": {
         "runtime.learn.method": ["BinaryCrossEntropy"],
         "minimizer.initialsquaredpenalty": ["2.0"],
-        "minimizer.energylosscoefficient": ["0.0", "0.1", "1.0", "10.0"],
+        "minimizer.energylosscoefficient": ["0.1", "1.0", "10.0"],
         "minimizer.proxvaluestepsize": ["1.0e-2", "1.0e-3"],
         "minimizer.squaredpenaltyincreaserate": ["2.0"],
         "minimizer.objectivedifferencetolerance": ["1.0e-3"],
@@ -558,8 +558,8 @@ def run_first_order_wl_methods():
 
 
 def main():
-    # run_first_order_wl_methods_hyperparamter_search()
-    run_first_order_wl_methods()
+    run_first_order_wl_methods_hyperparamter_search()
+    # run_first_order_wl_methods()
 
 
 if __name__ == '__main__':

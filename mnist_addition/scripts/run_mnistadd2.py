@@ -560,7 +560,7 @@ def run_first_order_wl_methods():
 
 def main():
     run_first_order_wl_methods_hyperparamter_search()
-    run_first_order_wl_methods()
+    # run_first_order_wl_methods()
 
 
 if __name__ == '__main__':
