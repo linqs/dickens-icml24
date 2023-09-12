@@ -66,6 +66,7 @@ class MNISTAdditionModel(pslpython.deeppsl.model.DeepModel):
                 ])
         elif self._application == 'inference':
             self._model.load_state_dict(torch.load(options['save-path']))
+            self._model.temperature = 0.5
 
         return {}
 

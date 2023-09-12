@@ -65,17 +65,17 @@ FIRST_ORDER_WL_METHODS_OPTION_RANGES = {
         "minimizer.squaredpenaltyincreaserate": ["2.0"],
         "minimizer.objectivedifferencetolerance": ["1.0e-3"],
         "minimizer.finalparametermovementconvergencetolerance": ["1.0e-1"],
-        "minimizer.proxruleweight": ["1.0e-2", "1.0e-3"]
+        "minimizer.proxruleweight": ["1.0e-1", "1.0e-2", "1.0e-3"]
     }
 }
 
 NEURAL_NETWORK_OPTIONS = {
     "dropout": ["0.0"],
-    "weight_decay": ["1.0e-4"],
+    "weight_decay": ["1.0e-6"],
     "neural_learning_rate": ["1.0e-3", "1.0e-4"],
     "learning_rate_decay_step": ["30"],
     "learning_rate_decay": ["1.0"],
-    "temperature_decay_rate": ["1.0e-2", "1.0e-3"],
+    "temperature_decay_rate": ["1.0e-3"],
     "transforms": ["false"],
     "freeze_resnet": ["false"]
 }
