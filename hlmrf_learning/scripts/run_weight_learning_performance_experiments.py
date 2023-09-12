@@ -157,7 +157,7 @@ def run_first_order_wl_methods(dataset: str):
                                          **DATASET_OPTION_RANGES[dataset]}
 
     for method in FIRST_ORDER_WL_METHODS:
-        for split in range(0, 5):
+        for split in range(0, 1):
             method_out_dir = os.path.join(base_out_dir, "{}/split::{}".format(method, split))
             os.makedirs(method_out_dir, exist_ok=True)
 
