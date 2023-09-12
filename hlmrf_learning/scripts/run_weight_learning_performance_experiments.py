@@ -144,7 +144,7 @@ def run_first_order_wl_methods(dataset: str):
     original_options = dataset_original_json["options"]
 
     # If the dataset is epinions, citeseer, or cora, then we need to load the extended json file.
-    if dataset in ["epinions", "citeseer", "cora"]:
+    if dataset in ["citeseer", "cora"]:
         dataset_extended_json_path = os.path.join(PSL_EXTENDED_EXAMPLES_DIR, "{}/cli/{}.json".format(dataset, dataset))
 
         with open(dataset_extended_json_path, "r") as file:
