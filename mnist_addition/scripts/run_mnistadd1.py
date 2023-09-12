@@ -389,7 +389,7 @@ def run_first_order_wl_methods_hyperparamter_search():
         method_out_dir = os.path.join(base_out_dir, method)
         os.makedirs(method_out_dir, exist_ok=True)
 
-        for train_size in TRAIN_SIZES:
+        for train_size in HYPERPARAMETER_SEARCH_TRAIN_SIZES:
             for overlap in OVERLAPS:
                 for split in ["0"]:
                     split_out_dir = os.path.join(method_out_dir, "split::{}/train-size::{}/overlap::{}".format(split, train_size, overlap))
