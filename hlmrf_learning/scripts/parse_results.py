@@ -9,25 +9,27 @@ RESULTS_BASE_DIR = os.path.join(THIS_DIR, "../results")
 
 DATASET_NAME_OUTPUT_KEYS = {
     "epinions": {
-        "test_eval": {"name": "AUROC", "key": "Results -- AUROC:"}
+        "test_eval": {"names": ["AUROC"], "keys": ["Results -- AUROC:"]}
     },
     "citeseer": {
-        "test_eval": {"name": "Accuracy", "key": "Results -- Categorical Accuracy:"}
+        "test_eval": {"names": ["Accuracy"], "keys": ["Results -- Categorical Accuracy:"]}
     },
     "cora": {
-        "test_eval": {"name": "Accuracy", "key": "Results -- Categorical Accuracy:"}
+        "test_eval": {"names": ["Accuracy"], "keys": ["Results -- Categorical Accuracy:"]}
     },
     "yelp": {
-        "test_eval": {"name": "MAE", "key": "Results -- MAE:"}
+        "test_eval": {"names": ["MAE"], "keys": ["Results -- MAE:"]}
     },
     "drug-drug-interaction": {
-        "test_eval": {"name": "AUROC", "key": "Results -- AUROC:"}
+        "test_eval": {"names": ["AUROC"], "keys": ["Results -- AUROC:"]}
     },
     "stance-4forums": {
-        "test_eval": {"name": "AUROC", "key": "ISPROAUTH, Results -- AUROC:"}
+        "test_eval": {"names": ["ISPROAUTH-AUROC", "DISAGREES-AUROC"],
+                      "keys": ["ISPROAUTH, Results -- AUROC:", "DISAGREES, Results -- AUROC:"]}
     },
     "stance-createdebate": {
-        "test_eval": {"name": "AUROC", "key": "ISPROAUTH, Results -- AUROC:"}
+        "test_eval": {"names": ["ISPROAUTH-AUROC", "DISAGREES-AUROC"],
+                      "keys": ["ISPROAUTH, Results -- AUROC:", "DISAGREES, Results -- AUROC:"]}
     }
 }
 
@@ -43,16 +45,24 @@ def parse_experiment_output(dataset_name: str, experiment: str, output_file_path
             if "Weight Learning Objective:" in line:
                 experiment_output["learning_objective"].append(float(re.search(r"Weight Learning Objective: (-?\d+.\d+|Infinity|NaN)", line).group(1)))
 
-            if DATASET_NAME_OUTPUT_KEYS[dataset_name]["test_eval"]["key"] in line:
-                experiment_output[DATASET_NAME_OUTPUT_KEYS[dataset_name]["test_eval"]["name"]] = float(
-                    re.search(r"{} (-?\d+.\d+)".format(DATASET_NAME_OUTPUT_KEYS[dataset_name]["test_eval"]["key"]), line).group(1)
-                )
+            for i, key in enumerate(DATASET_NAME_OUTPUT_KEYS[dataset_name]["test_eval"]["keys"]):
+                if key in line:
+                    experiment_output[DATASET_NAME_OUTPUT_KEYS[dataset_name]["test_eval"]["names"][i]] = float(
+                        re.search(r"{} (-?\d+.\d+)".format(key), line).group(1)
+                    )
 
-    if DATASET_NAME_OUTPUT_KEYS[dataset_name]["test_eval"]["name"] not in experiment_output:
+    experiment_finished = False
+    for name in DATASET_NAME_OUTPUT_KEYS[dataset_name]["test_eval"]["names"]:
+        if name in experiment_output:
+            experiment_finished = True
+            break
+
+    if not experiment_finished:
         experiment_output["wl_num_steps"] = None
         experiment_output["inference_time"] = None
         experiment_output["total_inference_time"] = None
-        experiment_output[DATASET_NAME_OUTPUT_KEYS[dataset_name]["test_eval"]["name"]] = None
+        for name in DATASET_NAME_OUTPUT_KEYS[dataset_name]["test_eval"]["names"]:
+            experiment_output[name] = None
         return experiment_output
 
     experiment_output["wl_num_steps"] = len(experiment_output["learning_objective"])
