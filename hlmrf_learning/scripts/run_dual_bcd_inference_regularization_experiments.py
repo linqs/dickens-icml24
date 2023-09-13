@@ -16,32 +16,32 @@ STANDARD_EXPERIMENT_OPTIONS = {
     "runtime.learn": "false",
     "runtime.inference.method": "DualBCDInference",
     "duallcqp.computeperiod": "10",
-    "duallcqp.maxiterations": "25000"
+    "duallcqp.maxiterations": "50000"
 }
 
 STANDARD_DATASET_OPTIONS = {
     "epinions": {
-        "duallcqp.primaldualthreshold": "0.1"
+        "duallcqp.primaldualthreshold": "0.01"
     },
     "citeseer": {
         "eval.closetruth": "true",
-        "duallcqp.primaldualthreshold": "0.1"
+        "duallcqp.primaldualthreshold": "0.01"
     },
     "cora": {
         "eval.closetruth": "true",
-        "duallcqp.primaldualthreshold": "0.1"
+        "duallcqp.primaldualthreshold": "0.01"
     },
     "yelp": {
-        "duallcqp.primaldualthreshold": "0.1"
+        "duallcqp.primaldualthreshold": "0.01"
     },
     "drug-drug-interaction": {
-        "duallcqp.primaldualthreshold": "0.1"
+        "duallcqp.primaldualthreshold": "0.01"
     },
     "stance-4forums": {
-        "duallcqp.primaldualthreshold": "0.1"
+        "duallcqp.primaldualthreshold": "0.01"
     },
     "stance-createdebate": {
-        "duallcqp.primaldualthreshold": "0.1"
+        "duallcqp.primaldualthreshold": "0.01"
     }
 }
 
