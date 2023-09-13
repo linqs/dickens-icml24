@@ -19,11 +19,10 @@ STANDARD_EXPERIMENT_OPTIONS = {
     "gradientdescent.numsteps": "500",
     "gradientdescent.scalestepsize": "false",
     "gradientdescent.batchgenerator": "FullBatchGenerator",
-    "gradientdescent.movementbreak": "true",
-    "gradientdescent.movementtolerance": "1.0e-3",
+    "gradientdescent.movementbreak": "false",
     "gradientdescent.trainingcomputeperiod": "5",
     "gradientdescent.trainingevaluationbreak": "true",
-    "gradientdescent.trainingevaluationpatience": "25",
+    "gradientdescent.trainingevaluationpatience": "50",
     "gradientdescent.stopcomputeperiod": "5",
     "duallcqp.computeperiod": "10",
     "duallcqp.maxiterations": "10000"
@@ -45,6 +44,12 @@ STANDARD_DATASET_OPTIONS = {
         "duallcqp.primaldualthreshold": "1.0e-2"
     },
     "drug-drug-interaction": {
+        "duallcqp.primaldualthreshold": "1.0e-2"
+    },
+    "stance-4forums": {
+        "duallcqp.primaldualthreshold": "1.0e-2"
+    },
+    "stance-createdebate": {
         "duallcqp.primaldualthreshold": "1.0e-2"
     }
 }
@@ -71,6 +76,16 @@ DATASET_OPTION_RANGES = {
         "minimizer.objectivedifferencetolerance": ["1.0"]
     },
     "drug-drug-interaction": {
+        "gradientdescent.stepsize": ["1.0e-3", "1.0e-2"],
+        "duallcqp.regularizationparameter": ["1.0e-2"],
+        "minimizer.objectivedifferencetolerance": ["1.0"]
+    },
+    "stance-4forums": {
+        "gradientdescent.stepsize": ["1.0e-3", "1.0e-2"],
+        "duallcqp.regularizationparameter": ["1.0e-2"],
+        "minimizer.objectivedifferencetolerance": ["1.0"]
+    },
+    "stance-createdebate": {
         "gradientdescent.stepsize": ["1.0e-3", "1.0e-2"],
         "duallcqp.regularizationparameter": ["1.0e-2"],
         "minimizer.objectivedifferencetolerance": ["1.0"]
@@ -141,10 +156,11 @@ def run_first_order_wl_methods(dataset: str):
     with open(dataset_json_path, "r") as file:
         dataset_original_json = json.load(file)
 
-    original_options = dataset_original_json["options"]
+    original_options = {}
+    if "options" in dataset_original_json:
+        original_options = dataset_original_json["options"]
 
-    # If the dataset is epinions, citeseer, or cora, then we need to load the extended json file.
-    if dataset in ["citeseer", "cora"]:
+    if dataset in ["stance-4forums", "stance-createdebate", "citeseer", "cora"]:
         dataset_extended_json_path = os.path.join(PSL_EXTENDED_EXAMPLES_DIR, "{}/cli/{}.json".format(dataset, dataset))
 
         with open(dataset_extended_json_path, "r") as file:
@@ -221,7 +237,7 @@ def run_first_order_wl_methods(dataset: str):
                 # Reset the json file.
                 dataset_original_json.update({"options": original_options})
                 with open(dataset_json_path, "w") as file:
-                    json.dump(dataset_original_json, file)
+                    json.dump(dataset_original_json, file, indent=4)
 
                 print("Finished experiment: Dataset:{}, Weight Learning Method: {}.".format(dataset, method))
 

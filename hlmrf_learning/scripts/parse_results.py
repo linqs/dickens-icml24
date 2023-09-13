@@ -22,6 +22,12 @@ DATASET_NAME_OUTPUT_KEYS = {
     },
     "drug-drug-interaction": {
         "test_eval": {"name": "AUROC", "key": "Results -- AUROC:"}
+    },
+    "stance-4forums": {
+        "test_eval": {"name": "AUROC", "key": "ISPROAUTH, Results -- AUROC:"}
+    },
+    "stance-createdebate": {
+        "test_eval": {"name": "AUROC", "key": "ISPROAUTH, Results -- AUROC:"}
     }
 }
 
