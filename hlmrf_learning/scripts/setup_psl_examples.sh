@@ -8,10 +8,10 @@ readonly PSL_EXAMPLES_DIR="${BASE_DIR}/psl-examples"
 readonly PSL_EXAMPLES_REPO='https://github.com/linqs/psl-examples.git'
 readonly PSL_EXAMPLES_BRANCH='main'
 
-#readonly AVAILABLE_MEM_KB=$(cat /proc/meminfo | grep 'MemTotal' | sed 's/^[^0-9]\+\([0-9]\+\)[^0-9]\+$/\1/')
-## Floor by multiples of 5 and then reserve an additional 5 GB.
-#readonly JAVA_MEM_GB=$((${AVAILABLE_MEM_KB} / 1024 / 1024 / 5 * 5 - 5))
-readonly JAVA_MEM_GB=16
+readonly AVAILABLE_MEM_KB=$(cat /proc/meminfo | grep 'MemTotal' | sed 's/^[^0-9]\+\([0-9]\+\)[^0-9]\+$/\1/')
+# Floor by multiples of 5 and then reserve an additional 5 GB.
+readonly JAVA_MEM_GB=$((${AVAILABLE_MEM_KB} / 1024 / 1024 / 5 * 5 - 5))
+#readonly JAVA_MEM_GB=16
 
 function fetch_psl_examples() {
    if [ -e ${PSL_EXAMPLES_DIR} ]; then
