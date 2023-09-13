@@ -8,6 +8,7 @@ import sys
 THIS_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)))
 RESULTS_BASE_DIR = os.path.join(THIS_DIR, "../results")
 PSL_EXAMPLES_DIR = os.path.join(THIS_DIR, "../psl-examples")
+PSL_EXTENDED_EXAMPLES_DIR = os.path.join(THIS_DIR, "../psl-extended-examples")
 EXPERIMENT_RESULTS_DIR = os.path.join(RESULTS_BASE_DIR, "dual_bcd_regularization")
 
 STANDARD_EXPERIMENT_OPTIONS = {
@@ -36,6 +37,12 @@ STANDARD_DATASET_OPTIONS = {
     "drug-drug-interaction": {
         "duallcqp.primaldualthreshold": "0.1"
     },
+    "stance-4forums": {
+        "duallcqp.primaldualthreshold": "0.1"
+    },
+    "stance-createdebate": {
+        "duallcqp.primaldualthreshold": "0.1"
+    }
 }
 
 INFERENCE_OPTION_RANGES = {
@@ -68,10 +75,21 @@ def run_inference_params(dataset: str):
     dataset_cli_path = os.path.join(PSL_EXAMPLES_DIR, "{}/cli".format(dataset))
     dataset_json_path = os.path.join(dataset_cli_path, "{}.json".format(dataset))
 
-    dataset_json = None
+    dataset_original_json = None
     with open(dataset_json_path, "r") as file:
-        dataset_json = json.load(file)
-    original_options = dataset_json["options"]
+        dataset_original_json = json.load(file)
+
+    original_options = {}
+    if "options" in dataset_original_json:
+        original_options = dataset_original_json["options"]
+
+    if dataset in ["stance-4forums", "stance-createdebate"]:
+        dataset_extended_json_path = os.path.join(PSL_EXTENDED_EXAMPLES_DIR, "{}/cli/{}.json".format(dataset, dataset))
+
+        with open(dataset_extended_json_path, "r") as file:
+            dataset_json = json.load(file)
+    else:
+        dataset_json = dataset_original_json
 
     standard_experiment_option_ranges = {**INFERENCE_OPTION_RANGES}
 
@@ -136,9 +154,9 @@ def run_inference_params(dataset: str):
             os.system("cp {} {}".format(os.path.join(dataset_cli_path, "{}.json".format(dataset)), experiment_out_dir))
 
             # Reset the json file.
-            dataset_json.update({"options": original_options})
+            dataset_original_json.update({"options": original_options})
             with open(dataset_json_path, "w") as file:
-                json.dump(dataset_json, file, indent=4)
+                json.dump(dataset_original_json, file, indent=4)
 
             print("Finished experiment: Dataset:{}".format(dataset))
 

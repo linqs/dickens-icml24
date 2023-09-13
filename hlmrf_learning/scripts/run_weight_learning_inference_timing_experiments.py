@@ -50,6 +50,14 @@ STANDARD_DATASET_OPTIONS = {
         "duallcqp.regularizationparameter": "1.0e-1",
         "admmreasoner.stepsize": "1.0",
     },
+    "stance-4forums": {
+        "duallcqp.regularizationparameter": "1.0e-1",
+        "admmreasoner.stepsize": "1.0",
+    },
+    "stance-createdebate": {
+        "duallcqp.regularizationparameter": "1.0e-1",
+        "admmreasoner.stepsize": "1.0",
+    }
 }
 
 FIRST_ORDER_WL_METHODS = ["SquaredError", "StructuredPerceptron"]
@@ -133,10 +141,11 @@ def run_first_order_wl_methods(dataset: str):
     with open(dataset_json_path, "r") as file:
         dataset_original_json = json.load(file)
 
-    original_options = dataset_original_json["options"]
+    original_options = {}
+    if "options" in dataset_original_json:
+        original_options = dataset_original_json["options"]
 
-    # If the dataset is epinions, citeseer, or cora, then we need to load the extended json file.
-    if dataset in ["citeseer", "cora"]:
+    if dataset in ["stance-4forums", "stance-createdebate", "citeseer", "cora"]:
         dataset_extended_json_path = os.path.join(PSL_EXTENDED_EXAMPLES_DIR, "{}/cli/{}.json".format(dataset, dataset))
 
         with open(dataset_extended_json_path, "r") as file:
