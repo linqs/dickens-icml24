@@ -28,7 +28,7 @@ STANDARD_EXPERIMENT_OPTIONS = {
     "gradientdescent.numsteps": "500",
     "gradientdescent.runfulliterations": "false",
     "duallcqp.computeperiod": "10",
-    "duallcqp.maxiterations": "25000",
+    "duallcqp.maxiterations": "50000",
     "runtime.validation": "true",
     "gradientdescent.savevalidationweights": "true",
     "gradientdescent.batchgenerator": "ConnectedComponentBatchGenerator"
