@@ -29,33 +29,26 @@ STANDARD_EXPERIMENT_OPTIONS = {
 
 STANDARD_DATASET_OPTIONS = {
     "epinions": {
-        "duallcqp.regularizationparameter": "1.0e-1",
         "admmreasoner.stepsize": "1.0e-1",
     },
     "citeseer": {
         "eval.closetruth": "true",
-        "duallcqp.regularizationparameter": "1.0e-1",
         "admmreasoner.stepsize": "10.0",
     },
     "cora": {
         "eval.closetruth": "true",
-        "duallcqp.regularizationparameter": "1.0e-1",
         "admmreasoner.stepsize": "10.0",
     },
     "yelp": {
-        "duallcqp.regularizationparameter": "1.0e-1",
         "admmreasoner.stepsize": "1.0",
     },
     "drug-drug-interaction": {
-        "duallcqp.regularizationparameter": "1.0e-1",
         "admmreasoner.stepsize": "1.0",
     },
     "stance-4forums": {
-        "duallcqp.regularizationparameter": "1.0e-1",
         "admmreasoner.stepsize": "1.0",
     },
     "stance-createdebate": {
-        "duallcqp.regularizationparameter": "1.0e-1",
         "admmreasoner.stepsize": "1.0",
     }
 }
@@ -71,6 +64,7 @@ FIRST_ORDER_WL_METHODS_STANDARD_OPTION_RANGES = {
 
 FIRST_ORDER_WL_INFERENCE_METHOD_OPTION_RANGES = {
     "DualBCDInference": {
+        "duallcqp.regularizationparameter": ["1.0e-1", "1.0e-2"],
         "weightlearning.inference": ["DualBCDInference"],
         "runtime.inference.method": ["DualBCDInference"],
     },
