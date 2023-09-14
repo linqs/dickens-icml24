@@ -58,7 +58,7 @@ FIRST_ORDER_WL_INFERENCE_METHODS = ["DistributedDualBCDInference", "ADMMInferenc
 
 FIRST_ORDER_WL_METHODS_STANDARD_OPTION_RANGES = {
     "gradientdescent.negativelogregularization": ["1.0e-3"],
-    "gradientdescent.stepsize": ["1.0e-3", "1.0e-2"],
+    "gradientdescent.stepsize": ["1.0e-3"],
     "gradientdescent.negativeentropyregularization": ["0.0"]
 }
 
@@ -89,7 +89,7 @@ FIRST_ORDER_WL_METHODS_OPTION_RANGES = {
     "BinaryCrossEntropy": {
         "runtime.learn.method": ["BinaryCrossEntropy"],
         "minimizer.initialsquaredpenalty": ["2.0"],
-        "minimizer.energylosscoefficient": ["0.0"],
+        "minimizer.energylosscoefficient": ["0.1"],
         "minimizer.proxvaluestepsize": ["1.0e-2"],
         "minimizer.squaredpenaltyincreaserate": ["2.0"],
         "minimizer.objectivedifferencetolerance": ["0.1"],
@@ -98,7 +98,7 @@ FIRST_ORDER_WL_METHODS_OPTION_RANGES = {
     "SquaredError": {
         "runtime.learn.method": ["SquaredError"],
         "minimizer.initialsquaredpenalty": ["2.0"],
-        "minimizer.energylosscoefficient": ["0.0"],
+        "minimizer.energylosscoefficient": ["0.1"],
         "minimizer.proxvaluestepsize": ["1.0e-2"],
         "minimizer.squaredpenaltyincreaserate": ["2.0"],
         "minimizer.objectivedifferencetolerance": ["0.1"],
