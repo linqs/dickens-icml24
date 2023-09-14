@@ -75,7 +75,7 @@ NEURAL_NETWORK_OPTIONS = {
     "neural_learning_rate": ["1.0e-3", "1.0e-4"],
     "learning_rate_decay_step": ["30"],
     "learning_rate_decay": ["1.0"],
-    "temperature_decay_rate": ["1.0e-2", "1.0e-3"],
+    "temperature_decay_rate": ["1.0e-3"],
     "transforms": ["false"],
     "freeze_resnet": ["false"]
 }
