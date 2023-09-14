@@ -69,6 +69,7 @@ FIRST_ORDER_WL_INFERENCE_METHOD_OPTION_RANGES = {
         "runtime.inference.method": ["DualBCDInference"],
     },
     "DistributedDualBCDInference": {
+        "duallcqp.regularizationparameter": ["1.0e-1", "1.0e-2"],
         "weightlearning.inference": ["DistributedDualBCDInference"],
         "runtime.inference.method": ["DistributedDualBCDInference"],
     },
