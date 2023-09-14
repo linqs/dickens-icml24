@@ -3,8 +3,13 @@
 import json
 import os
 import re
+import sys
 
 THIS_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)))
+
+sys.path.append(os.path.join(THIS_DIR, '..', '..'))
+import util
+
 MNIST_CLI_DIR = os.path.join(THIS_DIR, "../cli")
 RESULTS_BASE_DIR = os.path.join(THIS_DIR, "../results")
 PERFORMANCE_RESULTS_DIR = os.path.join(RESULTS_BASE_DIR, "performance")
@@ -248,23 +253,6 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
 }
 
 
-def enumerate_hyperparameters(hyperparameters_dict: dict, current_hyperparameters={}):
-    for key in sorted(hyperparameters_dict):
-        hyperparameters = []
-        for value in hyperparameters_dict[key]:
-            next_hyperparameters = current_hyperparameters.copy()
-            next_hyperparameters[key] = value
-
-            remaining_hyperparameters = hyperparameters_dict.copy()
-            remaining_hyperparameters.pop(key)
-
-            if remaining_hyperparameters:
-                hyperparameters = hyperparameters + enumerate_hyperparameters(remaining_hyperparameters, next_hyperparameters)
-            else:
-                hyperparameters.append(next_hyperparameters)
-        return hyperparameters
-
-
 def set_data_path(dataset_json, split, train_size, overlap):
     # sed dataset paths
     for predicate in dataset_json["predicates"]:
@@ -398,7 +386,7 @@ def run_first_order_wl_methods_hyperparamter_search():
                     # Iterate over every combination options values.
                     method_options_dict = {**standard_experiment_option_ranges,
                                            **FIRST_ORDER_WL_METHODS_OPTION_RANGES[method]}
-                    for options in enumerate_hyperparameters(method_options_dict):
+                    for options in util.enumerate_hyperparameters(method_options_dict):
                         for dropout in NEURAL_NETWORK_OPTIONS["dropout"]:
                             for weight_decay in NEURAL_NETWORK_OPTIONS["weight_decay"]:
                                 for transforms in NEURAL_NETWORK_OPTIONS["transforms"]:

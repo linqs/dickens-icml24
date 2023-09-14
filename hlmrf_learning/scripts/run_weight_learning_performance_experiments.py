@@ -6,6 +6,10 @@ import sys
 import signal
 
 THIS_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)))
+
+sys.path.append(os.path.join(THIS_DIR, '..', '..'))
+import util
+
 RESULTS_BASE_DIR = os.path.join(THIS_DIR, "../results")
 PSL_EXAMPLES_DIR = os.path.join(THIS_DIR, "../psl-examples")
 PSL_EXTENDED_EXAMPLES_DIR = os.path.join(THIS_DIR, "../psl-extended-examples")
@@ -211,23 +215,6 @@ BEST_HYPERPARAMETERS = {
 }
 
 
-def enumerate_hyperparameters(hyperparameters_dict: dict, current_hyperparameters={}):
-    for key in sorted(hyperparameters_dict):
-        hyperparameters = []
-        for value in hyperparameters_dict[key]:
-            next_hyperparameters = current_hyperparameters.copy()
-            next_hyperparameters[key] = value
-
-            remaining_hyperparameters = hyperparameters_dict.copy()
-            remaining_hyperparameters.pop(key)
-
-            if remaining_hyperparameters:
-                hyperparameters = hyperparameters + enumerate_hyperparameters(remaining_hyperparameters, next_hyperparameters)
-            else:
-                hyperparameters.append(next_hyperparameters)
-        return hyperparameters
-
-
 def run_first_order_wl_methods_hyperparameter_search(dataset: str):
     base_out_dir = os.path.join(PERFORMANCE_RESULTS_DIR, dataset)
     os.makedirs(base_out_dir, exist_ok=True)
@@ -264,7 +251,7 @@ def run_first_order_wl_methods_hyperparameter_search(dataset: str):
             # Iterate over every combination options values.
             method_options_dict = {**standard_experiment_option_ranges,
                                    **FIRST_ORDER_WL_METHODS_OPTION_RANGES[method]}
-            for options in enumerate_hyperparameters(method_options_dict):
+            for options in util.enumerate_hyperparameters(method_options_dict):
                 experiment_out_dir = method_out_dir
                 for key, value in sorted(options.items()):
                     experiment_out_dir = os.path.join(experiment_out_dir, "{}::{}".format(key, value))
