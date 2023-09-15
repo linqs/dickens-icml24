@@ -34,13 +34,8 @@ function main() {
     done
 
     pushd . >/dev/null
-      cd mnist_addition
-      python3 ./scripts/run_mnistadd1.py
-    popd >/dev/null
-
-    pushd . >/dev/null
-      cd mnist_addition
-      python3 ./scripts/run_mnistadd2.py
+      cd citation
+      python3 ./scripts/run_weight_learning_performance_experiments.py
     popd >/dev/null
 }
 
