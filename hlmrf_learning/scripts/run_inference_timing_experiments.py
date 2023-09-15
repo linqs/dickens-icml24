@@ -59,7 +59,7 @@ INFERENCE_METHOD_OPTION_RANGES = {
     },
     "ADMMInference": {
         "runtime.inference.method": ["ADMMInference"],
-        "admmreasoner.stepsize": ["10", "1", "0.1", "0.01"]
+        "admmreasoner.stepsize": ["10", "1", "0.1", "0.01", "0.001"]
     }
 }
 
