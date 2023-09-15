@@ -49,7 +49,8 @@ INFERENCE_OPTION_RANGES = {
     "duallcqp.regularizationparameter": ["1.0e-3"]
 }
 
-FIRST_ORDER_WL_METHODS = ["BinaryCrossEntropy", "Energy"]
+# FIRST_ORDER_WL_METHODS = ["BinaryCrossEntropy", "Energy"]
+FIRST_ORDER_WL_METHODS = ["Energy"]
 
 FIRST_ORDER_WL_METHODS_STANDARD_OPTION_RANGES = {
     "gradientdescent.stepsize": ["1.0e-14"],
@@ -77,10 +78,10 @@ FIRST_ORDER_WL_METHODS_OPTION_RANGES = {
 NEURAL_NETWORK_OPTIONS = {
     "dropout": ["0.0"],
     "weight_decay": ["1.0e-4"],
-    "neural_learning_rate": ["1.0e-3", "1.0e-4"],
+    "neural_learning_rate": ["1.0e-3", "1.0e-4", "1.0e-5"],
     "learning_rate_decay_step": ["30"],
     "learning_rate_decay": ["1.0"],
-    "temperature_decay_rate": ["1.0e-3"],
+    "temperature_decay_rate": ["1.0e-3", "1.0e-5"],
     "transforms": ["false"],
     "freeze_resnet": ["false"]
 }
