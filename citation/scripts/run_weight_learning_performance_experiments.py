@@ -104,6 +104,10 @@ def set_data_path(dataset_json, split):
                 dataset_json["predicates"][predicate]["options"]["save-path"] = \
                     re.sub(r"split::[0-9]+", "split::{}".format(split), dataset_json["predicates"][predicate]["options"]["save-path"])
 
+            if "load-path" in dataset_json["predicates"][predicate]["options"]:
+                dataset_json["predicates"][predicate]["options"]["load-path"] = \
+                    re.sub(r"split::[0-9]+", "split::{}".format(split), dataset_json["predicates"][predicate]["options"]["load-path"])
+
         if "targets" in dataset_json["predicates"][predicate]:
             if "learn" in dataset_json["predicates"][predicate]["targets"]:
                 dataset_json["predicates"][predicate]["targets"]["learn"] = \
