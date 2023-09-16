@@ -22,6 +22,8 @@ STANDARD_EXPERIMENT_OPTIONS = {
     "duallcqp.primaldualbreak": "false",
     "duallcqp.computeperiod": "1",
     "duallcqp.maxiterations": "25000",
+    "reasoner.gradientdescent.maxiterations": "25000",
+    "reasoner.gradientdescent.firstorderbreak": "false",
     "reasoner.variablemovementbreak": "true",
     "reasoner.variablemovementnorm": "Infinity",
     "reasoner.variablemovementtolerance": "1.0e-3"
@@ -46,9 +48,13 @@ STANDARD_DATASET_OPTIONS = {
     }
 }
 
-INFERENCE_METHODS = ["DualBCDInference", "DistributedDualBCDInference", "ADMMInference"]
+INFERENCE_METHODS = ["DualBCDInference", "DistributedDualBCDInference", "ADMMInference", "GradientDescentInference"]
 
 INFERENCE_METHOD_OPTION_RANGES = {
+    "GradientDescentInference": {
+        "runtime.inference.method": ["GradientDescentInference"],
+        "gradientdescent.stepsize": ["10.0", "1.0", "0.1", "0.01", "0.001"],
+    },
     "DualBCDInference": {
         "runtime.inference.method": ["DualBCDInference"],
         "duallcqp.regularizationparameter": ["10.0", "1.0", "0.1"],
