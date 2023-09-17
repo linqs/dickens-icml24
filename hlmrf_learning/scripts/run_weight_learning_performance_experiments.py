@@ -79,7 +79,7 @@ DATASET_OPTION_RANGES = {
     },
     "yelp": {
         "gradientdescent.stepsize": ["1.0e-3", "1.0e-2"],
-        "duallcqp.regularizationparameter": ["1.0e-2", "1.0e-3"],
+        "duallcqp.regularizationparameter": ["1.0e-1"],
         "minimizer.objectivedifferencetolerance": ["1.0"]
     },
     "drug-drug-interaction": {
