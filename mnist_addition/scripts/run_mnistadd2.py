@@ -125,8 +125,8 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.initialsquaredpenalty": "2.0",
                 "minimizer.objectivedifferencetolerance": "1.0e-3",
                 "minimizer.finalparametermovementconvergencetolerance": "1.0e-1",
-                "minimizer.proxruleweight": "1.0e-2",
-                "minimizer.proxvaluestepsize": "1.0e-2",
+                "minimizer.proxruleweight": "1.0e-3",
+                "minimizer.proxvaluestepsize": "1.0e-3",
                 "minimizer.squaredpenaltyincreaserate": "2.0",
                 "minimizer.energylosscoefficient": "10.0",
                 "duallcqp.regularizationparameter": "1.0e-3",
@@ -142,8 +142,8 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.initialsquaredpenalty": "2.0",
                 "minimizer.objectivedifferencetolerance": "1.0e-3",
                 "minimizer.finalparametermovementconvergencetolerance": "1.0e-1",
-                "minimizer.proxruleweight": "1.0e-2",
-                "minimizer.proxvaluestepsize": "1.0e-2",
+                "minimizer.proxruleweight": "1.0e-3",
+                "minimizer.proxvaluestepsize": "1.0e-3",
                 "minimizer.squaredpenaltyincreaserate": "2.0",
                 "minimizer.energylosscoefficient": "10.0",
                 "duallcqp.regularizationparameter": "1.0e-3",
@@ -159,8 +159,8 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.initialsquaredpenalty": "2.0",
                 "minimizer.objectivedifferencetolerance": "1.0e-3",
                 "minimizer.finalparametermovementconvergencetolerance": "1.0e-1",
-                "minimizer.proxruleweight": "1.0e-2",
-                "minimizer.proxvaluestepsize": "1.0e-2",
+                "minimizer.proxruleweight": "1.0e-3",
+                "minimizer.proxvaluestepsize": "1.0e-3",
                 "minimizer.squaredpenaltyincreaserate": "2.0",
                 "minimizer.energylosscoefficient": "10.0",
                 "duallcqp.regularizationparameter": "1.0e-3",
@@ -179,10 +179,10 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
             "0.00": {
                 "dropout": "0.0",
                 "weight_decay": "1.0e-4",
-                "neural_learning_rate": "1.0e-4",
+                "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "temperature_decay_rate": "1.0e-3",
+                "temperature_decay_rate": "1.0e-5",
                 "transforms": "false",
                 "freeze_resnet": "false"
             }
@@ -191,10 +191,10 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
             "0.00": {
                 "dropout": "0.0",
                 "weight_decay": "1.0e-4",
-                "neural_learning_rate": "1.0e-4",
+                "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "temperature_decay_rate": "1.0e-3",
+                "temperature_decay_rate": "1.0e-5",
                 "transforms": "false",
                 "freeze_resnet": "false"
             }
@@ -203,10 +203,10 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
             "0.00": {
                 "dropout": "0.0",
                 "weight_decay": "1.0e-4",
-                "neural_learning_rate": "1.0e-4",
+                "neural_learning_rate": "1.0e-3",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "temperature_decay_rate": "1.0e-3",
+                "temperature_decay_rate": "1.0e-5",
                 "transforms": "false",
                 "freeze_resnet": "false"
             }
@@ -547,8 +547,8 @@ def run_first_order_wl_methods():
 
 
 def main():
-    run_first_order_wl_methods_hyperparamter_search()
-    # run_first_order_wl_methods()
+    # run_first_order_wl_methods_hyperparamter_search()
+    run_first_order_wl_methods()
 
 
 if __name__ == '__main__':
