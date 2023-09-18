@@ -523,7 +523,6 @@ def run_first_order_wl_methods(dataset: str):
             method_out_dir = os.path.join(base_out_dir, "{}/split::{}".format(method, split))
             os.makedirs(method_out_dir, exist_ok=True)
 
-            # Iterate over every combination options values.
             options = BEST_HYPERPARAMETERS[dataset][method]
 
             experiment_out_dir = method_out_dir
@@ -535,11 +534,11 @@ def run_first_order_wl_methods(dataset: str):
                 print("Skipping experiment: {}.".format(experiment_out_dir))
                 continue
 
-            dataset_json.update({"options":{**original_options,
-                                            **STANDARD_EXPERIMENT_OPTIONS,
-                                            **STANDARD_DATASET_OPTIONS[dataset],
-                                            **options,
-                                            "runtime.learn.output.model.path": "./{}_learned.psl".format(dataset)}})
+            dataset_json.update({"options": {**original_options,
+                                             **STANDARD_EXPERIMENT_OPTIONS,
+                                             **STANDARD_DATASET_OPTIONS[dataset],
+                                             **options,
+                                             "runtime.learn.output.model.path": "./{}_learned.psl".format(dataset)}})
 
             # Write the options the json file.
             with open(dataset_json_path, "w") as file:
