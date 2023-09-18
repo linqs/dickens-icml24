@@ -163,30 +163,144 @@ BEST_HYPERPARAMETERS = {
         },
         "StructuredPerceptron": {
             "runtime.learn.method": "StructuredPerceptron",
+            "duallcqp.regularizationparameter": "1.0e-3",
+            "gradientdescent.stepsize": "1.0e-3",
+            "gradientdescent.negativelogregularization": "1.0e-3",
+            "gradientdescent.negativeentropyregularization": "0.0"
+        },
+        "Energy": {
+            "runtime.learn.method": "Energy",
+            "duallcqp.regularizationparameter": "1.0e-3",
+            "gradientdescent.stepsize": "1.0e-3",
+            "gradientdescent.negativelogregularization": "1.0e-3",
+            "gradientdescent.negativeentropyregularization": "0.0"
+        }
+    },
+    "citeseer": {
+        "SquaredError": {
+            "runtime.learn.method": "SquaredError",
+            "duallcqp.regularizationparameter": "1.0e-2",
+            "gradientdescent.stepsize": "1.0e-3",
+            "gradientdescent.negativelogregularization": "1.0e-3",
+            "gradientdescent.negativeentropyregularization": "0.0",
+            "minimizer.objectivedifferencetolerance": "0.1",
+            "minimizer.initialsquaredpenalty": "2.0",
+            "minimizer.energylosscoefficient": "1.0",
+            "minimizer.proxvaluestepsize": "1.0e-2",
+            "minimizer.squaredpenaltyincreaserate": "2.0",
+            "minimizer.proxruleweight": "1.0e-2"
+        },
+        "BinaryCrossEntropy": {
+            "runtime.learn.method": "BinaryCrossEntropy",
             "duallcqp.regularizationparameter": "1.0e-2",
             "gradientdescent.stepsize": "1.0e-2",
             "gradientdescent.negativelogregularization": "1.0e-3",
             "gradientdescent.negativeentropyregularization": "0.0",
+            "minimizer.objectivedifferencetolerance": "0.1",
+            "minimizer.initialsquaredpenalty": "2.0",
+            "minimizer.energylosscoefficient": "0.0",
+            "minimizer.proxvaluestepsize": "1.0e-1",
+            "minimizer.squaredpenaltyincreaserate": "2.0",
+            "minimizer.proxruleweight": "1.0e-3"
+        },
+        "StructuredPerceptron": {
+            "runtime.learn.method": "StructuredPerceptron",
+            "duallcqp.regularizationparameter": "1.0e-3",
+            "gradientdescent.stepsize": "1.0e-3",
+            "gradientdescent.negativelogregularization": "1.0e-3",
+            "gradientdescent.negativeentropyregularization": "0.0"
         },
         "Energy": {
             "runtime.learn.method": "Energy",
             "duallcqp.regularizationparameter": "1.0e-2",
             "gradientdescent.stepsize": "1.0e-3",
             "gradientdescent.negativelogregularization": "1.0e-3",
-            "gradientdescent.negativeentropyregularization": "0.0",
+            "gradientdescent.negativeentropyregularization": "0.0"
         }
     },
-    "citeseer": {
-        "SquaredError": {},
-        "BinaryCrossEntropy": {},
-        "StructuredPerceptron": {},
-        "Energy": {}
-    },
     "cora": {
-        "SquaredError": {},
-        "BinaryCrossEntropy": {},
-        "StructuredPerceptron": {},
-        "Energy": {}
+        "SquaredError": {
+            "runtime.learn.method": "SquaredError",
+            "duallcqp.regularizationparameter": "1.0e-3",
+            "gradientdescent.stepsize": "1.0e-2",
+            "gradientdescent.negativelogregularization": "1.0e-3",
+            "gradientdescent.negativeentropyregularization": "0.0",
+            "minimizer.objectivedifferencetolerance": "0.1",
+            "minimizer.initialsquaredpenalty": "2.0",
+            "minimizer.energylosscoefficient": "0.1",
+            "minimizer.proxvaluestepsize": "1.0e-1",
+            "minimizer.squaredpenaltyincreaserate": "2.0",
+            "minimizer.proxruleweight": "1.0e-2"
+        },
+        "BinaryCrossEntropy": {
+            "runtime.learn.method": "BinaryCrossEntropy",
+            "duallcqp.regularizationparameter": "1.0e-3",
+            "gradientdescent.stepsize": "1.0e-2",
+            "gradientdescent.negativelogregularization": "1.0e-3",
+            "gradientdescent.negativeentropyregularization": "0.0",
+            "minimizer.objectivedifferencetolerance": "0.1",
+            "minimizer.initialsquaredpenalty": "2.0",
+            "minimizer.energylosscoefficient": "0.1",
+            "minimizer.proxvaluestepsize": "1.0e-1",
+            "minimizer.squaredpenaltyincreaserate": "2.0",
+            "minimizer.proxruleweight": "1.0e-2"
+        },
+        "StructuredPerceptron": {
+            "runtime.learn.method": "StructuredPerceptron",
+            "duallcqp.regularizationparameter": "1.0e-3",
+            "gradientdescent.stepsize": "1.0e-3",
+            "gradientdescent.negativelogregularization": "1.0e-3",
+            "gradientdescent.negativeentropyregularization": "0.0"
+        },
+        "Energy": {
+            "runtime.learn.method": "Energy",
+            "duallcqp.regularizationparameter": "1.0e-2",
+            "gradientdescent.stepsize": "1.0e-3",
+            "gradientdescent.negativelogregularization": "1.0e-3",
+            "gradientdescent.negativeentropyregularization": "0.0"
+        }
+    },
+    "drug-drug-interaction": {
+        "SquaredError": {
+            "runtime.learn.method": "SquaredError",
+            "duallcqp.regularizationparameter": "1.0e-2",
+            "gradientdescent.stepsize": "1.0e-3",
+            "gradientdescent.negativelogregularization": "1.0e-3",
+            "gradientdescent.negativeentropyregularization": "0.0",
+            "minimizer.objectivedifferencetolerance": "0.1",
+            "minimizer.initialsquaredpenalty": "2.0",
+            "minimizer.energylosscoefficient": "0.1",
+            "minimizer.proxvaluestepsize": "1.0e-1",
+            "minimizer.squaredpenaltyincreaserate": "2.0",
+            "minimizer.proxruleweight": "1.0e-3"
+        },
+        "BinaryCrossEntropy": {
+            "runtime.learn.method": "BinaryCrossEntropy",
+            "duallcqp.regularizationparameter": "1.0e-2",
+            "gradientdescent.stepsize": "1.0e-2",
+            "gradientdescent.negativelogregularization": "1.0e-3",
+            "gradientdescent.negativeentropyregularization": "0.0",
+            "minimizer.objectivedifferencetolerance": "0.1",
+            "minimizer.initialsquaredpenalty": "2.0",
+            "minimizer.energylosscoefficient": "0.1",
+            "minimizer.proxvaluestepsize": "1.0e-2",
+            "minimizer.squaredpenaltyincreaserate": "2.0",
+            "minimizer.proxruleweight": "1.0e-2"
+        },
+        "StructuredPerceptron": {
+            "runtime.learn.method": "StructuredPerceptron",
+            "duallcqp.regularizationparameter": "1.0e-2",
+            "gradientdescent.stepsize": "1.0e-3",
+            "gradientdescent.negativelogregularization": "1.0e-3",
+            "gradientdescent.negativeentropyregularization": "0.0"
+        },
+        "Energy": {
+            "runtime.learn.method": "Energy",
+            "duallcqp.regularizationparameter": "1.0e-2",
+            "gradientdescent.stepsize": "1.0e-3",
+            "gradientdescent.negativelogregularization": "1.0e-3",
+            "gradientdescent.negativeentropyregularization": "0.0"
+        }
     },
     "yelp": {
         "SquaredError": {},
@@ -194,23 +308,89 @@ BEST_HYPERPARAMETERS = {
         "StructuredPerceptron": {},
         "Energy": {}
     },
-    "drug-drug-interaction": {
-        "SquaredError": {},
-        "BinaryCrossEntropy": {},
-        "StructuredPerceptron": {},
-        "Energy": {}
-    },
     "stance-4forums": {
-        "SquaredError": {},
-        "BinaryCrossEntropy": {},
-        "StructuredPerceptron": {},
-        "Energy": {}
+        "SquaredError": {
+            "runtime.learn.method": "SquaredError",
+            "duallcqp.regularizationparameter": "1.0e-3",
+            "gradientdescent.stepsize": "1.0e-3",
+            "gradientdescent.negativelogregularization": "1.0e-3",
+            "gradientdescent.negativeentropyregularization": "0.0",
+            "minimizer.objectivedifferencetolerance": "0.1",
+            "minimizer.initialsquaredpenalty": "2.0",
+            "minimizer.energylosscoefficient": "0.0",
+            "minimizer.proxvaluestepsize": "1.0e-2",
+            "minimizer.squaredpenaltyincreaserate": "2.0",
+            "minimizer.proxruleweight": "1.0e-3"
+        },
+        "BinaryCrossEntropy": {
+            "runtime.learn.method": "BinaryCrossEntropy",
+            "duallcqp.regularizationparameter": "1.0e-3",
+            "gradientdescent.stepsize": "1.0e-3",
+            "gradientdescent.negativelogregularization": "1.0e-3",
+            "gradientdescent.negativeentropyregularization": "0.0",
+            "minimizer.objectivedifferencetolerance": "0.1",
+            "minimizer.initialsquaredpenalty": "2.0",
+            "minimizer.energylosscoefficient": "0.0",
+            "minimizer.proxvaluestepsize": "1.0e-2",
+            "minimizer.squaredpenaltyincreaserate": "2.0",
+            "minimizer.proxruleweight": "1.0e-3"
+        },
+        "StructuredPerceptron": {
+            "runtime.learn.method": "StructuredPerceptron",
+            "duallcqp.regularizationparameter": "1.0e-3",
+            "gradientdescent.stepsize": "1.0e-3",
+            "gradientdescent.negativelogregularization": "1.0e-3",
+            "gradientdescent.negativeentropyregularization": "0.0"
+        },
+        "Energy": {
+            "runtime.learn.method": "Energy",
+            "duallcqp.regularizationparameter": "1.0e-3",
+            "gradientdescent.stepsize": "1.0e-3",
+            "gradientdescent.negativelogregularization": "1.0e-3",
+            "gradientdescent.negativeentropyregularization": "0.0"
+        }
     },
     "stance-createdebate": {
-        "SquaredError": {},
-        "BinaryCrossEntropy": {},
-        "StructuredPerceptron": {},
-        "Energy": {}
+        "SquaredError": {
+            "runtime.learn.method": "SquaredError",
+            "duallcqp.regularizationparameter": "1.0e-3",
+            "gradientdescent.stepsize": "1.0e-2",
+            "gradientdescent.negativelogregularization": "1.0e-3",
+            "gradientdescent.negativeentropyregularization": "0.0",
+            "minimizer.objectivedifferencetolerance": "0.1",
+            "minimizer.initialsquaredpenalty": "2.0",
+            "minimizer.energylosscoefficient": "0.1",
+            "minimizer.proxvaluestepsize": "1.0e-1",
+            "minimizer.squaredpenaltyincreaserate": "2.0",
+            "minimizer.proxruleweight": "1.0e-2"
+        },
+        "BinaryCrossEntropy": {
+            "runtime.learn.method": "BinaryCrossEntropy",
+            "duallcqp.regularizationparameter": "1.0e-2",
+            "gradientdescent.stepsize": "1.0e-3",
+            "gradientdescent.negativelogregularization": "1.0e-3",
+            "gradientdescent.negativeentropyregularization": "0.0",
+            "minimizer.objectivedifferencetolerance": "0.1",
+            "minimizer.initialsquaredpenalty": "2.0",
+            "minimizer.energylosscoefficient": "10.0",
+            "minimizer.proxvaluestepsize": "1.0e-1",
+            "minimizer.squaredpenaltyincreaserate": "2.0",
+            "minimizer.proxruleweight": "1.0e-2"
+        },
+        "StructuredPerceptron": {
+            "runtime.learn.method": "StructuredPerceptron",
+            "duallcqp.regularizationparameter": "1.0e-3",
+            "gradientdescent.stepsize": "1.0e-2",
+            "gradientdescent.negativelogregularization": "1.0e-3",
+            "gradientdescent.negativeentropyregularization": "0.0"
+        },
+        "Energy": {
+            "runtime.learn.method": "Energy",
+            "duallcqp.regularizationparameter": "1.0e-2",
+            "gradientdescent.stepsize": "1.0e-3",
+            "gradientdescent.negativelogregularization": "1.0e-3",
+            "gradientdescent.negativeentropyregularization": "0.0"
+        }
     },
 }
 
@@ -418,7 +598,8 @@ def parse_args() -> str:
 def main():
     dataset = parse_args()
 
-    run_first_order_wl_methods_hyperparameter_search(dataset)
+    # run_first_order_wl_methods_hyperparameter_search(dataset)
+    run_first_order_wl_methods(dataset)
 
 
 if __name__ == '__main__':
