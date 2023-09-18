@@ -38,6 +38,7 @@
           "../data/experiment::cora/split::0/category-target-latent.txt"
         ],
         "validation": [
+          "../data/experiment::cora/split::0/category-target-train.txt",
           "../data/experiment::cora/split::0/category-target-test.txt",
           "../data/experiment::cora/split::0/category-target-valid.txt",
           "../data/experiment::cora/split::0/category-target-latent.txt"
