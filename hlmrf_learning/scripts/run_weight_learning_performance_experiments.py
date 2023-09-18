@@ -397,7 +397,7 @@ BEST_HYPERPARAMETERS = {
 
 
 def run_first_order_wl_methods_hyperparameter_search(dataset: str):
-    base_out_dir = os.path.join(PERFORMANCE_RESULTS_DIR, dataset)
+    base_out_dir = os.path.join(HYPERPARAMETER_PERFORMANCE_RESULTS_DIR, dataset)
     os.makedirs(base_out_dir, exist_ok=True)
 
     # Load the json file with the dataset options.
