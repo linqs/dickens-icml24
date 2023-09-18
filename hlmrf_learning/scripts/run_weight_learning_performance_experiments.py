@@ -13,7 +13,8 @@ import util
 RESULTS_BASE_DIR = os.path.join(THIS_DIR, "../results")
 PSL_EXAMPLES_DIR = os.path.join(THIS_DIR, "../psl-examples")
 PSL_EXTENDED_EXAMPLES_DIR = os.path.join(THIS_DIR, "../psl-extended-examples")
-PERFORMANCE_RESULTS_DIR = os.path.join(RESULTS_BASE_DIR, "performance")
+HYPERPARAMETER_PERFORMANCE_RESULTS_DIR = os.path.join(RESULTS_BASE_DIR, "performance_hyperparameter_search")
+PERFORMANCE_RESULTS_DIR = os.path.join(RESULTS_BASE_DIR, "final_performance")
 
 HYPERPARAMETER_SPLITS = [0]
 SPLITS = [0, 1, 2, 3, 4]
