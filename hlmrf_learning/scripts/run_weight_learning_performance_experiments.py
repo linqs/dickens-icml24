@@ -48,7 +48,7 @@ STANDARD_DATASET_OPTIONS = {
         "duallcqp.primaldualthreshold": "1.0e-2"
     },
     "yelp": {
-        "duallcqp.primaldualthreshold": "1.0e-2"
+        "duallcqp.primaldualthreshold": "1.0e-1"
     },
     "drug-drug-interaction": {
         "duallcqp.primaldualthreshold": "1.0e-2"
@@ -79,7 +79,7 @@ DATASET_OPTION_RANGES = {
     },
     "yelp": {
         "gradientdescent.stepsize": ["1.0e-3", "1.0e-2"],
-        "duallcqp.regularizationparameter": ["1.0e-1"],
+        "duallcqp.regularizationparameter": ["1.0e-2"],
         "minimizer.objectivedifferencetolerance": ["1.0"]
     },
     "drug-drug-interaction": {
