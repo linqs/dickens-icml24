@@ -134,7 +134,7 @@ def main():
                         model_results = parse_results(dataset_name, experiment, learning_loss_dir)
                         save_model_results(model_results, learning_loss_dir)
 
-            if experiment == "performance":
+            if experiment in ["performance_hyperparameter_search", "final_performance"]:
                 for learning_loss in os.listdir(dataset_dir):
                     learning_loss_dir = os.path.join(dataset_dir, learning_loss)
                     model_results = parse_results(dataset_name, experiment, learning_loss_dir)
