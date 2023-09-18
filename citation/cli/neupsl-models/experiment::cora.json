@@ -75,7 +75,7 @@
           "../data/experiment::cora/split::0/category-truth-obs-train.txt"
         ],
         "validation": [
-          "../data/experiment::cora/split::0/category-truth-train.txt",
+          "../data/experiment::cora/split::0/category-truth-train.txt"
         ],
         "infer": [
           "../data/experiment::cora/split::0/category-truth-train.txt",
