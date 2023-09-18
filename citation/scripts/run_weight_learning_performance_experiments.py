@@ -15,7 +15,7 @@ RESULTS_BASE_DIR = os.path.join(THIS_DIR, "../results")
 PERFORMANCE_RESULTS_DIR = os.path.join(RESULTS_BASE_DIR, "performance")
 
 DATASETS = ["citeseer", "cora"]
-SPLITS = ["0", "1", "2", "3", "4", "5", "6"]
+SPLITS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 STANDARD_EXPERIMENT_OPTIONS = {
     "inference.normalize": "false",
