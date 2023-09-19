@@ -399,7 +399,7 @@ def run_learning_timing():
                                                              **learning_options,
                                                              "runtime.learn.output.model.path": "./mnist-addition_learned.psl"}})
 
-                            dataset_json["predicates"]["NeuralClassifier/2"]["options"]["experiment"] = "mnist-2"
+                            dataset_json["predicates"]["NeuralClassifier/2"]["options"]["experiment"] = "mnist-1"
                             dataset_json["predicates"]["NeuralClassifier/2"]["options"]["split"] = split
                             dataset_json["predicates"]["NeuralClassifier/2"]["options"]["train_size"] = train_size
                             dataset_json["predicates"]["NeuralClassifier/2"]["options"]["dropout"] = dropout
