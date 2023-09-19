@@ -65,7 +65,7 @@ class MNISTAdditionModel(pslpython.deeppsl.model.DeepModel):
                     torchvision.transforms.RandomRotation(degrees=0)
                 ])
         elif self._application == 'inference':
-            self._model.load_state_dict(torch.load(options['save-path']))
+            self._model.load_state_dict(torch.load(options['save-path'], map_location=self._device))
             self._model.temperature = 0.5
 
         return {}
@@ -147,7 +147,8 @@ class MNISTAdditionModel(pslpython.deeppsl.model.DeepModel):
         backbone = torchvision.models.resnet18(num_classes=128)
 
         backbone.load_state_dict(torch.load(
-            f"{THIS_DIR}/../../data/experiment::{options['experiment']}/split::{options['split']}/train-size::{options['train_size']}/overlap::0.00/saved-networks/simclr-pretrained-backbone.pt"
+            f"{THIS_DIR}/../../data/experiment::{options['experiment']}/split::{options['split']}/train-size::{options['train_size']}/overlap::0.00/saved-networks/simclr-pretrained-backbone.pt",
+            map_location=self._device
         ))
 
         return MNIST_Classifier(
