@@ -347,7 +347,7 @@ def run_learning_timing():
             os.makedirs(inference_method_out_dir, exist_ok=True)
 
             # Iterate over every combination options values.
-            inference_method_options_dict = {**INFERENCE_METHOD_OPTION_RANGES[method]}
+            inference_method_options_dict = {**INFERENCE_METHOD_OPTION_RANGES[inference_method]}
             for inference_method_options in util.enumerate_hyperparameters(inference_method_options_dict):
                 for train_size in TRAIN_SIZES:
                     for overlap in OVERLAPS:
