@@ -44,6 +44,11 @@ function main() {
     popd >/dev/null
 
     pushd . >/dev/null
+      cd mnist_addition
+      python3 ./scripts/run_mnistadd2_learning_timing.py
+    popd >/dev/null
+
+    pushd . >/dev/null
       cd citation
       python3 ./scripts/run_weight_learning_performance_experiments.py
     popd >/dev/null
