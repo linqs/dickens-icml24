@@ -45,6 +45,11 @@ function main() {
 
     pushd . >/dev/null
       cd mnist_addition
+      python3 ./scripts/run_mnistadd1_learning_timing.py
+    popd >/dev/null
+
+    pushd . >/dev/null
+      cd mnist_addition
       python3 ./scripts/run_mnistadd2_learning_timing.py
     popd >/dev/null
 
