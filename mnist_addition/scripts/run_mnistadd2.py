@@ -220,7 +220,7 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
                 "neural_learning_rate": "1.0e-4",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "temperature_decay_rate": "1.0e-3",
+                "temperature_decay_rate": "1.0e-5",
                 "transforms": "false",
                 "freeze_resnet": "false"
             }
@@ -232,7 +232,7 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
                 "neural_learning_rate": "1.0e-4",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "temperature_decay_rate": "1.0e-3",
+                "temperature_decay_rate": "1.0e-5",
                 "transforms": "false",
                 "freeze_resnet": "false"
             }
@@ -244,7 +244,7 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
                 "neural_learning_rate": "1.0e-4",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "temperature_decay_rate": "1.0e-3",
+                "temperature_decay_rate": "1.0e-5",
                 "transforms": "false",
                 "freeze_resnet": "false"
             }

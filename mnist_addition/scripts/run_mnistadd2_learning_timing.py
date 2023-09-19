@@ -41,12 +41,17 @@ STANDARD_EXPERIMENT_OPTIONS = {
 }
 
 FIRST_ORDER_WL_METHODS = ["SquaredError", "StructuredPerceptron"]
-INFERENCE_METHODS = ["DualBCDInference", "ADMMInference"]
+INFERENCE_METHODS = ["DualBCDInference", "DistributedDualBCDInference", "ADMMInference"]
 
 INFERENCE_METHOD_OPTION_RANGES = {
     "DualBCDInference": {
         "weightlearning.inference": ["DualBCDInference"],
         "runtime.inference.method": ["DualBCDInference"],
+        "duallcqp.regularizationparameter": ["1.0e-3"],
+    },
+    "DistributedDualBCDInference": {
+        "weightlearning.inference": ["DistributedDualBCDInference"],
+        "runtime.inference.method": ["DistributedDualBCDInference"],
         "duallcqp.regularizationparameter": ["1.0e-3"],
     },
     "ADMMInference": {
@@ -185,7 +190,7 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
                 "neural_learning_rate": "1.0e-4",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "temperature_decay_rate": "1.0e-3",
+                "temperature_decay_rate": "1.0e-5",
                 "transforms": "false",
                 "freeze_resnet": "false"
             }
@@ -197,7 +202,7 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
                 "neural_learning_rate": "1.0e-4",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "temperature_decay_rate": "1.0e-3",
+                "temperature_decay_rate": "1.0e-5",
                 "transforms": "false",
                 "freeze_resnet": "false"
             }
@@ -209,7 +214,7 @@ BEST_NEURAL_NETWORK_HYPERPARAMETERS = {
                 "neural_learning_rate": "1.0e-4",
                 "learning_rate_decay_step": "30",
                 "learning_rate_decay": "1.0",
-                "temperature_decay_rate": "1.0e-3",
+                "temperature_decay_rate": "1.0e-5",
                 "transforms": "false",
                 "freeze_resnet": "false"
             }
