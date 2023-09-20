@@ -13,6 +13,10 @@ readonly RUN_SCRIPT_VERSION='2.0.1'
 readonly BASE_NAME='mnist-addition'
 readonly OUTPUT_DIRECTORY="${THIS_DIR}/inferred-predicates"
 
+readonly AVAILABLE_MEM_KB=$(cat /proc/meminfo | grep 'MemTotal' | sed 's/^[^0-9]\+\([0-9]\+\)[^0-9]\+$/\1/')
+# Floor by multiples of 5 and then reserve an additional 5 GB.
+readonly JAVA_MEM_GB=$((${AVAILABLE_MEM_KB} / 1024 / 1024 / 5 * 5 - 5))
+
 readonly ADDITIONAL_PSL_OPTIONS=''
 
 function main() {
@@ -29,7 +33,7 @@ function main() {
 function run_psl() {
     echo "Running PSL Inference."
 
-    java -jar "${JAR_PATH}" \
+    java -Xmx${JAVA_MEM_GB}G -Xms${JAVA_MEM_GB}G -jar "${JAR_PATH}" \
         --config "${THIS_DIR}/${BASE_NAME}.json" \
         --output "${OUTPUT_DIRECTORY}" \
         ${ADDITIONAL_PSL_OPTIONS} "$@"
