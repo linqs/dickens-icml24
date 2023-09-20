@@ -51,6 +51,9 @@ def parse_log(log_path):
 def main():
     results = {}
     for experiment in sorted(os.listdir(RESULTS_DIR)):
+        if experiment != "performance":
+            continue
+
         results[experiment] = {dataset: dict() for dataset in sorted(os.listdir(os.path.join(RESULTS_DIR, experiment)))}
         for dataset in sorted(os.listdir(os.path.join(RESULTS_DIR, experiment))):
             results[experiment][dataset] = {experiment_group: dict() for experiment_group in
