@@ -304,7 +304,19 @@ BEST_HYPERPARAMETERS = {
         }
     },
     "yelp": {
-        "SquaredError": {},
+        "SquaredError": {
+            "runtime.learn.method": "SquaredError",
+            "duallcqp.regularizationparameter": "1.0e-2",
+            "gradientdescent.stepsize": "1.0e-3",
+            "gradientdescent.negativelogregularization": "1.0e-3",
+            "gradientdescent.negativeentropyregularization": "0.0",
+            "minimizer.objectivedifferencetolerance": "0.1",
+            "minimizer.initialsquaredpenalty": "2.0",
+            "minimizer.energylosscoefficient": "10.0",
+            "minimizer.proxvaluestepsize": "1.0e-2",
+            "minimizer.squaredpenaltyincreaserate": "2.0",
+            "minimizer.proxruleweight": "1.0e-1"
+        },
         "BinaryCrossEntropy": {},
         "StructuredPerceptron": {},
         "Energy": {}
