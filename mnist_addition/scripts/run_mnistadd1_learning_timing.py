@@ -65,7 +65,7 @@ BEST_HYPERPARAMETERS = {
     "StructuredPerceptron": {
         "00600": {
             "0.00": {
-                "runtime.learn.method": "Energy",
+                "runtime.learn.method": "StructuredPerceptron",
                 "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
@@ -75,7 +75,7 @@ BEST_HYPERPARAMETERS = {
         },
         "06000": {
             "0.00": {
-                "runtime.learn.method": "Energy",
+                "runtime.learn.method": "StructuredPerceptron",
                 "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
@@ -85,7 +85,7 @@ BEST_HYPERPARAMETERS = {
         },
         "50000": {
             "0.00": {
-                "runtime.learn.method": "Energy",
+                "runtime.learn.method": "StructuredPerceptron",
                 "duallcqp.regularizationparameter": "1.0e-3",
                 "gradientdescent.stepsize": "1.0e-14",
                 "gradientdescent.negativelogregularization": "1.0e-3",
@@ -97,7 +97,7 @@ BEST_HYPERPARAMETERS = {
     "SquaredError": {
         "00600": {
             "0.00": {
-                "runtime.learn.method": "BinaryCrossEntropy",
+                "runtime.learn.method": "SquaredError",
                 "minimizer.initialsquaredpenalty": "2.0",
                 "minimizer.objectivedifferencetolerance": "1.0e-3",
                 "minimizer.finalparametermovementconvergencetolerance": "1.0e-1",
@@ -114,7 +114,7 @@ BEST_HYPERPARAMETERS = {
         },
         "06000": {
             "0.00": {
-                "runtime.learn.method": "BinaryCrossEntropy",
+                "runtime.learn.method": "SquaredError",
                 "minimizer.initialsquaredpenalty": "2.0",
                 "minimizer.objectivedifferencetolerance": "1.0e-3",
                 "minimizer.finalparametermovementconvergencetolerance": "1.0e-1",
@@ -131,7 +131,7 @@ BEST_HYPERPARAMETERS = {
         },
         "50000": {
             "0.00": {
-                "runtime.learn.method": "BinaryCrossEntropy",
+                "runtime.learn.method": "SquaredError",
                 "minimizer.initialsquaredpenalty": "2.0",
                 "minimizer.objectivedifferencetolerance": "1.0e-3",
                 "minimizer.finalparametermovementconvergencetolerance": "1.0e-1",
