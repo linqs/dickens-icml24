@@ -57,7 +57,7 @@ def parse_log(log_path):
 def main():
     results = {}
     for experiment in sorted(os.listdir(RESULTS_DIR)):
-        if experiment != "learning_timing":
+        if experiment not in ["inference_timing", "learning_timing"]:
             continue
 
         results[experiment] = {dataset: dict() for dataset in sorted(os.listdir(os.path.join(RESULTS_DIR, experiment)))}
