@@ -41,7 +41,7 @@ STANDARD_EXPERIMENT_OPTIONS = {
 }
 
 FIRST_ORDER_WL_METHODS = ["SquaredError", "StructuredPerceptron"]
-INFERENCE_METHODS = ["DualBCDInference", "DistributedDualBCDInference", "ADMMInference"]
+INFERENCE_METHODS = ["DualBCDInference", "ADMMInference"]
 
 INFERENCE_METHOD_OPTION_RANGES = {
     "DualBCDInference": {
