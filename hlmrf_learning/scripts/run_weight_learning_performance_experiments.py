@@ -330,8 +330,20 @@ BEST_HYPERPARAMETERS = {
             "minimizer.squaredpenaltyincreaserate": "2.0",
             "minimizer.proxruleweight": "1.0e-2"
         },
-        "StructuredPerceptron": {},
-        "Energy": {}
+        "StructuredPerceptron": {
+            "runtime.learn.method": "StructuredPerceptron",
+            "duallcqp.regularizationparameter": "1.0e-2",
+            "gradientdescent.stepsize": "1.0e-3",
+            "gradientdescent.negativelogregularization": "1.0e-3",
+            "gradientdescent.negativeentropyregularization": "0.0"
+        },
+        "Energy": {
+            "runtime.learn.method": "Energy",
+            "duallcqp.regularizationparameter": "1.0e-2",
+            "gradientdescent.stepsize": "1.0e-3",
+            "gradientdescent.negativelogregularization": "1.0e-3",
+            "gradientdescent.negativeentropyregularization": "0.0"
+        }
     },
     "stance-4forums": {
         "SquaredError": {
