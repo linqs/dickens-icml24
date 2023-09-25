@@ -351,9 +351,6 @@ def run_learning_timing():
         os.makedirs(method_out_dir, exist_ok=True)
 
         for inference_method in INFERENCE_METHODS:
-            if (inference_method == "ADMMInference") and (method == "SquaredError"):
-                continue
-
             inference_method_out_dir = os.path.join(method_out_dir, inference_method)
             os.makedirs(inference_method_out_dir, exist_ok=True)
 
