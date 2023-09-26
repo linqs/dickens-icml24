@@ -118,7 +118,7 @@ BEST_HYPERPARAMETERS = {
                 "minimizer.initialsquaredpenalty": "2.0",
                 "minimizer.objectivedifferencetolerance": "1.0e-3",
                 "minimizer.finalparametermovementconvergencetolerance": "1.0e-1",
-                "minimizer.proxruleweight": "1.0e-2",
+                "minimizer.proxruleweight": "1.0e-3",
                 "minimizer.proxvaluestepsize": "1.0e-3",
                 "minimizer.squaredpenaltyincreaserate": "2.0",
                 "minimizer.energylosscoefficient": "10.0",
