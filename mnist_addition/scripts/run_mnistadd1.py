@@ -26,7 +26,7 @@ STANDARD_EXPERIMENT_OPTIONS = {
     "gradientdescent.trainingcomputeperiod": "5",
     "gradientdescent.validationcomputeperiod": "5",
     "gradientdescent.validationbreak": "true",
-    "gradientdescent.validationpatience": "25",
+    "gradientdescent.validationpatience": "50",
     "gradientdescent.stopcomputeperiod": "5",
     "weightlearning.inference": "DualBCDInference",
     "runtime.inference.method": "DualBCDInference",
