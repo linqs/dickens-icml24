@@ -57,11 +57,11 @@ INFERENCE_METHOD_OPTION_RANGES = {
     },
     "DualBCDInference": {
         "runtime.inference.method": ["DualBCDInference"],
-        "duallcqp.regularizationparameter": ["10.0", "1.0", "0.1"],
+        "duallcqp.regularizationparameter": ["100.0", "10.0", "1.0", "0.1", "0.01"],
     },
     "DistributedDualBCDInference": {
         "runtime.inference.method": ["DistributedDualBCDInference"],
-        "duallcqp.regularizationparameter": ["10.0", "1.0", "0.1"],
+        "duallcqp.regularizationparameter": ["100.0", "10.0", "1.0", "0.1", "0.01"],
     },
     "ADMMInference": {
         "runtime.inference.method": ["ADMMInference"],
