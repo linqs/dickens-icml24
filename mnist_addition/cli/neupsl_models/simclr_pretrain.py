@@ -4,7 +4,6 @@ Code for pre-training a model using SimCLR on MNIST.
 Adapted from: <https://github.com/sthalles/SimCLR>
 """
 
-import numpy as np
 import os
 import pandas as pd
 import sys
